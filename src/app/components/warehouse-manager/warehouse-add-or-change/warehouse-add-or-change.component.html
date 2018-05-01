@@ -1,0 +1,208 @@
+<div id="warehouse-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span class="caption-subject font-red sbold uppercase">{{title}}</span>
+
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" (ngSubmit)="onAddOrChange(warehouseAddOrChange)" autocomplete="off" #warehouseAddOrChange="ngForm">
+                  <div class="form-body">
+                    <div class="alert alert-danger display-hide" *ngIf="warehouseAddOrChange.form.valid">
+                      <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                    <div class="alert alert-success display-hide">
+                      <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Code
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Code" name="code" [(ngModel)]="warehouse.code" readonly #code="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Name
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': name.errors && (name.dirty ||submited&&!name.dirty),
+                        'has-success': !name.errors 
+                     }">
+                        <input type="text" class="form-control" placeholder="Name" [(ngModel)]="warehouse.name" name="name" required #name="ngModel"
+                        />
+                        <span class="help-block" *ngIf="name.errors && (name.dirty ||submited&&!name.dirty)">
+                          <div class="required">Name is required</div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Email
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <div class="input-group" [ngClass]="{ 
+                          'has-error': email.errors && (email.dirty ||submited&&!email.dirty),
+                          'has-success': !email.errors 
+                       }">
+                          <span class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                          </span>
+                          <input type="text" class="form-control" placeholder="Email" [(ngModel)]="warehouse.email" name="mail" required maxlength="150"
+                            pattern="[^ @]*@[^ @]*" #email="ngModel" />
+                        </div>
+                        <span class="help-block" *ngIf="email.errors && (email.dirty ||submited&&!email.dirty)">
+                          <div class="required" *ngIf="email.errors.required">Email is required</div>
+                          <span class="required" *ngIf="email.errors.maxlength">Email only contain up to 150 characters</span>
+                          <span class="required" *ngIf="email.errors.pattern">Email invalid</span>
+                        </span>
+                        <span class="help-block"> e.g: support@gico.vn </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Phone Number
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': phone.errors && (phone.dirty ||submited&&!phone.dirty),
+                        'has-success': !phone.errors 
+                     }">
+                        <input type="text" class="form-control" placeholder="phoneNumber" name="phone" [(ngModel)]="warehouse.phoneNumber" maxlength="50"
+                          #phone="ngModel" required pattern="[0-9]+" />
+                        <span class="help-block" *ngIf="phone.errors && (phone.dirty ||submited&&!phone.dirty)">Số điện thoại không để trống và chỉ được viết số</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Province
+                      </label>
+                      <div class="col-md-6" [ngClass]="{ 
+                        'has-error': province.errors && (province.dirty ||submited&&!province.dirty),
+                        'has-success': !province.errors 
+                     }">
+                        <input type="text" disabled="disabled" class="form-control" name="province" [(ngModel)]="warehouse.provinceName" #province="ngModel"
+                        />
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">District
+                      </label>
+                      <div class="col-md-6" [ngClass]="{ 
+                          'has-error': district.errors && (district.dirty ||submited&&!district.dirty),
+                          'has-success': !district.errors 
+                       }">
+                        <input type="text" disabled="disabled" class="form-control" name="district" [(ngModel)]="warehouse.districtName" #district="ngModel"
+                        />
+
+                      </div>
+                    </div>  
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Ward
+                      </label>
+                      <div class="col-md-6" [ngClass]="{ 
+                            'has-error': village.errors && (village.dirty ||submited&&!village.dirty),
+                            'has-success': !village.errors 
+                         }">
+                        <input type="text" disabled="disabled" class="form-control" name="village" [(ngModel)]="warehouse.villageName" #village="ngModel"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Street
+                      </label>
+                      <div class="col-md-6" [ngClass]="{ 
+                            'has-error': road.errors && (road.dirty ||submited&&!road.dirty),
+                            'has-success': !road.errors 
+                         }">
+                        <input type="text" disabled="disabled" class="form-control" name="road" [(ngModel)]="warehouse.roadName" #road="ngModel"
+                        />
+                        <button type="button" class="btn grey-salsa btn-outline" (click)="onShowWarehouseAddress(1)">Edit Adress</button>
+                      </div>
+                    </div>
+
+                   
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Type
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': type.errors && (type.dirty ||submited&&!type.dirty),
+                        'has-success': !type.errors 
+                     }">
+                        <select class="form-control" [(ngModel)]="warehouse.type" name="type" required #type="ngModel">
+                          <option *ngFor="let item of types" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="type.errors && (type.dirty ||submited&&!type.dirty)">
+                          <p class="required">type is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Status
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': status.errors && (status.dirty ||submited&&!status.dirty),
+                        'has-success': !type.errors 
+                     }">
+                        <select class="form-control" [(ngModel)]="warehouse.status" name="status" required #status="ngModel">
+                          <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="status.errors && (status.dirty ||submited&&!status.dirty)">
+                          <p class="required">status is required</p>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Desciption
+                      </label>
+                      <div class="col-md-7">
+                        <textarea class="form-control" rows="3" placeholder="description" name="description" [(ngModel)]="warehouse.description"
+                          #description="ngModel"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Address Detail
+                      </label>
+                      <div class="col-md-7">
+                        <textarea class="form-control" rows="3" placeholder="Address detail" name="addressDetail" [(ngModel)]="warehouse.addressDetail"
+                          #addressDetail="ngModel"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-actions">
+                      <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                          <button type="submit" class="btn green">Save</button>
+                          <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="popup">
+  <app-warehouse-address #warehouseAddress (updateAddress)="onUpdateAddress($event)"></app-warehouse-address>
+</div>

@@ -1,0 +1,91 @@
+<div id="productgroup-price" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light portlet-fit portlet-form bordered">
+                            <div class="portlet-title ">
+                                <div class="caption">
+                                    <i class="icon-settings font-red"></i>
+                                    <span class="caption-subject font-red sbold uppercase">Product Group config Price</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <form class="form-horizontal" (ngSubmit)="onSave(productGroupConfigPrices)" autocomplete="off" #productGroupConfigPrices="ngForm">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th style="min-width: 300px;text-align: center;">
+                                                                            Min Price
+                                                                        </th>
+                                                                        <th style="min-width: 300px;text-align: center;">
+                                                                            Max Price
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let priceObj of prices; let i = index">
+                                                                        <td>
+                                                                            <div class="has-success">
+                                                                                <input type="number" class="form-control form-filter input-sm" name="priceObjminPrice_{{i}}" [(ngModel)]="priceObj.minPrice"
+                                                                                />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div [ngClass]="{ 
+                                                                                'has-error': priceObj.minPrice > priceObj.maxPrice,
+                                                                                'has-success': priceObj.minPrice <= priceObj.maxPrice
+                                                                                }">
+                                                                                <input type="number" class="form-control form-filter input-sm" name="priceObjmaxPrice_{{i}}" [(ngModel)]="priceObj.maxPrice"
+                                                                                />
+                                                                                <span class="help-block" *ngIf="priceObj.minPrice > priceObj.maxPrice">
+                                                                                    <p class="required">MaxPrice >= MinPrice</p>
+                                                                                </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" title="Cancel" class="btn btn-circle btn-outline red" (click)="onRemove(i)">
+                                                                                <i class="fa fa-remove"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div>
+                                                            <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onAddNew()">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green" (click)=onSave()>Save</button>
+                                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+.control-label {
+    font-weight: bold;
+}
+
+.error-messages.ng-active {
+    color: red;
+}
+
+.error {
+    color: #E03930;
+}
+
+.description-info img {
+    width: 100%;
+    margin: 15px 0px;
+}
+
+.collapse-content {
+    max-height: 150px;
+    height: 113px;
+    overflow: hidden;
+}
+
+.content-description {
+    display: block;
+}

@@ -1,0 +1,51 @@
+<form autocomplete="off" (ngSubmit)="onSubmit()" #frmTabAttribute="ngForm">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed table-striped table-bordered">
+        <tr>
+          <th style="width:2%" class="text-center">STT</th>
+          <th style="width:13%" class="text-center">Tên thuộc tính </th>
+          <th style="width:60%" class="text-center">Giá trị</th>
+          <th style="width:25%" class="text-center">Đơn vị (nếu có)</th>
+        </tr>
+        <tr *ngFor="let item of attributes; let i = index" [attr.data-index]="i">
+          <td class="text-center">{{i + 1}}</td>
+          <td>
+            {{item.attributeName}}
+          </td>
+          <td>
+            <div class="form-group" *ngIf="item.attributeType == 2">
+              <select class="form-control select2" id="dynamicField_{{i}}" name="dynamicField_{{i}}" [(ngModel)]="productAttributeInfo.value"
+                attr.attributeId="{{item.attributeId}}" attr.attributeType="{{item.attributeType}}">
+                <option *ngFor="let val of item.attributeValues" [ngValue]="val.attributeValueId">{{val.value}}</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="item.attributeType == 4">
+              <input type="text" class="form-control" id="dynamicField_{{i}}" name="dynamicField_{{i}}" attr.attributeId="{{item.attributeId}}"
+                attr.attributeType="{{item.attributeType}}" />
+            </div>
+            <div class="form-group" *ngIf="item.attributeType != 2 && item.attributeType != 4">
+              <textarea rows="4" class="form-control" id="dynamicField_{{i}}" name="dynamicField_{{i}}" attr.attributeId="{{item.attributeId}}"
+                attr.attributeType="{{item.attributeType}}"></textarea>
+            </div>
+          </td>
+          <td>
+            <div class="form-group" *ngIf="item.baseUnitId > 0 && item.attributeType == 4">
+              <select class="form-control select2-unit" id="unitId_{{i}}" name="unitId_{{i}}" [(ngModel)]="productAttributeInfo.unitId">
+                <option *ngFor="let item of measureUnits" [ngValue]="item.unitId"> {{item.unitName}} </option>
+              </select>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-1');">Quay lại</button>
+      <button type="button" class="btn btn-success" (click)="onSubmit(frmTabAttribute, productAttributeInfo)">
+        <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+    </div>
+  </div>
+</form>

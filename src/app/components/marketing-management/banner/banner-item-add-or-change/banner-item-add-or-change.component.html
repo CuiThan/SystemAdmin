@@ -1,0 +1,206 @@
+<div id="banner-item-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span [hidden]="bannerItem.id == 'undefined' || bannerItem.id == ''" class="caption-subject font-red sbold uppercase">Add new banner item</span>
+                  <span [hidden]="bannerItem.id != 'undefined' && bannerItem.id != ''" class="caption-subject font-red sbold uppercase">Change banner item</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" (ngSubmit)="onAddOrChange(bannerItemAddOrChange)" autocomplete="off" #bannerItemAddOrChange="ngForm">
+                  <div class="form-body">
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Id
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" name="id" [(ngModel)]="bannerItem.id" readonly #id="ngModel" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">BannerId
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="bannerId" name="bannerId" [(ngModel)]="banner.id" readonly #bannerId="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Banner Name
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="bannerName" name="bannerName" [(ngModel)]="banner.bannerName" readonly
+                          #bannerName="ngModel" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Banner Item Name
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': (bannerItemName.errors && (bannerItemName.dirty || bannerItemName.touched)) 
+                        || (!formValid && bannerItemName.errors),
+                        'has-success': !bannerItemName.errors 
+                     }">
+                        <input type="text" class="form-control" placeholder="BannerItemName" name="bannerItemName" [(ngModel)]="bannerItem.bannerItemName"
+                          required minlength="1" maxlength="1024" #bannerItemName="ngModel" />
+                        <span class="help-block" *ngIf="(bannerItemName.invalid && (bannerItemName.dirty  || bannerItemName.touched))
+                        || (!formValid && bannerItemName.errors)
+                        ">
+                          <p class="required" *ngIf="bannerItemName.errors?.required">Banner Item Name is required</p>
+                          <p class="required" *ngIf="bannerItemName.errors.maxlength || bannerItemName.errors.minlength">Banner Item Name must be between 1 and 1024 characters</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Target Url
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': (targetUrl.errors && (targetUrl.dirty || targetUrl.touched)) 
+                        || (!formValid && targetUrl.errors),
+                        'has-success': !targetUrl.errors 
+                         }">
+                        <input type="text" class="form-control" placeholder="Target URL" name="targetUrl" [(ngModel)]="bannerItem.targetUrl" required
+                          minlength="1" maxlength="2048" #targetUrl="ngModel" />
+                        <span class="help-block" *ngIf="(targetUrl.invalid && (targetUrl.dirty  || targetUrl.touched))
+                        || (!formValid && targetUrl.errors)
+                        ">
+                          <p class="required" *ngIf="targetUrl.errors?.required">TargetUrl is required</p>
+                          <p class="required" *ngIf="targetUrl.errors.maxlength || targetUrl.errors.minlength">targetUrl must be between 1 and 2048 characters</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Image URL
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <img [src]="bannerItem.imageUrl" width="100px" height="100px" style="border: 1px" />
+                        <a (click)="onChangeImage()">Change image </a>
+                        <span class="help-block" *ngIf="(bannerItem.imageUrl == '' || bannerItem.imageUrl == null) && !formValid">
+                          <p class="required">Image is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">BackgroundRGB
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="BackgroundRGB" name="backgroundRGB" [(ngModel)]="bannerItem.backgroundRGB"
+                          maxlength="50" #backgroundRGB="ngModel" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">IsBannerDefault
+                      </label>
+                      <div class="col-md-7">
+                        <div class="mt-checkbox-inline">
+                          <label class="mt-checkbox">
+                            <input type="checkbox" (ngModelChange)="onSelectedCheckbox()" class="form-check-input" name="isDefault " [(ngModel)]="bannerItem.isDefault"
+                              #isDefault="ngModel" /> IsDefault
+                            <span></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div [style.display]="bannerItem.isDefault ? 'none' : 'block'">
+                      <div class="form-group">
+                        <label class="control-label col-md-3">StartDate
+                        </label>
+                        <div class="col-md-4">
+                          <div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="mm/dd/yyyy">
+                            <input type="text" class="form-control" name="startDate" placeholder="startDate" [(ngModel)]="bannerItem.startDate" maxlength="50"
+                              #startDate="ngModel" [readonly]="bannerItem.isDefault" />
+                            <span class="input-group-btn">
+                              <button class="btn btn-sm default" type="button">
+                                <i class="fa fa-calendar"></i>
+                              </button>
+                            </span>
+                          </div>
+                          <span class="help-block">MM/dd/yyy (tháng/ngày/năm)</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3">EndDate
+                        </label>
+                        <div class="col-md-4">
+                          <div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="mm/dd/yyyy">
+                            <input type="text" class="form-control" name="endDate" placeholder="startDate" [(ngModel)]="bannerItem.endDate" maxlength="50"
+                              #endDate="ngModel" [readonly]="bannerItem.isDefault" />
+                            <span class="input-group-btn">
+                              <button class="btn btn-sm default" type="button">
+                                <i class="fa fa-calendar"></i>
+                              </button>
+                            </span>
+                          </div>
+                          <span class="help-block">MM/dd/yyy (tháng/ngày/năm)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Status
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{'has-error': (status.errors && (status.dirty || status.touched)) 
+                      || (!formValid && status.errors),
+                      'has-success': !status.errors 
+                       }">
+                        <select class="form-control form-filter input-sm" [(ngModel)]="bannerItem.status" name="status" #status="ngModel" required>
+                          <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="(status.invalid && (status.dirty  || status.touched))
+                        || (!formValid && status.errors)
+                        ">
+                          <p class="required" *ngIf="status.errors.required">Status is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Priority
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{'has-error': (status.errors && (status.dirty || status.touched)) 
+                      || (!formValid && status.errors),
+                      'has-success': !status.errors 
+                       }">
+                       <input type="text" class="form-control" name="priority" placeholder="Priority" [(ngModel)]="bannerItem.priority" maxlength="50"
+                       #priority="ngModel" />
+                        <span class="help-block" *ngIf="(priority.invalid && (priority.dirty  || priority.touched))
+                        || (!formValid && status.errors)
+                        ">
+                          <p class="required" *ngIf="status.errors.required">Priority is required</p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Save</button>
+                        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popupUpload">
+  <app-file-uploader-popup #fileUploaderPopup (thumbnailData)="getUploadedFile($event)"></app-file-uploader-popup>
+</div>

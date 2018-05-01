@@ -1,0 +1,6 @@
+i.noDisplay {
+    display:none !important;
+}
+i.yesDisplay {
+    display:in-line !important;
+}

@@ -1,0 +1,89 @@
+
+<div class="row">
+  <div class="col-md-12">
+      <!-- Begin: Demo Datatable 1 -->
+      <div class="portlet light portlet-fit portlet-datatable">
+          <div class="portlet-title portlet-title-action ">
+              <div class="actions">                    
+                  <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddOrChangeForm(0)" >
+                      <i class="fa fa-plus"></i> Add new </a>
+                  
+                  <div class="btn-group">
+                      <a class="btn red btn-outline btn-circle dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                          <i class="fa fa-share"></i>
+                          <span class="hidden-xs"> Tools </span>
+                          <i class="fa fa-angle-down"></i>
+                      </a>
+                      <ul class="dropdown-menu pull-right">
+                          <li>
+                              <a href="javascript:;"> Export to Excel </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;"> Export to CSV </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;"> Export to XML </a>
+                          </li>
+                          <li class="divider"> </li>
+                          <li>
+                              <a href="javascript:;"> Print Invoices </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="portlet-body">
+<div class="table-container">
+  <form (ngSubmit)="getManufacturers()" #f="ngForm" autocomplete="off">
+    <table class="table table-striped table-bordered table-hover">          
+      <thead>
+        <tr> 
+          <th class="col-xs-1">Id</th>       
+          <th class="col-xs-2">Name</th>
+          <th class="col-xs-4">Description</th>
+          <th class="col-xs-2">Logo</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+              
+          </td>
+          <td>
+              <div>
+                  <input type="text" class="form-control form-filter input-sm" name="name" [(ngModel)]="searchParams.name" #name="ngModel" />
+              </div>
+          </td>
+          <td>
+              
+          </td>
+          <td></td>
+          <td><button  class="btn btn-sm yellow filter-submit margin-bottom" type="submit" >
+              <i class="fa fa-search"></i> Search</button></td>
+        </tr>
+        <tr *ngFor='let m of manufacturers | paginate: { id: "manu", itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }'>  
+          <td> {{m.id}}</td>    
+          <td> {{m.name}}</td>
+          <td> {{m.description}}</td>
+          <td> <img style ="height: 50px; width:50px;" src="http://192.168.1.251:5000{{m.logo}}"/></td>
+          <td>
+              <a href="javascript:;" class="btn btn-circle btn-outline green " (click)="onShowAddOrChangeForm(m.id)">
+                  <i class="fa fa-pencil"></i> Edit </a>
+              <a href="javascript:;" class="btn btn-circle btn-outline blue" [routerLink]="['/g/manufacturerdetails/', m.id]" >
+                  <i class="fa fa-reorder"></i> Detail </a>
+          </td>
+        </tr>  
+      </tbody>  
+    </table>
+    
+  </form>
+  <pagination-controls (pageChange) = "pageIndex = $event" id="manu"></pagination-controls>
+</div>
+</div>
+<div class="popup">
+  <app-manufacturer-add-or-change #manufacturerAddOrChange (getManufacturer)="getManufacturers($event)"></app-manufacturer-add-or-change>
+</div>

@@ -1,0 +1,55 @@
+<div id="template-define-html" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span class="caption-subject font-red sbold uppercase">Change template define html</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <form class="form-horizontal" (ngSubmit)="onChangeHtml(templateDefineHtmlChange)" autocomplete="off" #templateDefineHtmlChange="ngForm">
+                  <div class="form-body">
+                    <div class="form-group">
+                      <label class="control-label col-md-2">JsUrls</label>
+                      <div class="col-md-10">
+                        <textarea class="form-control" rows="3" placeholder="JsUrls" name="jsUrlsString" [(ngModel)]="templateDefine.jsUrlsString" maxlength="4000"
+                          #JsUrls="ngModel"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-2">CssUrls</label>
+                      <div class="col-md-10">
+                        <textarea class="form-control" rows="3" placeholder="CssUrls" name="cssUrlsString" [(ngModel)]="templateDefine.cssUrlsString" maxlength="4000"
+                          #CssUrls="ngModel"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Html</label>
+                        <div class="col-md-10">
+                          <textarea class="form-control" rows="20" placeholder="Html" name="Html" [(ngModel)]="templateDefine.html" maxlength="4000"
+                            #Html="ngModel"></textarea>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Save</button>
+                        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

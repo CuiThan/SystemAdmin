@@ -1,0 +1,16 @@
+.list-file-uploaded {
+    padding: 0;
+}
+
+.list-file-uploaded .item {
+    list-style: none;
+}
+
+.drag-zone-content{
+    text-align: center;
+    color: #000;
+}
+
+.ui-fileupload-content {
+    border: 2px dashed #ddd;
+}

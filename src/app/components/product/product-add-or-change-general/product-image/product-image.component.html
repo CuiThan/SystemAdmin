@@ -1,0 +1,115 @@
+<form autocomplete="off" (ngSubmit)="onSubmit()" #frmTabImage="ngForm">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <label class="control-label">ID Video Youtube</label>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="text" name="videoUrl" class="form-control" [(ngModel)]="productImage.videoUrl" #videoUrl="ngModel" placeholder="ID Video Youtube"
+                            maxlength="128" />
+                        <div class="help-block" *ngIf="(videoUrl.errors && (videoUrl.dirty || videoUrl.touched)) || (!formValid && videoUrl.errors)">
+                            <p class="required" *ngIf="videoUrl.errors.maxlength">Cho phép tối đa 128 ký tự.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3> Đăng ảnh sản phẩm - Nhiều biến thể</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <app-multiple-file-upload #multipleFileUpload></app-multiple-file-upload>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left">Tên thuộc tính biến thể</th>
+                                    <th>ID Video Youtube</th>
+                                    <th>Ảnh sản phẩm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left">
+                                        &nbsp;
+                                    </td>
+                                    <td class="cell-product-variant-amount">
+                                        <!--Id Video Youtube-->
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="VideoUrlDefault">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-info">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="error-messages">
+                                            <div>
+                                                Không vượt quá 128 ký tự
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="uploadAllImages" class="dropzone">
+                                                    <app-multiple-file-upload #multipleFileUploadAllItem></app-multiple-file-upload>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="product-variant-row" id="product_variant_row_1">
+                                    <td>
+                                        Giá trị thuộc tính
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="VideoUrl" />
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="dropzone" role="form" enctype="multipart/form-data" style="min-height: 125px">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <p class="text-red">Chỉ cho phép tối đa 10 ảnh trên 1 biến thể!</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top:15px">
+                                            <div class="col-md-12">
+                                                <app-multiple-file-upload #multipleFileUploadItem></app-multiple-file-upload>
+                                                <div class="alert alert-info alert-dismissable">
+                                                    Chưa có ảnh nào cho sản phẩm này.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:15px">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-4');">Quay lại</button>
+                <button type="button" class="btn btn-success" (click)="onSubmit(frmTabImage, productImage)">
+                    <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+            </div>
+        </div>
+
+    </div>
+</form>

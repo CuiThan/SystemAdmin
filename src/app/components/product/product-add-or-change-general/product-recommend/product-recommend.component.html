@@ -1,0 +1,94 @@
+<form autocomplete="off" #frmTabRecommend="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Thuộc tính phân loại (segment)</h4>
+            <table class="table table-condensed table-bordered">
+                <tr>
+                    <th style="width:10%">STT</th>
+                    <th style="width:30%">Thuộc tính </th>
+                    <th>Giá trị</th>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td>Giới tính</td>
+                    <td>
+                        <div class="col-md-8 form-group">
+                            <select class="form-control" name="Gender">
+                                <option value="">Lựa chọn giá trị </option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td>Độ tuổi mua hàng</td>
+                    <td>
+                        <div class="col-md-8 form-group">
+                            <select class="form-control" name="Gender">
+                                <option value="">Lựa chọn giá trị </option>
+                            </select>
+                        </div>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td>Mức thu nhập
+                        <i class="fa fa-info-circle" aria-hidden="true" data-toggle="popover" data-html="true" data-content="Định nghĩa mức thu nhập: <br/> 1.Thấp: Dưới 5 triệu <br/>2.Trung bình: Từ 5 triệu đến 20 triệu. <br/> 3.Cao: Từ 20 triệu. <br/> 4. Không xác định"
+                            data-placement="top" data-trigger="hover"></i>
+                    </td>
+                    <td>
+                        <div class="col-md-8 form-group">
+                            <select class="form-control" name="Gender">
+                                <option value="">Lựa chọn giá trị </option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-12">
+            <h4>Sản phẩm mua cùng</h4>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control txtProduct" placeholder="Nhập tên sản phẩm" />
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-primary">&nbsp; &nbsp; Thêm sản phẩm &nbsp; &nbsp; </button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="col-md-12">
+            <h4>Danh sách sản phẩm</h4>
+            <table class="table table-condensed table-bordered">
+                <tr>
+                    <th style="width:10%">STT</th>
+                    <th style="width:10%">ADR ID </th>
+                    <th style="width:30%">Ảnh </th>
+                    <th style="width:40%">Tên sản phẩm</th>
+                    <th style="width:10%">Thao tác </th>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td>productRecommend.ProductItemId</td>
+                    <td>
+                        <img src="#" />
+                    </td>
+                    <td>productRecommend.ProductName</td>
+                    <td>
+                        <a href="javascript:void(0)"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-6');">Quay lại</button>
+            <button type="button" class="btn btn-success" (click)="setTab.emit('tab-8');">
+                <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+        </div>
+    </div>
+</form>

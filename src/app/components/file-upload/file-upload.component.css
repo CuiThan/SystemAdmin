@@ -1,0 +1,11 @@
+.dragarea {
+border: 1px solid red;
+}
+.img-thumbnail {
+    min-width: 157px;
+    min-height: 180px;
+}
+.img-upload-box{
+    min-width: 157px;
+    min-height: 30px;
+}

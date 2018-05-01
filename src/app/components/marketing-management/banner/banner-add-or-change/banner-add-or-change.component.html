@@ -1,0 +1,83 @@
+<div id="banner-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span [hidden]="banner.id == ''" class="caption-subject font-red sbold uppercase">Add new banner</span>
+                  <span [hidden]="banner.id != ''" class="caption-subject font-red sbold uppercase">Change banner</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" (ngSubmit)="onAddOrChange(bannerAddOrChange)" autocomplete="off" #bannerAddOrChange="ngForm">
+                  <div class="form-body">                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Banner Name
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': (bannerName.errors && (bannerName.dirty || bannerName.touched)) 
+                        || (!formValid && bannerName.errors),
+                        'has-success': !bannerName.errors 
+                     }">
+                        <input type="text" class="form-control" placeholder="BannerName" name="bannerName" [(ngModel)]="banner.bannerName" required
+                         minlength="1" maxlength="1024" #bannerName="ngModel" />
+                        <span class="help-block" *ngIf="(bannerName.invalid && (bannerName.dirty  || bannerName.touched))
+                        || (!formValid && bannerName.errors)
+                        ">
+                          <p class="required" *ngIf="bannerName.errors?.required">Banner Name is required</p>
+                          <p class="required" *ngIf="bannerName.errors.maxlength || bannerName.errors.minlength">Banner Name must be between 1 and 1024 characters</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">BackgroundRGB
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="BackgroundRGB" name="backgroundRgb" [(ngModel)]="banner.backgroundRgb"
+                          maxlength="50" #backgroundRGB="ngModel" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Status
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                          'has-error': status.errors && (status.dirty  || (submited && !status.dirty)),
+                          'has-success': !status.errors 
+                       }">
+                        <select class="form-control form-filter input-sm" [(ngModel)]="banner.status" name="status" #status="ngModel" required>
+                          <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="status.invalid && (status.dirty || status.touched)">
+                          <p class="required" *ngIf="status.errors.required">Status is required</p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Save</button>
+                        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

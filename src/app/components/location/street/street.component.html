@@ -1,0 +1,111 @@
+<ngb-tabset>
+  <ngb-tab id="tab-1" title="Thông tin">
+    <ng-template ngbTabContent>
+      <div>
+        <div class="note note-info ">
+          <em class="block sbold font-red">{{locationUpdateRequest.streetName}}</em>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="portlet light portlet-fit portlet-datatable">
+                <div class="portlet-body">
+                  <div class="table-container">
+                    <table class="table table-striped table-bordered table-hover table-checkable">
+                      <tbody>
+                        <tr>
+                          <td> Id </td>
+                          <td>{{locationUpdateRequest.id}}</td>
+                        </tr>
+                        <tr>
+                          <td> Street Name English </td>
+                          <td>{{locationUpdateRequest.streetNameEN}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <em class="block sbold font-red">Nằm trên</em>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="portlet light portlet-fit portlet-datatable">
+                <div class="portlet-body">
+                  <div class="table-container">
+                    <table class="table table-striped table-bordered table-hover table-checkable">
+                      <thead>
+                        <tr role="row" class="heading">
+                          <th>STT</th>
+                          <th>Ward name</th>
+                          <th>District name</th>
+                          <th>Province name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of locationUpdateRequest.wards; let i = index">
+                          <td>{{i + 1}}</td>
+                          <td>{{item.wardName}}</td>
+                          <td>{{item.districtName}}</td>
+                          <td>{{item.provinceName}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <!-- <ngb-tab id="tab-2" title="Chỉnh sửa">
+    <ng-template ngbTabContent>
+      <form class="form-horizontal" (ngSubmit)="onStreetUpdate(streetUpdate)" autocomplete="off" #streetUpdate="ngForm">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Street Name
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input class="form-control" id="StreetName" type="text" name="StreetName" placeholder="Enter street name" [(ngModel)]="locationUpdateRequest.streetName"
+                      required />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Street Name English
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input class="form-control" id="StreetNameEN" type="text" name="StreetNameEN" placeholder="Enter street name english" [(ngModel)]="locationUpdateRequest.streetNameEN"
+                      required />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-danger" (click)="onDelete(locationUpdateRequest.id, 'street');">Delete</button>
+            <button type="submit" class="btn btn-success">
+              <i class='fa fa-spinner fa-spin'></i> Save</button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </ngb-tab> -->
+</ngb-tabset>

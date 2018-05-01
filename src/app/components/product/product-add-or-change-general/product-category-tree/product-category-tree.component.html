@@ -1,0 +1,35 @@
+<form autocomplete="off" #frmTabCategoryTree="ngForm">
+    <div class="col-md-10">
+        <div class="row form-horizontal clearfix" ng-repeat="categoryTree in product.CategoryTrees">
+            <div class="col-xs-12">
+                <div class="col-md-2">
+                    <span> Danh mục</span>
+                    <strong>categoryTree.CategoryTreeName</strong>
+                </div>
+                <div class="col-sm-9 col-md-5">
+                    <label>categoryTree.Breadcrum</label>
+                    <button type="button" id="btnSearch" class="btn btn-sm btn-success">
+                        Đổi ngành hàng
+                    </button>
+                </div>
+            </div>
+            <div class="col-xs-12" ng-show="categoryTree.ShowCate">
+                <div class="col-md-2"> </div>
+                <div class="col-sm-9 col-md-5">
+                    <div id="jsCategoryTree_categoryTree.CategoryTreeTypeId"></div>
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:15px">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-7');">Quay lại</button>
+            <button type="button" class="btn btn-success" (click)="setTab.emit('tab-9');">
+                <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+        </div>
+    </div>
+</form>

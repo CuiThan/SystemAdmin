@@ -1,0 +1,78 @@
+<div id="manufacturer-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span [hidden]="manufacturer.id != ''" class="caption-subject font-red sbold uppercase">Add new manufacturer</span>
+                  <span [hidden]="manufacturer.id == ''" class="caption-subject font-red sbold uppercase">Change manufacturer</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" (ngSubmit)="onAddOrChange(manufacturerAddOrChange)" autocomplete="off" #manufacturerAddOrChange="ngForm">
+                  <div class="form-body">
+                    <div class="alert alert-danger display-hide" *ngIf="manufacturerAddOrChange.form.valid">
+                      <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                    <div class="alert alert-success display-hide">
+                      <button class="close" data-close="alert"></button> Your form validation is successful! </div>                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Name
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': name.errors && (name.dirty ||submited&&!name.dirty),
+                        'has-success': !name.errors 
+                     }">
+                     <input type="text" class="form-control" placeholder="name" [(ngModel)]="manufacturer.name" name="name" required #name="ngModel"/>
+                        <span class="help-block" *ngIf="name.errors && (name.dirty ||submited&&!name.dirty)">
+                          <p class="required">name is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Logo
+                      </label>
+                      <div class="col-md-5" style="height:70%">
+                        <app-file-upload maxFiles="1" maxSize="3" fileExt="JPG, GIF, PNG" imageUrl="http://192.168.1.251:5000{{manufacturer.logo}}">
+                        </app-file-upload>
+                      </div>
+                    </div>                  
+                    
+                    
+                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Description
+                      </label>
+                      <div class="col-md-7">
+                        <textarea class="form-control" rows="3" placeholder="description" name="description" [(ngModel)]="manufacturer.description" #description="ngModel"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Save</button>
+                        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

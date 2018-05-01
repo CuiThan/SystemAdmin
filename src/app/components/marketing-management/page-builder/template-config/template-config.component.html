@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-title portlet-title-action ">
+        <div class="caption">
+          <i class="icon-settings font-green"></i>
+          <span class="caption-subject font-green sbold uppercase"> List Position of
+            <span class=" caption font-red-intense">{{template.templateName}}</span>
+            template. </span>
+        </div>
+        <div class="actions">
+          <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" [routerLink]="['/g/template/template-config-add',currentTemplateId]">
+            <i class="fa fa-plus"></i> Add new </a>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="table-container">
+          <form (ngSubmit)="getTemplateConfigs()" #searchForm="ngForm" autocomplete="off">
+            <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
+              <thead>
+                <tr role="row" class="heading">
+                  <th>
+                    PositionCode
+                  </th>
+                  <th>
+                    Component Type
+                  </th>
+                  <th>
+                    Component Id
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Actions
+                  </th>
+                </tr>
+                <tr role="row" class="filter">
+                  <td>
+                  </td>
+                  <td>
+                    <div>
+                      <select class="form-control form-filter input-sm" [(ngModel)]="searchParams.componentType" name="componentType" #componentType="ngModel">
+                        <option *ngFor="let item of componentTypes" [ngValue]="item.value">{{item.text}}</option>
+                      </select>
+                    </div>
+
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                    <div>
+                      <select class="form-control form-filter input-sm" [(ngModel)]="searchParams.status" name="status" #status="ngModel">
+                        <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                      </select>
+                    </div>
+
+                  </td>
+                  <td>
+                    <div class="margin-bottom-5">
+                      <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
+                        <i class="fa fa-search"></i> Search</button>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let templateConfig of templateConfigs | paginate: { itemsPerPage: searchParams.pageSize, currentPage: searchParams.pageIndex, totalItems: totalRow };let last = last ">
+                  <td>
+                    {{templateConfig.templatePositionCode}}
+                  </td>
+                  <td>
+                    {{templateConfig.componentTypeName}}
+                  </td>
+                  <td>
+                    {{templateConfig.componentId}}
+                  </td>
+                  <td>
+                    {{templateConfig.statusName}}
+                  </td>
+                  <td>
+                    <a href="javascript:;" class="btn btn-circle btn-outline green" [routerLink]="['/g/template/template-config-change',currentTemplateId,templateConfig.id]">
+                      <i class="fa fa-pencil"></i> Edit </a>
+                    <button type="button" class="btn btn-circle btn-outline red fa fa-remove templateconfig_remove_bs_confirmation" data-toggle="confirmation"
+                      attr.tmpid="{{templateConfig.id}}">
+                      <span *ngIf="last">{{onRegisterConfirmation()}}</span>
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="popupDetail">
+  <app-template-config-add-or-change #templateConfigAddOrChange [templateConfigId]="currentTemplateConfigId"></app-template-config-add-or-change>
+</div> -->

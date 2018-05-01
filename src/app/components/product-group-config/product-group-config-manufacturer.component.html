@@ -1,0 +1,148 @@
+<div id="productgroup-manufacturer" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light portlet-fit portlet-form bordered">
+                            <div class="portlet-title ">
+                                <div class="caption">
+                                    <i class="icon-settings font-red"></i>
+                                    <span class="caption-subject font-red sbold uppercase">Product Group config Manufacturers</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <form class="form-horizontal" autocomplete="off" #productGroupConfigVenders="ngForm">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Name
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Status
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="manufacturerParam" [(ngModel)]="manufacturerParam" />
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <select class="form-control form-filter input-sm" [(ngModel)]="manufacturerStatus" name="manufacturerStatus">
+                                                                                <option *ngFor="let item of manufacturerStatuses" [ngValue]="item.value">{{item.text}}</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetManufacturers()>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let manufacturer of manufacturers | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                                                                        <td style="padding-left: 10px;text-align: left;">
+                                                                            {{manufacturer.name}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            {{manufacturer.statusName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onAdd(manufacturer.id)">
+                                                                                <i class="fa fa-arrow-right"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Name
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Status
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="manufacturerConfigParam" [(ngModel)]="manufacturerConfigParam"
+                                                                            />
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <select class="form-control form-filter input-sm" [(ngModel)]="manufacturerConfigStatus" name="manufacturerConfigStatus">
+                                                                                <option *ngFor="let item of manufacturerStatuses" [ngValue]="item.value">{{item.text}}</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetManufacturersConfig()>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let manufacturer of manufacturersConfig | paginate: { itemsPerPage: manufacturerConfigPageSize, currentPage: manufacturerConfigPageIndex, totalItems: manufacturerConfigTotalRow }">
+                                                                        <td style="padding-left: 10px;text-align: left;">
+                                                                            {{manufacturer.name}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            {{manufacturer.statusName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" class="btn btn-circle btn-outline red" (click)="onRemove(manufacturer.id)">
+                                                                                <i class="fa fa-remove"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

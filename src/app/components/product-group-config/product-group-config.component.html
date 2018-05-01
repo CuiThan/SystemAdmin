@@ -1,0 +1,238 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-title portlet-title-action ">
+        <div class="actions">
+          <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onAddNew()">
+            <i class="fa fa-plus"></i> Add new </a>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="table-container">
+          <form (ngSubmit)="onGets()" #f="ngForm" autocomplete="off">
+            <table class="table table-striped table-bordered table-hover table-checkable" id="language">
+              <thead>
+                <tr role="row" class="heading">
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Description
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Actions
+                  </th>
+                  <th>
+                    Conditions
+                  </th>
+                </tr>
+                <tr role="row" class="filter">
+                  <td>
+                    <input type="text" class="form-control form-filter input-sm" name="searchName" [(ngModel)]="searchNameParam" #searchName
+                    />
+                  </td>
+                  <td></td>
+                  <td>
+                    <select class="form-control form-filter input-sm" [(ngModel)]="searchStatusParam" name="searchStatus" #searchStatus="ngModel"
+                      required>
+                      <option *ngFor="let item of statusesBySearch" [ngValue]="item.value">{{item.text}}</option>
+                    </select>
+                  </td>
+                  <td>
+                    <div class="margin-bottom-5">
+                      <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
+                        <i class="fa fa-search"></i> Search</button>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="showAddNew">
+                  <td>
+                    <div [ngClass]="{
+                      'has-error': (productGroupAddNewName.errors && (productGroupAddNewName.dirty|| productGroupAddNewName.touched))
+                                 || (!formValid && productGroupAddNewName.errors),
+                      'has-success': !productGroupAddNewName.errors
+                    }">
+                      <input type="text" class="form-control input-sm" name="productGroupAddNewName" [(ngModel)]="productGroupAddNew.name" #productGroupAddNewName="ngModel"
+                        required minlength="1" maxlength="256" />
+                      <span class="help-block" *ngIf="(productGroupAddNewName.errors && (productGroupAddNewName.dirty|| productGroupAddNewName.touched))
+                      || (!formValid && productGroupAddNewName.errors)">
+                        <p class="required" *ngIf="productGroupAddNewName.errors.required"> Name is required</p>
+                        <p class="required" *ngIf="productGroupAddNewName.errors.maxlength || productGroupAddNewName.errors.minlength">
+                          Path To View must be between 1 and 256 characters</p>
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div [ngClass]="{
+                      'has-error': (productGroupAddNewDescription.errors && (productGroupAddNewDescription.dirty|| productGroupAddNewDescription.touched))
+                                 || (!formValid && productGroupAddNewDescription.errors),
+                      'has-success': !productGroupAddNewDescription.errors
+                    }">
+                      <input type="text" class="form-control input-sm" name="productGroupAddNewDescription" [(ngModel)]="productGroupAddNew.description"
+                        #productGroupAddNewDescription="ngModel" maxlength="1024" />
+                      <span class="help-block" *ngIf="(productGroupAddNewDescription.errors && (productGroupAddNewDescription.dirty|| productGroupAddNewDescription.touched))
+                      || (!formValid && productGroupAddNewDescription.errors)">
+                        <p class="required" *ngIf="productGroupAddNewDescription.errors.maxlength">
+                          Path To View must be between 1 and 1024 characters</p>
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div [ngClass]="{
+                      'has-error': (productGroupAddNewStatus.errors && (productGroupAddNewStatus.dirty|| productGroupAddNewStatus.touched))
+                                 || (!formValid && productGroupAddNewStatus.errors),
+                      'has-success': !productGroupAddNewStatus.errors
+                    }">
+                      <select class="form-control form-filter input-sm" [(ngModel)]="productGroupAddNew.status" name="productGroupAddNewStatus"
+                        #productGroupAddNewStatus="ngModel" required>
+                        <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                      </select>
+                      <span class="help-block" *ngIf="(productGroupAddNewStatus.errors && (productGroupAddNewStatus.dirty || productGroupAddNewStatus.touched))
+                            || (!formValid && productGroupAddNewStatus.errors)
+                            ">
+                        <p class="required" *ngIf="productGroupAddNewStatus.errors?.required">Status Type is required</p>
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" class="btn green" (click)="onSave(f,productGroupAddNew)">Save</button>
+                    <button type="button" class="btn default" (click)="onAddNewCancel()">Cancel</button>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr *ngFor="let productGroup of productGroups | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                  <td>
+                    <span *ngIf="!rowEdits.Item(productGroup.id)">{{productGroup.name}}</span>
+                    <ng-container *ngIf="rowEdits.Item(productGroup.id)">
+                      <div [ngClass]="{
+                            'has-error': (productGroupChangeName.errors && (productGroupChangeName.dirty|| productGroupChangeName.touched))
+                                       || (!formValid && productGroupChangeName.errors),
+                            'has-success': !productGroupChangeName.errors
+                          }">
+                        <input type="text" class="form-control input-sm" name="name_{{productGroup.id}}" [(ngModel)]="productGroup.name" #productGroupChangeName="ngModel"
+                          required minlength="1" maxlength="256" />
+                        <span class="help-block" *ngIf="(productGroupChangeName.errors && (productGroupChangeName.dirty|| productGroupChangeName.touched))
+                            || (!formValid && productGroupChangeName.errors)">
+                          <p class="required" *ngIf="productGroupChangeName.errors.required"> Name is required</p>
+                          <p class="required" *ngIf="productGroupChangeName.errors.maxlength || productGroupChangeName.errors.minlength">
+                            Path To View must be between 1 and 256 characters</p>
+                        </span>
+                      </div>
+                    </ng-container>
+                  </td>
+                  <td>
+                    <span *ngIf="!rowEdits.Item(productGroup.id)">{{productGroup.description}}</span>
+                    <ng-container *ngIf="rowEdits.Item(productGroup.id)">
+                      <div [ngClass]="{
+                            'has-error': (productGroupChangeDescription.errors && (productGroupChangeDescription.dirty|| productGroupChangeDescription.touched))
+                                       || (!formValid && productGroupChangeDescription.errors),
+                            'has-success': !productGroupChangeDescription.errors
+                          }">
+                        <input type="text" class="form-control input-sm" name="productGroupChangeDescription" [(ngModel)]="productGroup.description"
+                          #productGroupChangeDescription="ngModel" maxlength="1024" />
+                        <span class="help-block" *ngIf="(productGroupChangeDescription.errors && (productGroupChangeDescription.dirty|| productGroupChangeDescription.touched))
+                            || (!formValid && productGroupChangeDescription.errors)">
+                          <p class="required" *ngIf="productGroupChangeDescription.errors.maxlength">
+                            Path To View must be between 1 and 1024 characters</p>
+                        </span>
+                      </div>
+                    </ng-container>
+                  </td>
+                  <td>
+                    <span *ngIf="!rowEdits.Item(productGroup.id)">{{productGroup.statusName}}</span>
+                    <ng-container *ngIf="rowEdits.Item(productGroup.id)">
+                      <div [ngClass]="{
+                          'has-error': (productGroupChangeStatus.errors && (productGroupChangeStatus.dirty|| productGroupChangeStatus.touched))
+                                     || (!formValid && productGroupChangeStatus.errors),
+                          'has-success': !productGroupChangeStatus.errors
+                        }">
+                        <select class="form-control form-filter input-sm" [(ngModel)]="productGroup.status" name="productGroupChangeStatus" #productGroupChangeStatus="ngModel"
+                          required>
+                          <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="(productGroupChangeStatus.errors && (productGroupChangeStatus.dirty || productGroupChangeStatus.touched))
+                                || (!formValid && productGroupChangeStatus.errors)
+                                ">
+                          <p class="required" *ngIf="productGroupChangeStatus.errors?.required">Status Type is required</p>
+                        </span>
+                      </div>
+                    </ng-container>
+                  </td>
+                  <td>
+                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onChange(productGroup.id)" *ngIf="!rowEdits.Item(productGroup.id)">
+                      <i class="fa fa-pencil"></i> Edit </a>
+                    <button type="button" class="btn green" (click)="onSave(f,productGroup)" *ngIf="rowEdits.Item(productGroup.id)">Save</button>
+                    <button type="button" class="btn default" (click)="onChangeCancel(productGroup.id)" *ngIf="rowEdits.Item(productGroup.id)">Cancel</button>
+
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                        <i class="fa fa-gear"></i>
+                        <span class="hidden-xs"> Conditions </span>
+                        <i class="fa fa-angle-down"></i>
+                      </a>
+                      <ul class="dropdown-menu pull-right">
+                        <li>
+                          <a href="javascript:;" (click)="onShowFormCategory(productGroup.id)">
+                            <i class="fa fa-gear"></i> Category </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                          <a href="javascript:;" (click)="onShowFormManufacturersConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Manufacturer </a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" (click)="onShowFormVendersConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Vendor </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="javascript:;" (click)="onShowFormWarehousesConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Warehouse </a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" (click)="onShowFormAttributesConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Attribute </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                          <a href="javascript:;" (click)="onShowFormPricesConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Price </a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" (click)="onShowFormQuantitiesConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Quantity </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="javascript:;" (click)="onShowFormProductsConfig(productGroup.id)">
+                            <i class="fa fa-gear"></i> Product </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<product-group-config-category #productGroupCategories></product-group-config-category>
+<product-group-config-vendor #productGroupVenders></product-group-config-vendor>
+<product-group-config-attribute #productGroupAttributes></product-group-config-attribute>
+<product-group-config-price #productGroupPrices></product-group-config-price>
+<product-group-config-quantity #productGroupQuantities></product-group-config-quantity>
+<product-group-config-manufacturer #productGroupManufacturers></product-group-config-manufacturer>
+<product-group-config-warehouse #productGroupWarehouses></product-group-config-warehouse>
+<product-group-config-product #productGroupProducts></product-group-config-product>

@@ -1,0 +1,51 @@
+<h2 class="bd-title">Sharding Config</h2>
+<div class="row">
+  <div class="col-sm">
+    <div class="row">
+      <label class="col-form-label  col-sm-2">ShardGroup:</label>
+      <div class="col-sm-4">
+        <select class="form-control" [(ngModel)]="model.shardGroupSelected" name="shardGroup" required (change)="onGets()">
+          <option *ngFor="let item of model.shardGroups" [ngValue]="item.value">{{item.text}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm">
+    <button type="button" class="btn btn-primary btn-sm float-right" (click)="onShowAddOrChangeForm(0)">Add</button>
+  </div>
+
+</div>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">HostName</th>
+      <th scope="col">DatabaseName</th>
+      <th scope="col">Uid</th>
+      <th scope="col">Pwd</th>
+      <th scope="col">ShardGroup</th>
+      <th scope="col">Type</th>
+      <th scope="col">Status</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of model.shardingConfigs">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.hostName}}</td>
+      <td>{{item.databaseName}}</td>
+      <td>{{item.uid}}</td>
+      <td>{{item.pwd}}</td>
+      <td>{{item.shardGroupName}}</td>
+      <td>{{item.typeName}}</td>
+      <td>{{item.statusName}}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm" (click)="onShowAddOrChangeForm(item.id)">Change</button>
+        <button type="button" class="btn btn-success btn-sm">Detail</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="popup">
+  <app-sharding-config-add-or-change #shardingConfigAddOrChange></app-sharding-config-add-or-change>
+</div>

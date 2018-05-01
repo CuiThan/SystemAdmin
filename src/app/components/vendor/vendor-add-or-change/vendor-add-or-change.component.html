@@ -1,0 +1,159 @@
+<div id="vendor-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span [hidden]="vendor.id != ''" class="caption-subject font-red sbold uppercase">Add new vendor</span>
+                  <span [hidden]="vendor.id == ''" class="caption-subject font-red sbold uppercase">Change vendor</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" (ngSubmit)="onAddOrChange(vendorAddOrChange)" autocomplete="off" #vendorAddOrChange="ngForm">
+                  <div class="form-body">
+                    <div class="alert alert-danger display-hide" *ngIf="vendorAddOrChange.form.valid">
+                      <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                    <div class="alert alert-success display-hide">
+                      <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Code
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Code" name="code" [(ngModel)]="vendor.code" readonly #code="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Name
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': name.errors && (name.dirty ||submited&&!name.dirty),
+                        'has-success': !name.errors 
+                     }">
+                     <input type="text" class="form-control" placeholder="Name" [(ngModel)]="vendor.name" name="name" required #name="ngModel"/>
+                        <span class="help-block" *ngIf="name.errors && (name.dirty ||submited&&!name.dirty)">
+                          <p class="required">name is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Company name
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Company name" [(ngModel)]="vendor.companyName" name="companyName" #companyNameme="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Email
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <div class="input-group" [ngClass]="{ 
+                          'has-error': email.errors && (email.dirty ||submited&&!email.dirty),
+                          'has-success': !email.errors 
+                       }">
+                          <span class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                          </span>
+                          <input type="text" class="form-control" placeholder="Email" [(ngModel)]="vendor.email" name="mail" required maxlength="150"
+                            pattern="[^ @]*@[^ @]*" #email="ngModel"
+                          />
+                        </div>
+                        <span class="help-block" *ngIf="email.errors && (email.dirty ||submited&&!email.dirty)">
+                          <p class="required" *ngIf="email.errors.required">Email is required</p>
+                          <p class="required" *ngIf="email.errors.maxlength">Email only contain up to 150 characters</p>
+                          <p class="required" *ngIf="email.errors.pattern">Email invalid</p>
+                        </span>
+                        <span class="help-block"> e.g: support@gico.vn </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Logo
+                      </label>
+                      <div class="col-md-5" style="height:70%">
+                        <app-file-upload maxFiles="1" maxSize="3" fileExt="JPG, GIF, PNG" imageUrl="http://192.168.1.251:5000{{vendor.logo}}">
+                        </app-file-upload>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Fax
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Fax" [(ngModel)]="vendor.fax" name="fax" #fax="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Website
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Website" [(ngModel)]="vendor.website" name="website" #website="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Phone Number
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="phoneNumber" name="phone" [(ngModel)]="vendor.phone" maxlength="50"
+                          #phone="ngModel"/>
+                        <span class="help-block">Số điện thoại di dộng viết liền</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Type
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-4" [ngClass]="{ 
+                        'has-error': (_typeDirty||submited)&&_type==0,
+                        'has-success': !((_typeDirty||submited)&&_type==0)
+                     }">
+                        <div class="mt-checkbox-list">
+                          <label class="mt-checkbox" *ngFor="let item of types;let index = index;trackBy:trackByIndex;">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="types[index].checked" value="{{item.value}}" [checked]="item.checked"
+                              (click)="checkedType(this.item)" name="types_{{item.value}}" /> {{item.text}}
+                            <span></span>
+                          </label>
+                          <div class="help-block" *ngIf="(_typeDirty||submited)&&_type==0">
+                            <p class="required">The type is required</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Description
+                      </label>
+                      <div class="col-md-7">
+                        <textarea class="form-control" rows="3" placeholder="description" name="description" [(ngModel)]="vendor.description" #description="ngModel"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Save</button>
+                        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

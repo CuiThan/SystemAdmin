@@ -1,0 +1,55 @@
+<div id="variationtheme-edit" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portlet-title ">
+              <div class="caption">
+                <i class="icon-settings font-red"></i>
+                <span class="caption-subject font-red sbold uppercase">Chỉnh sửa thuộc tính</span>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <form class="form-horizontal" (ngSubmit)="onChange(variationthemeEdit)" autocomplete="off" #variationThemeEditForm="ngForm">
+                <div class="form-body">                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3">Tên nhóm
+                      <span class="required"> (*) </span>
+                    </label>
+                    <div class="col-md-7" [ngClass]="{ 
+                      'has-error': variationthemeEditName.errors && (variationthemeEditName.dirty ||submited&&!variationthemeEditName.dirty),
+                      'has-success': !variationthemeEditName.errors}">
+                      <input type="text" class="form-control" placeholder="Nhập tên danh mục" name="variationthemeEditName" [(ngModel)]="variationthemeEdit.variationThemeName"
+                        #variationthemeEditName="ngModel" />
+                      <div class="help-block" *ngIf="variationthemeEditName.errors && (variationthemeEditName.dirty ||submited&&!variationthemeEditName.dirty)">
+                        <span class="required" *ngIf="variationthemeEditName.errors.required">Vui lòng không để trống tên nhóm</span>
+                        <span class="required" *ngIf="variationthemeEditName.errors.pattern">Tên nhóm chỉ chứa chũ in thường, chữ in hoa và ký tự </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3">Thuộc tính
+                      <span class="required"> (*) </span>
+                    </label>
+                    <div class="col-md-7" [ngClass]="{ 
+                    'has-error': attributeId.errors && (attributeId.dirty ||submited&&!attributeId.dirty),
+                    'has-success': !attributeId.errors}">
+                      <select class="form-control" [(ngModel)]="attributeIdAdd" name="attributeId" #attributeId="ngModel" required>
+                        <option *ngFor="let item of attributes" [ngValue]="item.attributeId"> {{item.attributeName}}</option>
+                      </select>
+                      <div class="help-block" *ngIf="attributeId.errors && (attributeId.dirty ||submited&&!attributeId.dirty)">
+                        <span class="required" *ngIf="attributeId.errors.required">Vui lòng chọn thuộc tính</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>            
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

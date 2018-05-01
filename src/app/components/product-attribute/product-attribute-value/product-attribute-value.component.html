@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-12">
+      <!-- Begin: Datatable -->
+      <div class="portlet light portlet-fit portlet-datatable">
+          <div class="portlet-title portlet-title-action ">
+              <div class="actions">
+                  <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddOrUpdateForm('')">
+                      <i class="fa fa-plus"></i> Add new
+                  </a>
+                  <div class="btn-group">
+                      <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                          <i class="fa fa-share"></i>
+                          <span class="hidden-xs"> Tools </span>
+                          <i class="fa fa-angle-down"></i>
+                      </a>
+                      <ul class="dropdown-menu pull-right">
+                          <li>
+                              <a href="javascript:;"> Export to Excel </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;"> Export to CSV </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;"> Export to XML </a>
+                          </li>
+                          <li class="divider"> </li>
+                          <li>
+                              <a href="javascript:;"> Print Invoices </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <div class="table-container">
+                  <form (ngSubmit)="onSearch()" #f="ngForm" autocomplete="off">
+                      <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
+                          <thead>
+                              <tr role="row" class="heading">
+                                  <th>
+                                      Id
+                                  </th>
+                                  <th>
+                                      Attribute Value Name
+                                  </th>
+                                  <th>
+                                      Status
+                                  </th>
+                                  <th class="col-md-2">
+                                      Actions
+                                  </th>
+                              </tr>
+                              <tr role="row" class="filter">
+                                  <td>
+                                      <div [ngClass]="{'has-success': id.dirty && id.value!=''}">
+                                          <input type="text" class="form-control form-filter input-sm" name="id" [(ngModel)]="searchParams.attributeValueId" #id="ngModel" />
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div [ngClass]="{'has-success': value.dirty && value.value!=''}">
+                                          <input type="text" class="form-control form-filter input-sm" name="value" [(ngModel)]="searchParams.value"
+                                              #value="ngModel" />
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div [ngClass]="{'has-success': status.dirty && status.value!=''}">
+                                          <select class="form-control form-filter input-sm" [(ngModel)]="searchParams.status" name="status" #status="ngModel">
+                                              <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                                          </select>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <div class="margin-bottom-5">
+                                          <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
+                                              <i class="fa fa-search"></i> Search</button>
+                                      </div>
+                                  </td>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let item of productattributeValues | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                                  <td>
+                                      {{item.attributeValueId}}
+                                  </td>
+                                  <td>
+                                      {{item.value}}
+                                  </td>
+                                  <td>
+                                      {{item.statusName}}
+                                  </td>
+                                  <td>
+                                      <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowAddOrUpdateForm(item.attributeValueId)">
+                                          <i class="fa fa-pencil"></i> Edit </a>
+                                      <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onDelete(item.attributeValueId)">
+                                          <i class="fa fa-trash"></i> Delete </a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <!-- End: Datatable -->
+  </div>
+</div>
+<div class="popup">
+  <app-product-attribute-value-add-or-update #productAttributeValueAddOrUpdate (onSearch)="onSearch($event)"></app-product-attribute-value-add-or-update>
+</div>

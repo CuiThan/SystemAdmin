@@ -1,0 +1,145 @@
+<div class="row">
+  <div class="col-2 offset-5">
+    <form class="login-form" (ngSubmit)="onRegister(registerForm)" autocomplete="off" #registerForm="ngForm">
+      <div class="form-group">
+        <label>FullName</label>
+        <input type="text" class="form-control" placeholder="Enter fullName" name="fullName" [(ngModel)]="model.fullName" required
+          minlength="4" maxlength="100" #fullName="ngModel" /> {{fullName.errors | json}}
+        <div [hidden]="!(fullName.touched && fullName.errors?.required)" class="alert alert-danger">
+          FullName is required
+        </div>
+        <small *ngIf="fullName.errors?.minlength" class="text-danger">
+          FullName must be longer than 4
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="text" class="form-control" placeholder="Enter email" name="email" [(ngModel)]="model.email" required email #email="ngModel"
+        />
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div [hidden]="!(email.touched && email.errors?.required)" class="alert alert-danger">
+          Email is required
+        </div>
+        <div [hidden]="!(email.touched && email.errors?.email)" class="alert alert-danger">
+          Email is not valid
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password" required
+          minlength="6" #password="ngModel" />
+        <div [hidden]="!(password.touched && password.errors?.required)" class="alert alert-danger">
+          Password is required
+        </div>
+        <small *ngIf="password.errors?.minlength" class="text-danger">
+          Password must be longer than 6
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        {{model.confirmPassword}}
+        <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="model.confirmPassword" required validateEqual="password"
+          reverse="false" #confirmPassword="ngModel">
+        <small [hidden]="!(confirmPassword.touched && confirmPassword.errors?.required)" class="text-danger">
+          Password is required
+        </small>
+        <small *ngIf="confirmPassword.errors?.validateEqual == false" class="text-danger">
+          Password is not math
+        </small>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>
+    </form>
+  </div>
+</div>
+
+<div class="login">
+  <!-- BEGIN LOGO -->
+  <div class="logo">
+    <a href="index.html">
+      <img src="/assets/admin/layout/img/logo-big.png" alt="" />
+    </a>
+  </div>
+  <!-- END LOGO -->
+  <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+  <div class="menu-toggler sidebar-toggler">
+  </div>
+  <!-- END SIDEBAR TOGGLER BUTTON -->
+  <!-- BEGIN LOGIN -->
+  <div class="content">
+    <!-- BEGIN REGISTRATION FORM -->
+    <form class="register-form" (ngSubmit)="onRegister()" autocomplete="off">
+      <h3>Sign Up</h3>
+      <p>
+        Enter your personal details below:
+      </p>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Full Name</label>
+        <div class="input-icon">
+          <i class="fa fa-font"></i>
+          <input class="form-control placeholder-no-fix" type="text" placeholder="Full Name" name="fullname" [(ngModel)]="userRegisterModel.fullName"
+            required />
+        </div>
+      </div>
+      <div class="form-group">
+        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+        <label class="control-label visible-ie8 visible-ie9">Email</label>
+        <div class="input-icon">
+          <i class="fa fa-envelope"></i>
+          <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email" [(ngModel)]="userRegisterModel.email"
+            required />
+        </div>
+      </div>
+      <p>
+        Enter your account details below:
+      </p>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Username</label>
+        <div class="input-icon">
+          <i class="fa fa-user"></i>
+          <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" [(ngModel)]="userRegisterModel.email"
+            required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Password</label>
+        <div class="input-icon">
+          <i class="fa fa-lock"></i>
+          <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password"
+            name="password" [(ngModel)]="userRegisterModel.password" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+        <div class="controls">
+          <div class="input-icon">
+            <i class="fa fa-check"></i>
+            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword"
+              [(ngModel)]="userRegisterModel.confirmPassword" required />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="tnc" /> I agree to the
+          <a href="#">
+            Terms of Service </a>
+          and
+          <a href="#">
+            Privacy Policy </a>
+        </label>
+        <div id="register_tnc_error">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button id="register-back-btn" type="button" class="btn">
+          <i class="m-icon-swapleft"></i> Back </button>
+        <button type="submit" id="register-submit-btn" class="btn green-haze pull-right">
+          Sign Up
+          <i class="m-icon-swapright m-icon-white"></i>
+        </button>
+      </div>
+    </form>
+    <!-- END REGISTRATION FORM -->
+
+  </div>
+  END LOGIN

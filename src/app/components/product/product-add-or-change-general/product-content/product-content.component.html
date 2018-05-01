@@ -1,0 +1,181 @@
+<form autocomplete="off" (ngSubmit)="onSubmit()" #frmTabInfo="ngForm">
+  <div class="row">
+    <div class="col-md-2">
+      <label class="control-label">Tên sản phẩm
+        <span class="required">(*)</span>
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input class="form-control" type="text" name="productName" [(ngModel)]="productContent.productName" #productName="ngModel"
+          placeholder="Tên sản phẩm" maxlength="512" required />
+        <div class="help-block" *ngIf="(productName.errors && (productName.dirty || productName.touched)) || (!formValid && productName.errors)">
+          <p class="required" *ngIf="productName.errors.required">Bạn phải nhập tên sản phẩm.</p>
+          <p class="required" *ngIf="productName.errors.maxlength">Tên sản phẩm không quá 512 ký tự.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="control-label">Thương hiệu
+        <span class="required">(*)</span>
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="hidden" name="manufacturerId" [(ngModel)]="productContent.manufacturerId" #manufacturerId="ngModel" required
+        />
+        <select class="form-control select2" id="manufacturerId">
+          <option value="">Lựa chọn thương hiệu</option>
+        </select>
+        <div class="help-block" *ngIf="(manufacturerId.errors && (manufacturerId.dirty || manufacturerId.touched)) || (!formValid && manufacturerId.errors)">
+          <p class="required" *ngIf="manufacturerId.errors.required">Bạn phải nhập thương hiệu sản phẩm.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <label class="control-label">Đơn vị tính
+        <span class="required"> (*)</span>
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="hidden" name="measureUnitId" [(ngModel)]="productContent.measureUnitId" #measureUnitId="ngModel" required />
+        <select class="form-control select2" id="measureUnitId">
+          <option value="">Chọn đơn vị</option>
+        </select>
+        <div class="help-block" *ngIf="(measureUnitId.errors && (measureUnitId.dirty || measureUnitId.touched)) || (!formValid && measureUnitId.errors)">
+          <p class="required" *ngIf="measureUnitId.errors.required"> Bạn phải nhập tên đơn vị của sản phẩm. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="control-label">Loại mặt hàng
+        <span class="required">(*)</span>
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <select class="form-control select2" name="typeId" [(ngModel)]="productContent.typeId" #typeId="ngModel" required>
+          <option value="">Lựa chọn loại mặt hàng</option>
+          <option *ngFor="let item of typeList" [ngValue]="item.value">{{item.text}}</option>
+        </select>
+        <div class="help-block" *ngIf="(typeId.errors && (typeId.dirty || typeId.touched)) || (!formValid && typeId.errors)">
+          <p class="required" *ngIf="typeId.errors.required"> Bạn phải lựa chọn loại mặt hàng </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <label class="control-label">Quantity per unit</label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input class="form-control" type="text" name="qtyPerUnit" [(ngModel)]="productContent.qtyPerUnit" #qtyPerUnit="ngModel" placeholder="Quantity per unit"
+          minlength="1" maxlength="8" />
+        <div class="help-block" *ngIf="(qtyPerUnit.errors && (qtyPerUnit.dirty || qtyPerUnit.touched)) || (!formValid && qtyPerUnit.errors)">
+          <p class="required" *ngIf="qtyPerUnit.errors.maxlength || qtyPerUnit.errors.minlength">Số lượng sản phẩm không quá 8 ký tự.</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="productContent.typeId == 4">
+      <div class="col-md-2">
+        <label class="control-label">Khối lượng pha lóc (kg)
+          <span class="required"> (*)</span>
+        </label>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <input type="text" class="form-control" name="weight" [(ngModel)]="productContent.weight" #weight="ngModel" minlength="0"
+            required/>
+          <div class="help-block" *ngIf="(weight.errors && (weight.dirty || weight.touched)) || (!formValid && weight.errors)">
+            <p class="required" *ngIf="weight.errors.required"> Bạn phải nhập khối lượng. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="productContent.typeId != 2">
+    <div class="col-md-2">
+      <label class="control-label">Nhập IMEI</label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="checkbox" name="requireSerial" [(ngModel)]="productContent.requireSerial" #requireSerial="ngModel" />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="control-label">Yêu cầu lắp đặt&nbsp;
+        <small>(Dành cho hàng cồng kềnh)</small>
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="checkbox" name="requireInstall" [(ngModel)]="productContent.requireInstall" #requireInstall="ngModel" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="productContent.typeId == 1 || productContent.typeId == 3">
+    <div class="col-md-2">
+      <label class="control-label">Không giao hàng ngoài thành phố</label>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="checkbox" name="canDeliverMultiCity" [(ngModel)]="productContent.canDeliverMultiCity" #canDeliverMultiCity="ngModel"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <label class="control-label">Nhóm thuộc tính tạo biến thể</label>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <input type="hidden" name="groupAttributeId" [(ngModel)]="productContent.groupAttributeId" #groupAttributeId="ngModel" />
+            <select class="form-control select2" id="groupAttributeId">
+              <option value="">Lựa chọn nhóm thuộc tính tạo biến thể</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="control-label">Mô tả ngắn gọn</label>
+    </div>
+    <div class="col-md-10">
+      <div class="form-group">
+        <ckeditor name="shortDescription" [(ngModel)]="productContent.shortDescription" #shortDescription="ngModel" [config]="config"></ckeditor>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <label class="control-label"> Mô tả chi tiết</label>
+    </div>
+    <div class="col-md-10">
+      <div class="form-group">
+        <ckeditor name="fullDescription" [(ngModel)]="productContent.fullDescription" #fullDescription="ngModel" [config]="config"></ckeditor>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-success" (click)="onSubmit(frmTabInfo, productContent)">
+        <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+    </div>
+  </div>
+</form>

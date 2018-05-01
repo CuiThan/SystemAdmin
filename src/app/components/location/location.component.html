@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-title portlet-title-action ">
+        <div class="caption">
+          <i class="icon-social-dribbble font-blue-sharp"></i>
+          <span class="caption-subject font-blue-sharp bold uppercase">Các tỉnh thành phố</span>
+        </div>
+        <div class="actions">
+          <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="display(true)">
+            <i class="fa fa-plus"></i> Add province
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="menus"></div>
+        </div>
+        <!-- TAB PROVINCE ADD -->
+        <div class="col-md-8" *ngIf="showVar">
+          <app-province-add #provinceAdd (displayChild)="display($event)" (reloadMenu)="registerMenusTree()"></app-province-add>
+        </div>
+        <!-- TAB PROVINCE -->
+        <div class="col-md-8" *ngIf="typeLocation == 1">
+          <app-province-detail #provinceDetail [provinceId]="searchParams.provinceId" (reloadMenu)="registerMenusTree()"></app-province-detail>
+        </div>
+        <!-- TAB DISTRICT -->
+        <div class="col-md-8" *ngIf="typeLocation == 2">
+          <app-district #districtDetail [districtId]="searchParams.districId" (reloadMenu)="registerMenusTree()"></app-district>
+        </div>
+        <!-- TAB WARD -->
+        <div class="col-md-8" *ngIf="typeLocation == 3">
+          <app-ward #wardDetail [wardId]="searchParams.wardId" (reloadMenu)="registerMenusTree()"></app-ward>
+        </div>
+        <!-- TAB STREET -->
+        <div class="col-md-8" *ngIf="typeLocation == 4">
+          <app-street #streetDetail [streetId]="searchParams.streetId" (reloadMenu)="registerMenusTree()"></app-street>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

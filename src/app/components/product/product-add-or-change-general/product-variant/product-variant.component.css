@@ -1,0 +1,8 @@
+.table-bordered tr th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-bordered tr .btn {
+    margin-right: 0;
+}

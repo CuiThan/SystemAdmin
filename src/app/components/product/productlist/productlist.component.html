@@ -1,0 +1,104 @@
+<h1 class="page-title">
+  <h2>Tạo sản phẩm</h2>
+  <div class="note note-success">
+    <p style="font-size: 15px;">
+      Sản phẩm mà bạn tạo mới có thể đã có trên hệ thống. Tìm kiếm ngay danh mục ngành hàng mà bạn muốn bán cho sản phẩm của mình
+      và tiết kiệm thời gian cho chính bản thân mình.
+      <br />
+      <a href="#">Xem tài liệu hướng dẫn</a> |
+      <a href="#">Xem video hướng dẫn</a>
+    </p>
+  </div>
+  <div class="box-header">
+      <h4 class="box-title">
+          Tìm kiếm sản phẩm trên hệ thống.
+      </h4>
+  </div>
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm">
+    <span class="input-group-btn">
+      <button class="btn blue" type="button">TÌM KIẾM</button>
+    </span>
+  </div>
+  <div class="pull-right" style="font-size:15px; padding: 10px 0;">Sản phẩm này chưa có trên hệ thống?
+    <a href="javascript:;" class="btn blue" [routerLink]="['/g/product/search-category']">TẠO MỚI SẢN PHẨM</a>
+  </div>
+</h1>
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <!-- Begin: Datatable -->
+      <div class="portlet-body">
+        <div class="table-container">
+          <form autocomplete="off">
+            <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
+              <thead>
+                <tr role="row" class="heading">
+                  <th> Id </th>
+                  <th class="col-md-1"> Ảnh </th>
+                  <th> Thông tin sản phẩm </th>
+                  <th class="col-md-2"> Chức năng </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> 123456 </td>
+                  <td>
+                    <img src="https://media.static-adayroi.com/sys_master/h89/h14/11003195981854.jpg" width="135px" /> </td>
+                  <td>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <strong>Tên sản phẩm:</strong> Áo
+                        <br/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <strong>Danh mục:</strong> Thời trang -> Thời trang nữ -> Áo nữ -> Áo thun, áo hai dây nữ -> Áo thun nữ
+                        <br/>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <strong>Mã sản phẩm:</strong> 123456
+                        <br/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <strong>Thương hiệu:</strong> Utana
+                        <br/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <strong>Ngày tạo:</strong> 16/03/2018
+                        <br/>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="actions">
+                    <a href="javascript:;" class="btn btn-circle btn-outline blue" (click)="onDetail()"> XEM CHI TIẾT </a>
+                    <br/>
+                    <a href="javascript:;" class="btn btn-circle btn-outline blue" [routerLink]="['/g/product', 0]"> TẠO SẢN PHẨM TƯƠNG TỰ </a>
+                    <br/>
+                    <a href="javascript:;" class="btn btn-circle btn-outline blue" [routerLink]="['/g/product', 0]"> TẠO BIẾN THỂ TƯƠNG TỰ </a>
+                    <br/>
+                    <a href="javascript:;" class="btn btn-circle btn-outline green" [routerLink]="['/g/product/add-existing', 0]"> BÁN SẢN PHẨM NÀY
+                      <small>(SỬ DỤNG 100% THÔNG TIN)</small>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+      <!-- End: Datatable -->
+    </div>
+  </div>
+</div>
+<div class="popup">
+  <app-product-detail #productDetail></app-product-detail>
+</div>

@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit portlet-datatable">
+            <div class="portlet-title portlet-title-action ">
+                <div class="actions">
+                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onAddNew()">
+                        <i class="fa fa-plus"></i> Add new </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-container">
+                    <form #f="ngForm" autocomplete="off">
+                        <table class="table table-striped table-bordered table-hover table-checkable" id="menu-positions">
+                            <thead>
+                                <tr role="row" class="heading">
+                                    <th>
+                                        Code
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                                <tr role="row" class="filter">
+                                    <td></td>
+                                    <td>
+                                        <input type="text" class="form-control form-filter input-sm" name="keywordOrCode" [(ngModel)]="keyword" #keywordOrCode="ngModel"
+                                        />
+                                    </td>
+                                    <td>
+                                        <select class="form-control form-filter input-sm" [(ngModel)]="statusParam" name="statusParam" #status="ngModel" required>
+                                            <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="margin-bottom-5">
+                                            <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)="onGets()">
+                                                <i class="fa fa-search"></i> Search</button>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="showAddNew">
+                                    <td></td>
+                                    <td>
+                                        <div [ngClass]="{
+                            'has-error': (menuPositionAddNewName.errors && (menuPositionAddNewName.dirty|| menuPositionAddNewName.touched))
+                                       || (!formValid && menuPositionAddNewName.errors),
+                            'has-success': !menuPositionAddNewName.errors
+                          }">
+                                            <input type="text" class="form-control input-sm" name="menuPositionAddNewName" [(ngModel)]="menuPositionAddNew.name" #menuPositionAddNewName="ngModel"
+                                                required minlength="1" maxlength="250" />
+                                            <span class="help-block" *ngIf="(menuPositionAddNewName.errors && (menuPositionAddNewName.dirty|| menuPositionAddNewName.touched))
+                            || (!formValid && menuPositionAddNewName.errors)">
+                                                <p class="required" *ngIf="menuPositionAddNewName.errors.required"> Name is required</p>
+                                                <p class="required" *ngIf="menuPositionAddNewName.errors.maxlength || menuPositionAddNewName.errors.minlength">
+                                                    Path To View must be between 1 and 250 characters</p>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div [ngClass]="{
+                            'has-error': (menuPositionAddNewStatus.errors && (menuPositionAddNewStatus.dirty|| menuPositionAddNewStatus.touched))
+                                       || (!formValid && menuPositionAddNewStatus.errors),
+                            'has-success': !menuPositionAddNewStatus.errors
+                          }">
+                                            <select class="form-control form-filter input-sm" [(ngModel)]="menuPositionAddNew.status" name="menuPositionAddNewStatus"
+                                                #menuPositionAddNewStatus="ngModel" required>
+                                                <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                                            </select>
+                                            <span class="help-block" *ngIf="(menuPositionAddNewStatus.errors && (menuPositionAddNewStatus.dirty || menuPositionAddNewStatus.touched))
+                                  || (!formValid && menuPositionAddNewStatus.errors)
+                                  ">
+                                                <p class="required" *ngIf="menuPositionAddNewStatus.errors?.required">Status Type is required</p>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn green" (click)="onSave(f,menuPositionAddNew,true)">Save</button>
+                                        <button type="button" class="btn default" (click)="onAddNewCancel()">Cancel</button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr *ngFor="let menuPosition of menuPositions">
+                                    <td>
+                                        {{menuPosition.code}}
+                                    </td>
+                                    <td>
+                                        <span *ngIf="!rowEdits.Item(menuPosition.id)">{{menuPosition.name}}</span>
+                                        <ng-container *ngIf="rowEdits.Item(menuPosition.id)">
+                                            <div [ngClass]="{
+                                  'has-error': (menuPositionName.errors && (menuPositionName.dirty|| menuPositionName.touched))
+                                             || (!formValid && menuPositionName.errors),
+                                  'has-success': !menuPositionName.errors
+                                }">
+                                                <input type="text" class="form-control input-sm" name="menuPositionName" [(ngModel)]="menuPosition.name" #menuPositionName="ngModel"
+                                                    required minlength="1" maxlength="256" />
+                                                <span class="help-block" *ngIf="(menuPositionName.errors && (menuPositionName.dirty|| menuPositionName.touched))
+                                  || (!formValid && menuPositionName.errors)">
+                                                    <p class="required" *ngIf="menuPositionName.errors.required"> Name is required</p>
+                                                    <p class="required" *ngIf="menuPositionName.errors.maxlength || menuPositionName.errors.minlength">
+                                                        Path To View must be between 1 and 250 characters</p>
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="!rowEdits.Item(menuPosition.id)">{{menuPosition.statusName}}</span>
+                                        <ng-container *ngIf="rowEdits.Item(menuPosition.id)">
+                                            <div [ngClass]="{
+                                'has-error': (menuPositionStatus.errors && (menuPositionStatus.dirty|| menuPositionStatus.touched))
+                                           || (!formValid && menuPositionStatus.errors),
+                                'has-success': !menuPositionStatus.errors
+                              }">
+                                                <select class="form-control form-filter input-sm" [(ngModel)]="menuPosition.status" name="menuPositionStatus" #menuPositionStatus="ngModel"
+                                                    required>
+                                                    <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="(menuPositionStatus.errors && (menuPositionStatus.dirty || menuPositionStatus.touched))
+                                      || (!formValid && menuPositionStatus.errors)
+                                      ">
+                                                    <p class="required" *ngIf="menuPositionStatus.errors?.required">Status Type is required</p>
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onChange(menuPosition.id)" *ngIf="!rowEdits.Item(menuPosition.id)">
+                                            <i class="fa fa-pencil"></i> Edit </a>
+                                        <button type="button" class="btn green" (click)="onSave(f,menuPosition,false)" *ngIf="rowEdits.Item(menuPosition.id)">Save</button>
+                                        <button type="button" class="btn default" (click)="onChangeCancel(menuPosition.id)" *ngIf="rowEdits.Item(menuPosition.id)">Cancel</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

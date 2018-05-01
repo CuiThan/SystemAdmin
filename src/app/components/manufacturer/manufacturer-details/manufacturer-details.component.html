@@ -1,0 +1,123 @@
+<div class="row">
+<h4 class="block font-blue sbold col-md-6">
+  Manufacturer ' s details</h4>
+</div>
+<div class="note note-info col-md-10">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BEGIN VALIDATION STATES-->
+      <div class="col-md-3">
+        <img src="http://192.168.1.251:5000{{manufacturer.logo}}" class="img-responsive pic-bordered" alt="">
+      </div>
+      <div class="col-md-9">
+        <div class="portlet-title">
+          <h1 class="font-green sbold uppercase">{{manufacturer.name}}</h1>
+        </div>
+        <div class="portlet-body">
+          <div class="mt-element-list">
+            <div class="mt-list-container list-simple">
+              <ul class="list-unstyled">
+              
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.code=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.code=='' || manufacturer.code==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Code
+                    </h3>
+                    <span class="caption-subject">{{manufacturer.code}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.description=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.description==''|| manufacturer.description==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Description
+                    </h3>
+                    <span class="caption-subject">{{manufacturer.description}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.email=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.email=='' || manufacturer.email==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Email
+                    </h3>
+                    <span class="caption-subject"><i class="font-red-sunglo">{{manufacturer.email}}</i></span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.phone=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.phone==''|| manufacturer.phone==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Phone Number
+                    </h3>
+                    <span class="caption-subject">{{manufacturer.phone}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.companyName=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.companyName=='' || manufacturer.companyName==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Company Name
+                    </h3>
+                    <span class="caption-subject bold font-purple-plum">{{manufacturer.companyName}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.website=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.website=='' || manufacturer.website==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Website
+                    </h3>
+                    <span class="caption-subject"><a><i>{{manufacturer.website}}</i></a></span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.fax=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.fax=='' || manufacturer.fax==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Fax
+                    </h3>
+                    <span class="caption-subject">{{manufacturer.fax}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(manufacturer.typeName=='') ? '':'done' }}">
+                    <i class="{{(manufacturer.typeName=='' || manufacturer.typeName==null) ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Type
+                    </h3>
+                    <span class="caption-subject">{{manufacturer.typeName}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                    <div class="list-icon-container {{(manufacturer.statusName=='') ? '':'done' }}">
+                      <i class="{{(manufacturer.statusName=='' || manufacturer.statusName==null) ? 'icon-close':'icon-check' }}"></i>
+                    </div>
+                    <div class="list-item-content">
+                      <h3 class="uppercase bold font-blue-hoki">Status
+                      </h3>
+                      <span [ngClass]="{
+                        'label label-sm label-info':manufacturer.status==1,
+                        'label label-sm label-success':manufacturer.status==2,
+                        'label label-sm label-danger':manufacturer.status==3
+                      }"> {{manufacturer.statusName}} </span>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END VALIDATION STATES-->
+    </div>
+  </div>
+</div>

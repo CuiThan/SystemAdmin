@@ -1,0 +1,262 @@
+<div id="category-attr-add-form" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4>Cài đặt thuộc tính cho danh mục</h4>
+
+
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+
+
+
+            <!-- BEGIN FORM-->
+            <form class="form-horizontal" (ngSubmit)="onAdd(attrCategoryAdd)" autocomplete="off" #attrCategoryAdd="ngForm">
+              <div class="form-body">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Thuộc tính
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                    'has-error': attrId1.errors && (attrId1.dirty ||submited&&!attrId1.dirty),
+                    'has-success': !attrId1.errors 
+                 }">
+
+                    <select class="form-control" [(ngModel)]="attributeIdAdd" name="attrId1" #attrId1="ngModel" required>
+                      <option *ngFor="let item of productAttr" [ngValue]="item.attributeId"> {{item.attributeName}}</option>
+                    </select>
+
+                    <div class="help-block" *ngIf="attrId1.errors && (attrId1.dirty ||submited&&!attrId1.dirty)">
+                      <span class="required" *ngIf="attrId1.errors.required">Vui lòng chọn thuộc tính</span>
+
+                    </div>
+
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Chọn kiểu
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                    'has-error': attrType1.errors && (attrType1.dirty ||submited&&!attrType1.dirty),
+                    'has-success': !attrType1.errors 
+                 }">
+
+                    <select class="form-control" [(ngModel)]="attributeTypeAdd" name="attrType1" #attrType1="ngModel" required>
+                      <option *ngFor="let item of attributeType" [ngValue]="item.value"> {{item.text}}</option>
+                    </select>
+                    <div class="help-block" *ngIf="attrType1.errors && (attrType1.dirty ||submited&&!attrType1.dirty)">
+                      <span class="required" *ngIf="attrType1.errors.required">Vui lòng chọn kiểu</span>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Thứ tự hiển thị
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                    'has-error': displayOrder1.errors && (displayOrder1.dirty ||submited&&!displayOrder1.dirty),
+                    'has-success': !displayOrder1.errors 
+                 }">
+
+                    <input type="text" class="form-control" [(ngModel)]="displayOrderAdd" required name="displayOrder1" #displayOrder1="ngModel"
+                      placeholder="Vui lòng chọn thứ tự hiển thị" pattern="^[0-9]+$" />
+                    <div class="help-block" *ngIf="displayOrder1.errors && (displayOrder1.dirty ||submited&&!displayOrder1.dirty)">
+                      <span class="required" *ngIf="displayOrder1.errors.required">Vui lòng không để trống thứ tự hiển thị</span>
+                      <span class="required" *ngIf="displayOrder1.errors.pattern">Thứ tự hiển thị chỉ chứa số.</span>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">Save</button>
+
+                  </div>
+                </div>
+              </div>
+              
+            </form>
+            <!-- END FORM-->
+
+
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div id="category-attr-change-form" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4>Cài đặt thuộc tính cho danh mục</h4>
+
+
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <!-- BEGIN FORM-->
+            <form class="form-horizontal" (ngSubmit)="onChange(attrCategoryChange)" autocomplete="off" #attrCategoryChangeForm="ngForm">
+              <div class="form-body">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Thuộc tính
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                    'has-error': attrId.errors && (attrId.dirty ||submited&&!attrId.dirty),
+                    'has-success': !attrId.errors 
+                 }">
+                    <select class="form-control" [(ngModel)]="attrCategoryChange.attributeId" name="attrId" #attrId="ngModel" required>
+                      <option *ngFor="let item of productAttr" [ngValue]="item.attributeId"> {{item.attributeName}}</option>
+                    </select>
+                    <div class="help-block" *ngIf="attrId.errors && (attrId.dirty ||submited&&!attrId.dirty)">
+                      <span class="required" *ngIf="attrId.errors.required">Vui lòng chọn thuộc tính</span>
+
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Chọn kiểu
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                    'has-error': attrType.errors && (attrType.dirty ||submited&&!attrType.dirty),
+                    'has-success': !attrType.errors 
+                 }">
+
+                    <select class="form-control" [(ngModel)]="attrCategoryChange.attributeType" name="attrType" #attrType="ngModel" required>
+                      <option *ngFor="let item of attributeType" [ngValue]="item.value"> {{item.text}}</option>
+                    </select>
+                    <div class="help-block" *ngIf="attrType.errors && (attrType.dirty ||submited&&!attrType.dirty)">
+                      <span class="required" *ngIf="attrType.errors.required">Vui lòng chọn kiểu</span>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Thứ tự hiển thị
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                    'has-error': displayOrder.errors && (displayOrder.dirty ||submited&&!displayOrder.dirty),
+                    'has-success': !displayOrder.errors 
+                 }">
+
+                    <input type="number" class="form-control" [(ngModel)]="attrCategoryChange.displayOrder" name="displayOrder" #displayOrder="ngModel"
+                      placeholder="Vui lòng chọn thứ tự hiển thị" pattern="^[0-9]+$" required />
+                      <div class="help-block" *ngIf="displayOrder.errors && (displayOrder.dirty ||submited&&!displayOrder.dirty)">
+                        <span class="required" *ngIf="displayOrder.errors.required">Vui lòng không để trống thứ tự hiển thị</span>
+                        <span class="required" *ngIf="displayOrder.errors.pattern">Thứ tự hiển thị chỉ chứa số.</span>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Sử dụng để tìm kiếm
+                  </label>
+                  <div class="col-md-7">
+                    <div class="mt-checkbox-inline">
+                      <label class="mt-checkbox">
+                        <input type="checkbox" class="form-check-input" name="isFilter" [(ngModel)]="attrCategoryChange.isFilter" #isFilter="ngModel"
+                        />
+                        <span></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">Save</button>
+
+                  </div>
+                </div>
+              </div>
+
+            </form>
+            <!-- END FORM-->
+
+
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div id="category-attr-remove" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="text-center">Bạn có chắc chắn xóa</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+
+
+            <div class="row">
+              <div class="col-md-offset-2 col-md-3">
+                <button type="submit" class="btn btn-lg green" (click)="removeCategoryAttr()">Có</button>
+              </div>
+              <div class="col-md-offset-3 col-md-3">
+                <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Không</button>
+              </div>
+
+            </div>
+
+
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

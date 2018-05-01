@@ -1,0 +1,113 @@
+<div id="category-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4>{{title}}</h4>
+
+
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+
+
+
+            <!-- BEGIN FORM-->
+            <form class="form-horizontal" (ngSubmit)="onAddOrChange(categoryAddOrChange)" autocomplete="off" #categoryAddOrChange="ngForm">
+              <div class="form-body">
+                <div class="alert alert-danger display-hide">
+                  <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                <div class="alert alert-success display-hide">
+                  <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Tên danh mục
+                    <span class="required"> (*) </span>
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                          'has-error': name.errors && (name.dirty  || (submited&&!name.dirty)),
+                          'has-success': !name.errors&&name.touched || !name.errors&&name.dirty }">
+                    <input type="text" class="form-control" placeholder="Nhập tên danh mục" name="name" required [(ngModel)]="categoryManager.category.name"
+                      #name="ngModel" pattern="^[A-Za-z&\s]+$" />
+                    <div class="help-block" *ngIf="name.errors && (name.dirty ||submited&&!name.dirty)">
+                      <span class="required" *ngIf="name.errors.required">Vui lòng không để trống tên danh mục</span>
+                      <span class="required" *ngIf="name.errors.pattern">Tên danh mục chỉ chứa chũ in thường, chữ in hoa và ký tự "&".</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Chi tiết
+                  </label>
+                  <div class="col-md-9">
+                    <ckeditor [(ngModel)]="categoryManager.category.description" name="description" #description="ngModel" [config]="config">
+                    </ckeditor>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Danh mục cha</label>
+                  <div class="col-md-7">
+                    <label class="control-label">{{this.selectedFolder.name}}</label>
+                    <br>
+                    <br>
+                    <div id="menus2"></div>
+                    <a (click)="onCancel()">Xóa danh mục cha</a>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Trạng thái
+
+                  </label>
+                  <div class="col-md-7">
+
+                    <select class="form-control" [(ngModel)]="categoryManager.category.status" name="st" #st="ngModel">
+                      <option *ngFor="let item of statuses" [ngValue]="item.value"> {{item.text}}</option>
+                    </select>
+
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3">Ngôn ngữ
+                  </label>
+                  <div class="col-md-7" [ngClass]="{ 
+                          'has-error': language.errors && (language.dirty ||submited&&!language.dirty),
+                          'has-success': !language.errors 
+                       }">
+                    <select class="form-control" [(ngModel)]="categoryManager.category.languageId" name="languageId" required #language="ngModel">
+                      <option *ngFor="let item of languages" [ngValue]="item.value">{{item.text}}</option>
+                    </select>
+                    <span class="help-block" *ngIf="language.errors && (language.dirty ||submited&&!language.dirty)">
+                      <p class="required">language is required</p>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">Save</button>
+                    <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+            <!-- END FORM-->
+
+
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

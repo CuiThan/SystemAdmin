@@ -1,0 +1,162 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-title portlet-title-action ">
+        <div class="caption">
+          <i class="icon-settings font-green"></i>
+          <span [hidden]="template.id == ''" class="caption-subject font-red sbold uppercase">Add new template</span>
+          <span [hidden]="template.id != ''" class="caption-subject font-red sbold uppercase">Change template</span>
+        </div>
+        <div class="actions">
+          <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" [routerLink]="['/g/template-add']">
+            <i class="fa fa-plus"></i> Add new </a>
+
+          <div class="btn-group">
+            <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+              <i class="fa fa-share"></i>
+              <span class="hidden-xs"> Tools </span>
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="javascript:;"> Export to Excel </a>
+              </li>
+              <li>
+                <a href="javascript:;"> Export to CSV </a>
+              </li>
+              <li>
+                <a href="javascript:;"> Export to XML </a>
+              </li>
+              <li class="divider"> </li>
+              <li>
+                <a href="javascript:;"> Print Invoices </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="table-container">
+          <form class="form-horizontal" (ngSubmit)="onAddOrChange(templateAddOrChange)" autocomplete="off" #templateAddOrChange="ngForm">
+            <div class="form-body">
+              <div class="form-group">
+                <label class="control-label col-md-3">Code
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control" placeholder="Code" name="code" [(ngModel)]="template.code" readonly #code="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">Template Name
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-7" [ngClass]="{ 
+                  'has-error': (templateName.errors && (templateName.dirty || templateName.touched)) 
+                  || (!formValid && templateName.errors),
+                  'has-success': !templateName.errors 
+                     }">
+                  <input type="text" class="form-control" placeholder="TemplateName" name="templateName" [(ngModel)]="template.templateName"
+                    required minlength="3" maxlength="100" #templateName="ngModel" />
+                  <span class="help-block" *ngIf="(templateName.invalid && (templateName.dirty  || templateName.touched))
+                  || (!formValid && templateName.errors)
+                  ">
+                    <p class="required" *ngIf="templateName.errors.required">Template Name is required</p>
+                    <p class="required" *ngIf="templateName.errors.maxlength || templateName.errors.minlength">Name must be between 3 and 100 characters</p>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">Thumbnail
+                </label>
+                <div class="col-md-7">
+                  <img src="{{template.thumbnail}}" width="100px" height="100px" style="border: 1px" />
+                  <a (click)="onChangeThumbnail()">Change thumbnail </a>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">Path To View
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-7" [ngClass]="{ 
+                  'has-error': (pathToView.errors && (pathToView.dirty || pathToView.touched)) 
+                  || (!formValid && pathToView.errors),
+                  'has-success': !pathToView.errors 
+                     }">
+                  <input type="text" class="form-control" placeholder="Path to view" name="pathToView" [(ngModel)]="template.pathToView" required
+                    minlength="1" maxlength="2048" #pathToView="ngModel" />
+                  <span class="help-block" *ngIf="(pathToView.invalid && (pathToView.dirty  || pathToView.touched))
+                  || (!formValid && pathToView.errors)
+                  ">
+                    <p class="required" *ngIf="pathToView.errors.required">Path To View is required</p>
+                    <p class="required" *ngIf="pathToView.errors.maxlength || pathToView.errors.minlength">Name must be between 1 and 2048 characters</p>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">Page Type
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-7" [ngClass]="{ 
+                  'has-error': (pageType.errors && (pageType.dirty || pageType.touched)) 
+                  || (!formValid && pageType.errors),
+                  'has-success': !pageType.errors 
+               }">
+                  <select class="form-control form-filter input-sm" [(ngModel)]="template.pageType" name="pageType" #pageType="ngModel" required>
+                    <option *ngFor="let item of pageTypes" [ngValue]="item.value">{{item.text}}</option>
+                  </select>
+                  <span class="help-block" *ngIf="(pageType.invalid && (pageType.dirty  || pageType.touched))
+                  || (!formValid && pageType.errors)
+                  ">
+                    <p class="required" *ngIf="pageType.errors.required">Page Type is required</p>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">Page Parameter
+                </label>
+                <div class="col-md-7">
+                  <input type="text" class="form-control" placeholder="Page Parameters" name="pageParameters" [(ngModel)]="template.pageParameters"
+                    maxlength="50" #pageParameters="ngModel" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3">Status
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-7" [ngClass]="{ 
+                  'has-error': (status.errors && (status.dirty || status.touched)) 
+                  || (!formValid && status.errors),
+                  'has-success': !status.errors 
+                 }">
+                  <select class="form-control form-filter input-sm" [(ngModel)]="template.status" name="status" #status="ngModel" required>
+                    <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                  </select>
+                  <span class="help-block" *ngIf="(status.invalid && (status.dirty  || status.touched))
+                  || (!formValid && status.errors)
+                  ">
+                    <p class="required" *ngIf="status.errors.required">Status is required</p>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                  <button type="submit" class="btn green">Save</button>
+                  <a href="javascript:;" [routerLink]="['/g/template']" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="popupUpload">
+  <app-file-uploader-popup #fileUploaderPopup (thumbnailData)="getUploadedFile($event)"></app-file-uploader-popup>
+</div>

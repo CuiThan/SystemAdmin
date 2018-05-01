@@ -1,0 +1,169 @@
+<h2 class="bd-title">Menu Config</h2>
+<form (ngSubmit)="onAddOrChange(menuAddOrChange)" autocomplete="off" #menuAddOrChange="ngForm">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Language: </label>
+        <select class="form-control form-control-sm" [(ngModel)]="languageIdSearchParam" name="languageIdSearchParam" required (change)="onInit()">
+          <option *ngFor="let item of model.languages" [ngValue]="item.value">{{item.text}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Position: </label>
+        <select class="form-control form-control-sm" [(ngModel)]="positionIdSearchParam" name="positionIdSearchParam" required (change)="onInit()">
+          <option *ngFor="let item of model.positions" [ngValue]="item.value">{{item.text}}</option>
+        </select>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <div class="actions">
+          <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onGet('',1)" *ngIf="model.menu.languageId?.length > 0 && model.menu.position > 0">
+            <i class="fa fa-plus"></i> Add new </a>
+        </div>
+      </div>
+      <div id="menus"></div>
+    </div>
+    <div class="col-md-8" id="frmMenu" *ngIf="showFormMenu">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#tab_1_1" data-toggle="tab"> Menu Info </a>
+        </li>
+        <li>
+          <a href="#tab_1_2" data-toggle="tab"> Banners </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade active in" id="tab_1_1">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="portlet-title portlet-title-action ">
+                <div class="caption">
+                  <i class="icon-settings font-green"></i>
+                  <span *ngIf="model.menu.id == '' || model.menu.id == null || model.menu.id == undefined" class="caption-subject font-green sbold uppercase">Add new Menu</span>
+                  <span *ngIf="model.menu.id !='' && model.menu.id != null && model.menu.id != undefined" class="caption-subject font-green sbold uppercase">
+                    Change Menu:
+                    <span class=" caption font-red-intense">{{model.menu.name}}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <div class="table-container">
+                  <div class="form-group">
+                    <label>Parent: </label>
+                    <div>
+                      <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onClearSelected()">
+                        <i class="fa fa-edit"></i> Clear Selected</a>
+                    </div>
+                    <div class="parents"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Name:
+                      <span class="required"> * </span>
+                    </label>
+                    <div [ngClass]="{ 
+                                          'has-error': (name.errors && (name.dirty || name.touched)) 
+                                          || (!formValid && name.errors),
+                                          'has-success': !name.errors       
+                                        }">
+                      <input type="text" class="form-control" placeholder="Enter name" #name="ngModel" name="name" [(ngModel)]="model.menu.name"
+                        required minlength="1" maxlength="500" />
+                      <span class="help-block" *ngIf="(name.invalid && (name.dirty  || name.touched))
+                                          || (!formValid && name.errors)
+                                          ">
+                        <p class="required" *ngIf="name.errors?.required">Name is required</p>
+                        <p class="required" *ngIf="name.errors.maxlength || name.errors.minlength">Name must be between 1 and 1024 characters</p>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Position: </label>
+                    <div [ngClass]="{ 
+                        'has-error': (position.errors && (position.dirty || position.touched)) 
+                        || (!formValid && position.errors),
+                        'has-success': !position.errors                 
+                      }">
+                      <select class="form-control form-control-sm" [(ngModel)]="model.menu.positionId" name="position" #position="ngModel" required>
+                        <option *ngFor="let item of model.positions" [ngValue]="item.value">{{item.text}}</option>
+                      </select>
+                      <span class="help-block" *ngIf="(position.invalid && (position.dirty  || position.touched))
+                        || (!formValid && position.errors)
+                        ">
+                        <span class="required">Position is required</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Type:
+                      <span class="required"> * </span>
+                    </label>
+                    <div [ngClass]="{ 
+                                          'has-error': (type.errors && (type.dirty || type.touched)) 
+                                          || (!formValid),
+                                          'has-success': !type.errors            
+                                        }">
+                      <select class="form-control form-control-sm" [(ngModel)]="model.menu.type" #type="ngModel" name="type" required>
+                        <option *ngFor="let item of model.types" [ngValue]="item.value">{{item.text}}</option>
+                      </select>
+                      <span class="help-block" *ngIf="(type.invalid && (type.dirty  || type.touched))
+                                          || (!formValid)
+                                          ">
+                        <span class="required">Type is required</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="objectbox"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Url: </label>
+                    <div [ngClass]="{ 
+                                          'has-error': (url.errors && (url.dirty || url.touched)) 
+                                          || (!formValid && url.errors),
+                                          'has-success': !url.errors                   
+                                        }">
+                      <input type="text" class="form-control" placeholder="Enter url" name="url" [(ngModel)]="model.menu.url" maxlength="4000"
+                        #url="ngModel" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                      />
+                      <span class="help-block" *ngIf="(url.invalid && (url.dirty  || url.touched))
+                                          || (!formValid && url.errors)
+                                          ">
+                        <span *ngIf="url.errors.required" class="required" class="required">Url is required</span>
+                        <span *ngIf="url.errors.pattern" class="required">Url is not patterm</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Priority: </label>
+                    <div [ngClass]="{ 
+                                          'has-error': (priority.errors && (priority.dirty || priority.touched)) 
+                                          || (!formValid && priority.errors),
+                                          'has-success': !priority.errors                   
+                                        }">
+                      <input type="text" class="form-control" placeholder="Enter Priority" name="priority" [(ngModel)]="model.menu.priority" maxlength="10"
+                        #priority="ngModel" pattern="^([0-9]*)$" />
+                      <span class="help-block" *ngIf="(priority.invalid && (priority.dirty  || priority.touched))
+                                          || (!formValid && priority.errors)
+                                          ">
+                        <span *ngIf="priority.errors.required" class="required">Priority is required</span>
+                        <span *ngIf="priority.errors.pattern" class="required">Priority is only number</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="remember" [(ngModel)]="model.menu.isPublish" /> Publish
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-primary" *ngIf="model.formState == 1 || model.formState == 2">Submit</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="tab_1_2">
+          <app-menu-banner-mapping #menuBannerMapping></app-menu-banner-mapping>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,441 @@
+<form autocomplete="off" (ngSubmit)="onSubmit()" #frmTabAttributeVariant="ngForm">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                <label class="control-label">Nhà cung cấp
+                    <span class="required"> (*)</span>
+                </label>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="hidden" name="vendorId" [(ngModel)]="productVariant.vendorId" #vendorId="ngModel" required />
+                            <select class="form-control" id="vendorId">
+                                <option value="">Lựa chọn nhà cung cấp</option>
+                            </select>
+                            <div class="help-block" *ngIf="(vendorId.errors && (vendorId.dirty || vendorId.touched)) || (!formValid && vendorId.errors)">
+                                <div class="required" *ngIf="vendorId.errors.required">Bạn phải nhập một nhà cung cấp.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="productVariant.typeId != 4 && productVariant.typeId != 5 && productVariant.typeId != 6">
+            <div class="col-md-2">
+                <label class="control-label">Nhà ký gửi</label>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="warehouseId" [(ngModel)]="productVariant.warehouseId" #warehouseId="ngModel"
+                                placeholder="Lựa chọn nhà ký gửi" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label class="control-label">VAT đầu vào
+                    <span class="required"> (*)</span>
+                </label>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <select class="form-control select2-reg" name="vat" [(ngModel)]="productVariant.vat" #vat="ngModel" required>
+                                <option value="">Chọn % VAT đầu vào</option>
+                            </select>
+                            <div class="help-block" *ngIf="(vat.errors && (vat.dirty || vat.touched)) || (!formValid && vat.errors)">
+                                <div class="required" *ngIf="vat.errors.required">Bạn phải lựa chọn VAT đầu vào.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label class="control-label">VAT đầu ra
+                    <span class="required"> (*)</span>
+                </label>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <select class="form-control select2-reg" name="vatExt" [(ngModel)]="productVariant.vatExt" #vatExt="ngModel" required>
+                                <option value="">Chọn % VAT đầu ra</option>
+                            </select>
+                            <div class="help-block" *ngIf="(vatExt.errors && (vatExt.dirty || vatExt.touched)) || (!formValid && vatExt.errors)">
+                                <div class="required" *ngIf="vatExt.errors.required">Bạn phải lựa chọn VAT đầu ra.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="productVariant.attributeVariants.length">
+            <div class="col-md-12">
+                <table class="table table-condensed table-striped table-bordered">
+                    <tr>
+                        <th style="width:2%" class="text-center">STT</th>
+                        <th style="width:13%" class="text-center">Thuộc tính </th>
+                        <th style="width:60%" class="text-center">Giá trị</th>
+                        <th style="width:25%" class="text-center">Đơn vị</th>
+                    </tr>
+                    <tr *ngFor="let item of productVariant.attributeVariants; let i = index" [attr.data-index]="i">
+                        <td class="text-center">{{i + 1}}</td>
+                        <td> {{item.attributeName}} </td>
+                        <td>
+                            <div *ngIf="item.attributeType == 2">
+                                <div class="form-group row" *ngFor="let variantValue of item.attributeValueVariants; let x = index" [attr.data-index]="x">
+                                    <div class="col-md-11">
+                                        <select class="form-control select2-reg" id="dynamicField_{{i}}_{{x}}" name="dynamicField_{{i}}_{{x}}" [(ngModel)]="productVariant.value"
+                                            attr.attributeId="{{item.attributeId}}" attr.attributeType="{{item.attributeType}}">
+                                            <option *ngFor="let val of item.attributeValues" [ngValue]="val.attributeValueId">{{val.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-default btn-sm btn-danger" title="Xóa giá trị thuộc tính" (click)="onRemoveAttributeVariant(item.attributeValueVariants, x);">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-11 text-right">
+                                        <button type="button" id="btnSearch" class="btn btn-sm btn-success" (click)="onAddAttributeVariant(item.attributeValueVariants);">
+                                            <i class="fa fa-plus fa-fw"></i>Thêm giá trị</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="item.attributeType == 4">
+                                <div class="form-group row" *ngFor="let variantValue of item.attributeValueVariants; let x = index" [attr.data-index]="x">
+                                    <div class="col-md-11">
+                                        <input type="text" class="form-control" id="dynamicField_{{i}}_{{x}}" name="dynamicField_{{i}}_{{x}}" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-default btn-sm btn-danger" title="Xóa giá trị thuộc tính" (click)="onRemoveAttributeVariant(item.attributeValueVariants, x);">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-11 text-right">
+                                        <button type="button" id="btnSearch" class="btn btn-sm btn-success" (click)="onAddAttributeVariant(item.attributeValueVariants);">
+                                            <i class="fa fa-plus fa-fw"></i>Thêm giá trị
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="item.attributeType != 2 && item.attributeType != 4">
+                                <textarea rows="4" class="form-control" id="dynamicField_{{i}}" name="dynamicField_{{i}}"></textarea>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" *ngIf="item.baseUnitId > 0 && item.attributeType == 4">
+                                <select class="form-control select2-unit" id="unitId_{{i}}" name="unitId_{{i}}" [(ngModel)]="productVariant.unitId">
+                                    <option *ngFor="let item of measureUnits" [ngValue]="item.unitId"> {{item.unitName}} </option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="productVariant.attributeVariants.length">
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-warning btn-lg" style="width: 300px; margin-bottom: 20px;" (click)="onCreateVariants();">Sinh biến thể</button>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="productVariant.attributeVariants.length">
+            <div class="col-md-12">
+                <table class="table table-bordered" id="table_variants">
+                    <thead>
+                        <tr>
+                            <th rowspan="2"></th>
+                            <th rowspan="2" *ngFor="let item of productVariant.attributeVariants">{{item.attributeName}}</th>
+                            <th rowspan="2">Tags</th>
+                            <th rowspan="2">Barcode</th>
+                            <th rowspan="2">SKU*</th>
+                            <th rowspan="2">Kho hàng</th>
+                            <th colspan="4">Sản phẩm</th>
+                        </tr>
+                        <tr>
+                            <th>Số lượng</th>
+                            <th>Giá bán</th>
+                            <th>Giá trên bao bì</th>
+                            <th>Giá vốn</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="showVariant">
+                        <tr>
+                            <td [attr.rowspan]="warehouses.length">
+                                <button type="button" id="btnSearch" class="btn btn-sm btn-danger" title="Xóa biến thể">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                            <td [attr.rowspan]="warehouses.length" *ngFor="let item of productVariant.attributeVariants"></td>
+                            <td [attr.rowspan]="warehouses.length">
+                                <!-- <tags-input display-property="Name" add-on-enter="true" add-on-blur="true" max-tags="5" min-length="1" max-length="50" replace-spaces-with-dashes="false">
+                                        <auto-complete source="loadTags($query)" select-first-match="false" min-length="1">
+                                        </auto-complete>
+                                    </tags-input> -->
+                                <input class="form-control" type="text" name="tags-input" placeholder="Tags-input" />
+                            </td>
+                            <td [attr.rowspan]="warehouses.length">
+                                <input type="text" class="form-control" name="Barcode" />
+                                <!-- <div class="help-block">
+                                    <div class="required">
+                                        Không vượt quá 50 ký tự
+                                    </div>
+                                </div> -->
+                            </td>
+                            <td [attr.rowspan]="warehouses.length">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="Sku" required />
+                                    <!-- <div class="help-block">
+                                        <div class="required"> Trường thông tin bắt buộc </div>
+                                        <div class="required"> Bắt buộc phải là số lớn hơn 0 </div>
+                                        <div class="required"> Không vượt quá 128 số </div>
+                                    </div> -->
+                                </div>
+                            </td>
+                            <td class="cell-warehouse">
+                                Tên kho hàng
+                            </td>
+                            <td class="cell-product-variant-amount">
+                                <div class="form-group">
+                                    <input type="text" class="form-control text-right" format-number name="Quantity" required />
+                                    <!-- <div class="help-block">
+                                        <div class="required"> Trường thông tin bắt buộc </div>
+                                        <div class="required"> Bắt buộc phải là số lớn hơn 0 </div>
+                                        <div class="required"> Không vượt quá 8 số </div>
+                                    </div> -->
+                                </div>
+                            </td>
+                            <td class="cell-product-variant-selling-price">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  text-right" format-number ecom-round-number name="SellPrice" required />
+                                    <!-- <div class="help-block">
+                                        <div class="required"> Trường thông tin bắt buộc </div>
+                                        <div class="required"> Bắt buộc phải là số </div>
+                                        <div class="required"> Không vượt quá 12 số </div>
+                                        <div class="required"> Giá bán không lẻ dưới trăm đồng. </div>
+                                    </div> -->
+                                </div>
+                            </td>
+                            <td class="cell-product-variant-original-price">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  text-right" format-number ecom-round-number name="OriginalPrice" required />
+                                    <!-- <div class="help-block">
+                                        <div class="required"> Trường thông tin bắt buộc </div>
+                                        <div class="required"> Bắt buộc phải là số </div>
+                                        <div class="required"> Không vượt quá 12 số </div>
+                                        <div class="required"> Giá bán không lẻ dưới trăm đồng. </div>
+                                    </div> -->
+                                </div>
+                            </td>
+
+                            <td class="cell-product-variant-original-price">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  text-right" format-number ecom-round-number name="CostOfSales" required />
+                                    <!-- <div class="help-block">
+                                        <div class="required"> Trường thông tin bắt buộc </div>
+                                        <div class="required"> Bắt buộc phải là số </div>
+                                        <div class="required"> Không vượt quá 12 số </div>
+                                        <div class="required"> Giá vốn không lẻ dưới trăm đồng. </div>
+                                    </div> -->
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="product-variant-row">
+                            <td class="cell-warehouse">
+                                Tên kho hàng
+                            </td>
+                            <td class="cell-product-variant-amount">
+                                <div class="form-group">
+                                    <input type="text" class="form-control text-right" format-number name="Quantity" required />
+                                    <!-- <div class="help-block">
+                                            <div class="required"> Trường thông tin bắt buộc </div>
+                                            <div class="required"> Bắt buộc phải là số lớn hơn 0 </div>
+                                            <div class="required"> Không vượt quá 8 số </div>
+                                        </div> -->
+                                </div>
+                            </td>
+                            <td class="cell-product-variant-selling-price">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  text-right" format-number ecom-round-number name="SellPrice" required />
+                                    <!-- <div class="help-block">
+                                            <div class="required"> Trường thông tin bắt buộc </div>
+                                            <div class="required"> Bắt buộc phải là số </div>
+                                            <div class="required"> Không vượt quá 12 số </div>
+                                            <div class="required"> Giá bán không lẻ dưới trăm đồng. </div>
+                                        </div> -->
+                                </div>
+                            </td>
+                            <td class="cell-product-variant-original-price">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  text-right" name="OriginalPrice" format-number ecom-round-number required />
+                                    <!-- <div class="help-block">
+                                            <div class="required"> Trường thông tin bắt buộc </div>
+                                            <div class="required"> Bắt buộc phải là số </div>
+                                            <div class="required"> Không vượt quá 12 số </div>
+                                            <div class="required"> Giá bán không lẻ dưới trăm đồng. </div>
+                                        </div> -->
+                                </div>
+                            </td>
+                            <td class="cell-product-variant-original-price">
+                                <div class="form-group">
+                                    <input type="text" class="form-control  text-right" name="CostOfSales" format-number ecom-round-number required />
+                                    <!-- <div class="help-block">
+                                            <div class="required"> Trường thông tin bắt buộc </div>
+                                            <div class="required"> Bắt buộc phải là số </div>
+                                            <div class="required"> Không vượt quá 12 số </div>
+                                            <div class="required"> Giá bán không lẻ dưới trăm đồng. </div>
+                                        </div> -->
+                                </div>
+                            </td>
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div *ngIf="!productVariant.attributeVariants.length">
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="control-label">Sku
+                        <span class="required">(*)</span>
+                    </label>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="Sku" [(ngModel)]="productVariant.sku" #sku="ngModel" placeholder="Mã sản phẩm"
+                                    maxlength="128" required />
+                                <div class="help-block" *ngIf="(sku.errors && (sku.dirty || sku.touched)) || (!formValid && sku.errors)">
+                                    <div class="required" *ngIf="sku.errors.required"> Bạn phải nhập mã SKU của sản phẩm. </div>
+                                    <div class="required" *ngIf="sku.errors.maxlength"> Không vượt quá 128 số </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="control-label"> Tags sản phẩm</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="tags-input" [(ngModel)]="productVariant.tags" #tags="ngModel" placeholder="Tags-input"
+                                />
+                                <small>Độ dài tối thiểu là 3 ký tự, độ dài tối đá 50 ký tự</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="control-label"> Barcode </label>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="Barcode" [(ngModel)]="productVariant.barcode" #barcode="ngModel" placeholder="Barcode sản phẩm"
+                                    maxlength="50" />
+                                <div class="help-block" *ngIf="(barcode.errors && (barcode.dirty || barcode.touched)) || (!formValid && barcode.errors)">
+                                    <div class="required" *ngIf="barcode.errors.maxlength"> Cho phép tối đa 50 ký tự </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="showWarehouse">
+                <div class="col-md-2">
+                    <label class="control-label"> Kho hàng </label>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select class="form-control" id="warehouseSelected" name="warehouseSelected" [(ngModel)]="productVariant.warehouseId">
+                                    <option *ngFor="let item of warehouses" [ngValue]="item.value">{{item.text}}</option>
+                                </select>
+                                <small>Thêm kho hàng để nhập thông tin sản phẩm</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-circle blue-steel btn-outline" (click)="onAddWarehouse();">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Kho hàng</th>
+                        <th colspan="3">Sản phẩm</th>
+                        <th colspan="4"></th>
+                    </tr>
+                    <tr>
+                        <th>Số lượng</th>
+                        <th>Giá bán</th>
+                        <th>Giá trên bao bì</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of warehousesTable; let i = index" [attr.data-index]="i">
+                        <td class="cell-warehouse text-left" id="warehouse_{{i}}" attr.warehouseId="{{item.value}}"> {{item.text}} </td>
+                        <td>
+                            <input type="text" class="form-control text-right" id="quantity_{{i}}" placeholder="0" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control text-right" id="sellPrice_{{i}}" placeholder="0" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control text-right" id="originalPrice_{{i}}" placeholder="0" />
+                        </td>
+                        <td>
+                            <a class="btn red" (click)="onRemoveWarehouse(item.value, item.text);">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-3');">Quay lại</button>
+                <button type="button" class="btn btn-success" (click)="onSubmit(frmTabAttributeVariant, productVariant)">
+                    <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+</form>

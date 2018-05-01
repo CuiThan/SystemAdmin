@@ -1,0 +1,32 @@
+<div id="file-uploader-popup" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 300px; min-height: 500px">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span class="caption-subject font-red sbold uppercase">Upload file</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <div style="width: 250px;min-height:350px; ">
+                  <app-file-upload maxFiles="1" maxSize="100" fileExt="JPG, GIF, PNG">
+                  </app-file-upload>
+                  <button type="button" class="btn green" (click)="onSave();">SAVE</button>
+                  <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                </div>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

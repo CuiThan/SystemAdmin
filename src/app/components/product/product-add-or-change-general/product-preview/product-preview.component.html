@@ -1,0 +1,488 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header">
+        <h3 class="box-title">Chi tiết sản phẩm </h3>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Tên </label>
+          </div>
+          <div class="col-md-10">
+            product.Name
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Mã (Barcode) </label>
+          </div>
+          <div class="col-md-10">
+            product.Barcode
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Mã (SKU) </label>
+          </div>
+          <div class="col-md-10">
+            product.Sku
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Danh mục </label>
+          </div>
+          <div class="col-md-10">
+            CategroyNameBreadCrumb
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Thương hiệu </label>
+          </div>
+          <div class="col-md-10">
+            product.BrandName
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Dòng sản phẩm </label>
+          </div>
+          <div class="col-md-10">
+            product.ProductlineName
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Loại sản phẩm </label>
+          </div>
+          <div class="col-md-10">
+            <div>
+              <div>
+                Bình thường
+              </div>
+              <div>
+                Tươi sống
+              </div>
+              <div>
+                Cồng kềnh
+              </div>
+              <div>
+                N/A
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Nhập IMEI </label>
+          </div>
+          <div class="col-md-10">
+            <div>
+              <div>
+                Có
+              </div>
+              <div>
+                Không
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Yêu cầu lắp đặt </label>
+          </div>
+          <div class="col-md-10">
+            <div>
+              <div>
+                Có
+              </div>
+              <div>
+                Không
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Đơn vị </label>
+          </div>
+          <div class="col-md-10">
+            product.UnitName
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> ID Video Youtube </label>
+          </div>
+          <div class="col-md-10">
+            product.VideoUrl
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Trọng lượng bao bì </label>
+          </div>
+          <div class="col-md-10">
+            product.WeightT (kg)
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Chiều dài bao bì </label>
+          </div>
+          <div class="col-md-10">
+            product.LengthT (cm)
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Chiều rộng bao bì </label>
+          </div>
+          <div class="col-md-10">
+            product.Width} (cm)
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Chiều cao bao bì </label>
+          </div>
+          <div class="col-md-10">
+            product.Height (cm)
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Mô tả ngắn </label>
+          </div>
+          <div class="col-md-10">
+            <div></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Mô tả chi tiết </label>
+          </div>
+          <div class="col-md-10">
+            <p class="mtop-10">
+              <a class="btn btn-xs btn-block btn-default full-content">Mở rộng nội dung</a>
+            </p>
+            <div class="description-info collapse-content" style="min-height:135px;">
+              <div class="content-description">
+                <div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-2">
+            <label class="control-label"> Kho hàng, số lượng, giá </label>
+          </div>
+          <div class="col-md-10">
+            <table class="table table-condensed table-bordered">
+              <tr>
+                <th>
+                  Kho hàng
+                </th>
+                <th class="text-center">Số lượng</th>
+                <th class="text-center">Giá bán (VNĐ)</th>
+                <th class="text-center">Giá in trên bao bì (VNĐ)</th>
+              </tr>
+              <tr>
+                <td>warehouse.Name</td>
+                <td class="text-right">
+                  warehouse.Quantity
+                </td>
+                <td class="text-right">
+                  warehouse.SellPrice
+                </td>
+                <td class="text-right">
+                  warehouse.OriginalPrice
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-2">
+            <label class="control-label"> Ảnh sản phẩm </label>
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-md-3" style="margin-bottom:10px; margin-top:5px">
+                  <div class="item work-archive-thumb-link">
+                    <img width="160" height="160" class="work-masonry-thumb" />
+                  </div>
+                </div>
+                <div class="alert alert-info alert-dismissable">
+                  Không có ảnh nào trong sản phẩm này
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-2">
+            <label class="control-label"> Biến thể </label>
+          </div>
+          <div class="col-md-10">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th rowspan="2">variantAttribute.Name</th>
+                  <th rowspan="2">Barcode</th>
+                  <th rowspan="2">SKU*</th>
+                  <th rowspan="2">Kho hàng</th>
+                  <th colspan="3">Sản phẩm</th>
+                </tr>
+                <tr>
+                  <th>Số lượng</th>
+                  <th>Giá bán</th>
+                  <th>Giá trên bao bì</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    AttributeValue
+                  </td>
+                  <td>
+                    variant.Barcode
+                  </td>
+                  <td>
+                    variant.Sku
+                  </td>
+                  <td>
+                    variant.Warehouses[0].Name
+                  </td>
+                  <td>
+                    variant.Warehouses[0].Quantity
+                  </td>
+                  <td>
+                    variant.Warehouses[0].SellPrice
+                  </td>
+                  <td>
+                    variant.Warehouses[0].OriginalPrice | number
+                  </td>
+                </tr>
+                <tr id="product_variant_row_1">
+                  <td>
+                    warehouse.Name
+                  </td>
+                  <td>
+                    warehouse.Quantity | number
+                  </td>
+                  <td>
+                    warehouse.SellPrice | number
+                  </td>
+                  <td>
+                    warehouse.OriginalPrice | number
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-2">
+            <label class="control-label"> Ảnh sản phẩm </label>
+          </div>
+          <div class="col-md-10">
+
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th style="text-align: left">variantAttribute.Name</th>
+                  <th>ID Video Youtube</th>
+                  <th>Ảnh sản phẩm</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="product-variant-row" id="product_variant_row_1">
+                  <td>
+                    getAttributeValue(item)
+                  </td>
+                  <td>
+                    variant.VideoUrl
+                  </td>
+                  <td>
+                    <div class="row" style="margin-top:15px">
+                      <div class="col-md-12">
+                        <div class="col-md-3" style="margin-bottom:10px; margin-top:5px">
+                          <div class="item work-archive-thumb-link">
+                            <img width="160" height="160" class="work-masonry-thumb" />
+                          </div>
+                        </div>
+                        <div class="alert alert-info alert-dismissable">
+                          Chưa có ảnh nào cho sản phẩm này.
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-2">
+            <label class="control-label"> Thuộc tính miêu tả </label>
+          </div>
+          <div class="col-md-10">
+            <table class="table table-condensed table-bordered table-striped">
+              <tr>
+                <th style="width:10%" class="text-center">STT</th>
+                <th style="width:30%" class="text-center">Tên thuộc tính </th>
+                <th style="width:30%" class="text-center">Giá trị</th>
+                <th style="width:30%" class="text-center">Đơn vị (nếu có)</th>
+              </tr>
+              <tr>
+                <td class="text-center">1</td>
+                <td>
+                  attribute.Name
+                </td>
+                <td>
+                  <div>
+                    <div>
+                      <ul class="list-unstyled">
+                        <li>
+                          value.AttributeValue
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      attribute.ValueNumber
+                    </div>
+                    <div>
+                      attribute.ValueText
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <select class="form-control">
+                      <option value="">Lựa chọn đơn vị</option>
+                    </select>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:5px">
+          <div class="col-md-2">
+            <label class="control-label"> Meta title </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              product.SEODetail.MetaTitle
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Meta description </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              product.SEODetail.MetaDescription
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Meta keyword </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              product.SEODetail.MetaKeyword
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Canonical URL </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              product.SEODetail.CanonicalUrl
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Meta Robots Index </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              <span>
+                <span>Có</span>
+                <span>Không</span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Meta Robots Follow </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              <span>
+                <span>Có</span>
+                <span>Không</span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label"> Ảnh chia sẻ Facebook </label>
+          </div>
+          <div class="col-md-10">
+            <p>
+              <img src="#" style="width: 180px" />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:15px">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-8');">Quay lại</button>
+        <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,170 @@
+<div id="productgroup-product" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light portlet-fit portlet-form bordered">
+                            <div class="portlet-title ">
+                                <div class="caption">
+                                    <i class="icon-settings font-red"></i>
+                                    <span class="caption-subject font-red sbold uppercase">Product Group config Products</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <form class="form-horizontal" autocomplete="off" #productGroupConfigProducts="ngForm">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Info
+                                                                        </th>
+                                                                        <th style="width: 100px;">
+                                                                            Type
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Status
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="productKeyword" [(ngModel)]="productKeyword" />
+                                                                        </td>
+                                                                        <td>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <select class="form-control form-filter input-sm" [(ngModel)]="productStatus" name="productStatus">
+                                                                                <option *ngFor="let item of Statuses" [ngValue]="item.value">{{item.text}}</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetProducts()>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let product of products | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                                                                        <td style="padding-left: 10px">
+                                                                            <div class="text-left">Code:
+                                                                                <strong>{{product.code}}</strong>
+                                                                            </div>
+                                                                            <div class="text-left">Name: {{product.name}}</div>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{product.typeName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            {{product.statusName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a *ngIf="product.isAdd" href="javascript:;" class="btn btn-circle btn-outline green" (click)="onAdd(product.id)">
+                                                                                <i class="fa fa-arrow-right"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Info
+                                                                        </th>
+                                                                        <th style="width: 100px;">
+                                                                            Type
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Status
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="productConfigKeyword" [(ngModel)]="productConfigKeyword"
+                                                                            />
+                                                                        </td>
+                                                                        <td>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <select class="form-control form-filter input-sm" [(ngModel)]="productConfigStatus" name="productConfigStatus">
+                                                                                <option *ngFor="let item of Statuses" [ngValue]="item.value">{{item.text}}</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetProductsConfig()>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let product of productsConfig | paginate: { itemsPerPage: productConfigPageSize, currentPage: productConfigPageIndex, totalItems: productConfigTotalRow }">
+                                                                        <td style="padding-left: 10px">
+                                                                            <div class="text-left">Code:
+                                                                                <strong>{{product.code}}</strong>
+                                                                            </div>
+                                                                            <div class="text-left">Name: {{product.name}}</div>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{product.typeName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            {{product.statusName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" class="btn btn-circle btn-outline red" (click)="onRemove(product.id)">
+                                                                                <i class="fa fa-remove"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

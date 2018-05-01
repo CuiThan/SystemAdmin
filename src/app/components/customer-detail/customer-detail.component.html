@@ -1,0 +1,64 @@
+
+  <h4 class="block font-blue sbold">Customer Detail</h4>
+ 
+    <div class="note note-info ">
+        <em class="block sbold font-red">{{customer.fullName}}</em>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- BEGIN VALIDATION STATES-->
+          <div class="portlet-body">
+            <div class="table-scrollable">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <td> Code </td>
+                    <td>{{customer.code}}</td>
+                  </tr>
+                  <tr>
+                    <td>Full Name</td>
+                    <td>{{customer.fullName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>{{customer.email}}</td>
+                  </tr>
+                  <tr>
+                    <td>Phone Number</td>
+                    <td>{{customer.phoneNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td>Birthday</td>
+                    <td>{{customer.birthday}}</td>
+                  </tr>
+                  <tr>
+                    <td>Type</td>
+                    <td>{{customer.typeName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Status</td>
+                    <td>
+                      <span [ngClass]="{
+                                    'label label-sm label-info':customer.status==1,
+                                    'label label-sm label-success':customer.status==2,
+                                    'label label-sm label-danger':customer.status==3
+                                  }"> {{customer.statusName}} </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gender</td>
+                    <td>{{customer.genderName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- END VALIDATION STATES-->
+        </div>
+      </div>
+    </div>
+
+ 
+    
+
+    
+   

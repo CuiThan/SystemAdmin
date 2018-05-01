@@ -1,0 +1,134 @@
+<form autocomplete="off" (ngSubmit)="onSubmit()" #frmTabAttributeLogistic="ngForm">
+  <div class="col-md-12">
+    <div class="row">
+      <table class="table table-condensed table-bordered">
+        <tr>
+          <th style="width:10%">STT</th>
+          <th style="width:30%">Thuộc tính </th>
+          <th style="width:30%">Giá trị</th>
+          <th style="width:30%">Đơn vị</th>
+        </tr>
+        <tr>
+          <td class="text-center">1</td>
+          <td>Trọng lượng bao bì</td>
+          <td>
+            <div class="form-group">
+              <ng-container *ngIf="productAttributeLogistic.typeId != 3">
+                <input type="text" class="form-control" name="weightT" [(ngModel)]="productAttributeLogistic.weightT" #weightT="ngModel"
+                  pattern="/^\d+(\,\d{0,4})?$/" [disabled]="productAttributeLogistic.typeId == 4 || productAttributeLogistic.typeId == 5 || productAttributeLogistic.typeId == 6"
+                  required maxlength="8" />
+                <div class="help-block" *ngIf="(weightT.errors && (weightT.dirty || weightT.touched)) || (!formValid && weightT.errors)">
+                  <p class="required" *ngIf="weightT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="weightT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="weightT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="productAttributeLogistic.typeId == 3">
+                <input type="text" class="form-control" name="weightT" [(ngModel)]="productAttributeLogistic.weightT" #weightT="ngModel"
+                  pattern="/^\s*(?=.*[1-9])\d*(?:\,\d{1,4})?\s*$/" required maxlength="8" />
+                <div class="help-block" *ngIf="(weightT.errors && (weightT.dirty || weightT.touched)) || (!formValid && weightT.errors)">
+                  <p class="required" *ngIf="weightT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="weightT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="weightT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+          <td>(kg)</td>
+        </tr>
+        <tr>
+          <td class="text-center">2</td>
+          <td>Chiều dài bao bì</td>
+          <td>
+            <div class="form-group">
+              <ng-container *ngIf="productAttributeLogistic.typeId != 3">
+                <input type="text" class="form-control" name="lengthT" [(ngModel)]="productAttributeLogistic.lengthT" #lengthT="ngModel"
+                  pattern="/^\d+(\,\d{0,4})?$/" [disabled]="productAttributeLogistic.typeId == 4 || productAttributeLogistic.typeId == 5 || productAttributeLogistic.typeId == 6"
+                  required maxlength="8" />
+                <div class="help-block" *ngIf="(lengthT.errors && (lengthT.dirty || lengthT.touched)) || (!formValid && lengthT.errors)">
+                  <p class="required" *ngIf="lengthT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="lengthT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="lengthT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="productAttributeLogistic.typeId == 3">
+                <input type="text" class="form-control" name="lengthT" [(ngModel)]="productAttributeLogistic.lengthT" #lengthT="ngModel"
+                  pattern="/^\s*(?=.*[1-9])\d*(?:\,\d{1,4})?\s*$/" required maxlength="8" />
+                <div class="help-block" *ngIf="(lengthT.errors && (lengthT.dirty || lengthT.touched)) || (!formValid && lengthT.errors)">
+                  <p class="required" *ngIf="lengthT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="lengthT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="lengthT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+          <td>(cm)</td>
+        </tr>
+        <tr>
+          <td class="text-center">3</td>
+          <td>Chiều rộng bao bì</td>
+          <td>
+            <div class="form-group">
+              <ng-container *ngIf="productAttributeLogistic.typeId != 3">
+                <input type="text" class="form-control" name="widthT" [(ngModel)]="productAttributeLogistic.widthT" #widthT="ngModel" pattern="/^\d+(\,\d{0,4})?$/"
+                  [disabled]="productAttributeLogistic.typeId == 4 || productAttributeLogistic.typeId == 5 || productAttributeLogistic.typeId == 6"
+                  required maxlength="8" />
+                <div class="help-block" *ngIf="(widthT.errors && (widthT.dirty || widthT.touched)) || (!formValid && widthT.errors)">
+                  <p class="required" *ngIf="widthT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="widthT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="widthT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="productAttributeLogistic.typeId == 3">
+                <input type="text" class="form-control" name="widthT" [(ngModel)]="productAttributeLogistic.widthT" #widthT="ngModel" pattern="/^\s*(?=.*[1-9])\d*(?:\,\d{1,4})?\s*$/"
+                  required maxlength="8" />
+                <div class="help-block" *ngIf="(widthT.errors && (widthT.dirty || widthT.touched)) || (!formValid && widthT.errors)">
+                  <p class="required" *ngIf="widthT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="widthT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="widthT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+          <td>(cm)</td>
+        </tr>
+        <tr>
+          <td class="text-center">4</td>
+          <td>Chiều cao bao bì</td>
+          <td>
+            <div class="form-group">
+              <ng-container *ngIf="productAttributeLogistic.typeId != 3">
+                <input type="text" class="form-control" name="heightT" [(ngModel)]="productAttributeLogistic.heightT" #heightT="ngModel"
+                  pattern="/^\d+(\,\d{0,4})?$/" [disabled]="productAttributeLogistic.typeId == 4 || productAttributeLogistic.typeId == 5 || productAttributeLogistic.typeId == 6"
+                  required maxlength="8" />
+                <div class="help-block" *ngIf="(heightT.errors && (heightT.dirty || heightT.touched)) || (!formValid && heightT.errors)">
+                  <p class="required" *ngIf="heightT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="heightT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="heightT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="productAttributeLogistic.typeId == 3">
+                <input type="text" class="form-control" name="heightT" [(ngModel)]="productAttributeLogistic.heightT" #heightT="ngModel"
+                  pattern="/^\s*(?=.*[1-9])\d*(?:\,\d{1,4})?\s*$/" required maxlength="8" />
+                <div class="help-block" *ngIf="(heightT.errors && (heightT.dirty || heightT.touched)) || (!formValid && heightT.errors)">
+                  <p class="required" *ngIf="heightT.errors.required">Trường thông tin bắt buộc.</p>
+                  <p class="required" *ngIf="heightT.errors.pattern">Bắt buộc phải là số > 0. Dùng dấu "," cho số thập phân.</p>
+                  <p class="required" *ngIf="heightT.errors.maxlength">Không vượt quá 8 số.</p>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+          <td>(cm)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="text-right">
+        <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-2');">Quay lại</button>
+        <button type="button" class="btn btn-success" (click)="onSubmit(frmTabAttributeLogistic, productAttributeLogistic)">
+          <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+      </div>
+    </div>
+  </div>
+</form>

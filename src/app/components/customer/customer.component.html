@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: Demo Datatable 1 -->
+        <div class="portlet light portlet-fit portlet-datatable">
+            <div class="portlet-title portlet-title-action ">
+                <div class="actions">                    
+                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onShowAddOrChangeForm('')" >
+                        <i class="fa fa-plus"></i> Add new </a>
+                    
+                    <div class="btn-group">
+                        <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-share"></i>
+                            <span class="hidden-xs"> Tools </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;"> Export to Excel </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> Export to CSV </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> Export to XML </a>
+                            </li>
+                            <li class="divider"> </li>
+                            <li>
+                                <a href="javascript:;"> Print Invoices </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-container">
+                    <form (ngSubmit)="getCustomers()" #f="ngForm" autocomplete="off">
+                    <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
+                        <thead>
+                            <tr role="row" class="heading">
+                                <th>
+                                    Code
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+                                <th>
+                                    Fullname
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                            <tr role="row" class="filter">
+                                <td>
+                                    <div [ngClass]="{'has-success': code.dirty && code.value!=''}">
+                                        <input type="text" class="form-control form-filter input-sm" name="code" [(ngModel)]="searchParams.code" #code="ngModel" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div  [ngClass]="{
+                                        'has-error': email.errors && email.dirty,
+                                        'has-success': !email.errors && email.dirty && email.value!=''
+                                    }">
+                                    <input type="text" class="form-control form-filter input-sm" name="email" [(ngModel)]="searchParams.email" 
+                                            pattern="[^ @]*@[^ @]*" minlength="3" maxlength="150" #email="ngModel"
+                                     />
+                                    <span class="help-block" *ngIf="email.errors && email.dirty">  Email invalid </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div [ngClass]="{'has-success': mobile.dirty && mobile.value!=''}">
+                                        <input type="text" class="form-control form-filter input-sm" name="mobile" [(ngModel)]="searchParams.mobile" #mobile="ngModel"
+                                        />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div [ngClass]="{'has-success': fullname.dirty && fullname.value!=''}">
+                                        <input type="text" class="form-control form-filter input-sm" name="fullName" [(ngModel)]="searchParams.fullName" #fullname="ngModel"
+                                        />
+                                    </div>
+                                </td>                                                                
+                                <td>
+                                        <div [ngClass]="{'has-success': status.dirty && status.value!=''}">
+                                    <select class="form-control form-filter input-sm" [(ngModel)]="searchParams.status" name="status" #status="ngModel">
+                                        <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                                    </select>
+                                        </div>
+                                </td>
+                                <td>
+                                    <div class="margin-bottom-5">
+                                        <button class="btn btn-sm yellow filter-submit margin-bottom"  type="submit">
+                                            <i class="fa fa-search"></i> Search</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let customer of customers | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                                <td>
+                                    {{customer.code}}
+                                </td>
+                                <td>
+                                    {{customer.email}}
+                                </td>
+                                <td>
+                                    {{customer.phoneNumber}}
+                                </td>
+                                <td>
+                                    {{customer.fullName}}
+                                </td>                                
+                                <td>
+                                    {{customer.statusName}}
+                                </td>
+                                <td>
+                                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowAddOrChangeForm(customer.id)">
+                                        <i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="javascript:;" class="btn btn-circle btn-outline blue" (click)="onGetDetail(customer.id)">
+                                        <i class="fa fa-reorder"></i> Detail </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                </div>
+            </div>
+        </div>
+        <!-- End: Demo Datatable 1 -->
+    </div>
+</div>
+<div class="popup">
+    <app-customer-add-or-change #customerAddOrChange></app-customer-add-or-change>
+</div>

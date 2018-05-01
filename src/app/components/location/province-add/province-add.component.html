@@ -1,0 +1,53 @@
+<div>
+  <form class="form-horizontal" (ngSubmit)="onAdd(provinceAdd)" autocomplete="off" #provinceAdd="ngForm">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-2">
+          <label class="control-label">Province Name
+            <span class="field-validation-error"> (*)</span>
+          </label>
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group" [ngClass]="{ 'has-error': name.errors && (name.dirty || submited && !name.dirty), 'has-success': !name.errors }">
+                <input class="form-control" id="ProvinceName" type="text" name="ProvinceName" placeholder="Enter province name" [(ngModel)]="locationUpdateRequest.provinceName"
+                  required #name="ngModel" />
+                <span class="help-block" *ngIf="name.errors && (name.dirty || submited && !name.dirty)">
+                  <p class="required">Province name is required</p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label class="control-label">Province Name English
+            <span class="field-validation-error"> (*)</span>
+          </label>
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group" [ngClass]="{ 'has-error': name.errors && (nameEN.dirty || submited && !nameEN.dirty), 'has-success': !nameEN.errors }">
+                <input class="form-control" id="ProvinceNameEN" type="text" name="ProvinceNameEN" placeholder="Enter province name english"
+                  [(ngModel)]="locationUpdateRequest.provinceNameEN" required #nameEN="ngModel" />
+                <span class="help-block" *ngIf="nameEN.errors && (nameEN.dirty || submited && !nameEN.dirty)">
+                  <p class="required">Province name english is required</p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:15px">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-warning" (click)="cancelAdd()">Cancel</button>
+        <button type="submit" class="btn btn-success">
+          <i class='fa fa-spinner fa-spin'></i> Save</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,122 @@
+<h4 class="block font-blue sbold">
+  Vendor Detail</h4>
+
+<div class="note note-info col-md-10">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BEGIN VALIDATION STATES-->
+      <div class="col-md-3">
+        <img src="http://192.168.1.251:5000{{vendor.logo}}" class="img-responsive pic-bordered" alt="">
+      </div>
+      <div class="col-md-9">
+        <div class="portlet-title">
+          <h1 class="font-green sbold uppercase">{{vendor.name}}</h1>
+        </div>
+        <div class="portlet-body">
+          <div class="mt-element-list">
+            <div class="mt-list-container list-simple">
+              <ul class="list-unstyled">
+              
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.code=='') ? '':'done' }}">
+                    <i class="{{(vendor.code=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Code
+                    </h3>
+                    <span class="caption-subject">{{vendor.code}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.description=='') ? '':'done' }}">
+                    <i class="{{(vendor.description=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Description
+                    </h3>
+                    <span class="caption-subject">{{vendor.description}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.email=='') ? '':'done' }}">
+                    <i class="{{(vendor.email=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Email
+                    </h3>
+                    <span class="caption-subject"><i class="font-red-sunglo">{{vendor.email}}</i></span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.phone=='') ? '':'done' }}">
+                    <i class="{{(vendor.phone=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Phone Number
+                    </h3>
+                    <span class="caption-subject">{{vendor.phone}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.companyName=='') ? '':'done' }}">
+                    <i class="{{(vendor.companyName=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Company Name
+                    </h3>
+                    <span class="caption-subject bold font-purple-plum">{{vendor.companyName}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.website=='') ? '':'done' }}">
+                    <i class="{{(vendor.website=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Website
+                    </h3>
+                    <span class="caption-subject"><a><i>{{vendor.website}}</i></a></span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.fax=='') ? '':'done' }}">
+                    <i class="{{(vendor.fax=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Fax
+                    </h3>
+                    <span class="caption-subject">{{vendor.fax}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                  <div class="list-icon-container {{(vendor.typeName=='') ? '':'done' }}">
+                    <i class="{{(vendor.typeName=='') ? 'icon-close':'icon-check' }}"></i>
+                  </div>
+                  <div class="list-item-content">
+                    <h3 class="uppercase bold font-blue-hoki">Type
+                    </h3>
+                    <span class="caption-subject">{{vendor.typeName}}</span>
+                  </div>
+                </li>
+                <li class="mt-list-item">
+                    <div class="list-icon-container {{(vendor.statusName=='') ? '':'done' }}">
+                      <i class="{{(vendor.statusName=='') ? 'icon-close':'icon-check' }}"></i>
+                    </div>
+                    <div class="list-item-content">
+                      <h3 class="uppercase bold font-blue-hoki">Status
+                      </h3>
+                      <span [ngClass]="{
+                        'label label-sm label-info':vendor.status==1,
+                        'label label-sm label-success':vendor.status==2,
+                        'label label-sm label-danger':vendor.status==3
+                      }"> {{vendor.statusName}} </span>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END VALIDATION STATES-->
+    </div>
+  </div>
+</div>

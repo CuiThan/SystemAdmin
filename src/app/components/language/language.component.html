@@ -1,0 +1,261 @@
+<div class="row">
+  <div class="col-md-12">
+      <!-- Begin: Demo Datatable 1 -->
+      <div class="portlet light portlet-fit portlet-datatable">
+          <div class="portlet-title portlet-title-action ">
+              <div class="actions">
+                  <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onAddNew()">
+                      <i class="fa fa-plus"></i> Add new </a>
+
+                  <div class="btn-group">
+                      <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                          <i class="fa fa-share"></i>
+                          <span class="hidden-xs"> Tools </span>
+                          <i class="fa fa-angle-down"></i>
+                      </a>
+                      <ul class="dropdown-menu pull-right">
+                          <li>
+                              <a href="javascript:;"> Export to Excel </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;"> Export to CSV </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;"> Export to XML </a>
+                          </li>
+                          <li class="divider"> </li>
+                          <li>
+                              <a href="javascript:;"> Print Invoices </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <div class="table-container">
+                  <form (ngSubmit)="onSearch()" #f="ngForm" autocomplete="off">
+                  <table class="table table-striped table-bordered table-hover table-checkable" id="language">
+                      <thead>
+                          <tr role="row" class="heading">
+                              <th>
+                                  Name
+                              </th>
+                              <th>
+                                Language Culture
+                              </th>
+                              <th>
+                                Unique SeoCode
+                              </th>
+                              <th>
+                                Flag
+                              </th>
+                              <th>
+                                Published
+                              </th>
+                              <th>
+                                DisplayOrder
+                              </th>
+                              <th>
+                                  Actions
+                              </th>
+                          </tr>
+                          <tr role="row" class="filter">
+                              <td>
+                                  <input type="text" class="form-control form-filter input-sm" name="name" [(ngModel)]="searchParams.name" #name="ngModel"/>
+                              </td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>
+                                  <div class="margin-bottom-5">
+                                      <button class="btn btn-sm yellow filter-submit margin-bottom" type="" (onclick)="onSearch()">
+                                          <i class="fa fa-search"></i> Search</button>
+                                  </div>
+                              </td>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngIf="showAddNew">
+                              <td>
+                                <div [ngClass]="{
+                                                                  'has-error': name.errors && (name.dirty|| name.touched ||submited ),
+                                                                  'has-success': !name.errors && (name.dirty|| name.touched ||submited )
+                                                              }">
+                                  <input type="text" class="form-control input-sm" name="languageAddnew.name" [(ngModel)]="languageAddnew.name" #name="ngModel"
+                                    required maxlength="100"/>
+                                  <span class="help-block" *ngIf="name.errors && (name.dirty|| name.touched ||submited )">
+                                      <p *ngIf="name.errors.required"> Name is required</p>
+                                      <p *ngIf="name.errors.maxlength"> Name only contain up to 150 characters</p>
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <div [ngClass]="{
+                                                                  'has-error': culture.errors && (culture.dirty|| culture.touched ||submited ),
+                                                                  'has-success': !culture.errors && (culture.dirty|| culture.touched ||submited )
+                                                              }">
+                                  <input type="text" class="form-control input-sm" name="languageAddnew.culture" [(ngModel)]="languageAddnew.culture"
+                                    #culture="ngModel" required maxlength="20"/>
+                                  <span class="help-block" *ngIf="culture.errors && (culture.dirty || culture.touched ||submited)">
+                                      <p *ngIf="culture.errors.required"> Culture is required</p>
+                                      <p *ngIf="culture.errors.maxlength"> Culture only contain up to 20 characters</p>
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <div [ngClass]="{
+                                                                  'has-error': uniqueSeoCode.errors && (uniqueSeoCode.dirty|| uniqueSeoCode.touched ||submited ),
+                                                                  'has-success': !uniqueSeoCode.errors && (uniqueSeoCode.dirty|| uniqueSeoCode.touched ||submited )
+                                                              }">
+                                  <input type="text" class="form-control input-sm" name="languageAddnew.uniqueSeoCode" [(ngModel)]="languageAddnew.uniqueSeoCode"
+                                    #uniqueSeoCode="ngModel" required maxlength="2"/>
+                                  <span class="help-block" *ngIf="uniqueSeoCode.errors && (uniqueSeoCode.dirty || uniqueSeoCode.touched ||submited)">
+                                      <p *ngIf="uniqueSeoCode.errors.required"> UniqueSeo Code  is required</p>
+                                      <p *ngIf="uniqueSeoCode.errors.maxlength"> UniqueSeo Code only contain up to 2 characters</p>
+                                  </span>
+                                </div>
+                              </td>
+                              <td style="width:20%; height:200px">
+                                  <div class="col-md-12">
+                                  <app-file-upload maxFiles="1" maxSize="3" fileExt="JPG, GIF, PNG">
+                                  </app-file-upload>
+                                  <!-- <span class="help-block" *ngIf="flagImageFileName.errors && (flagImageFileName.dirty || flagImageFileName.touched ||submited)">
+                                    <p>flagImageFileName is required</p>
+                                  </span> -->
+                                </div>
+                              </td>
+                              <td>
+                                <label class="mt-checkbox" style="margin-left: 7px;">
+                                  <input type="checkbox" class="form-control input-sm" name="languageAddnew.published" [(ngModel)]="languageAddnew.published"
+                                    #published="ngModel"/>
+                                  <span></span>
+                                </label>
+                              </td>
+                              <td>
+                                <div [ngClass]="{
+                                                                  'has-error': displayOrder.errors && (displayOrder.dirty|| displayOrder.touched ||submited ),
+                                                                  'has-success': !displayOrder.errors && (displayOrder.dirty|| displayOrder.touched ||submited )
+                                                              }">
+                                  <input type="number" class="form-control input-sm" name="languageAddnew.displayOrder" [(ngModel)]="languageAddnew.displayOrder"
+                                    #displayOrder="ngModel" required min="1" step="1"/>
+                                  <span class="help-block" *ngIf="displayOrder.errors && (displayOrder.dirty|| displayOrder.touched ||submited)">
+                                    <p *ngIf="displayOrder.errors.required"> Display order is required</p>
+                                    <p *ngIf="displayOrder.errors.min"> Display order must be greater than 0</p>
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn green" (click)="onSave('')">Save</button>
+                                  <button type="button" class="btn default" (click)="onAddNewCancel()">Cancel</button>
+                              </td>
+                          </tr>
+                          <tr *ngFor="let language of languages | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                              <td>
+                                  <span *ngIf="!rowEdits.Item(language.id)">{{language.name}}</span>
+                                  
+                                  <ng-container *ngIf="rowEdits.Item(language.id)">
+                                      <div [ngClass]="{
+                                        'has-error': name.errors && (name.dirty|| name.touched ||submited ),
+                                        'has-success': !name.errors 
+                                    }">
+                                  <input  type="text" class="form-control input-sm" name="name_{{language.id}}" [(ngModel)]="language.name" #name="ngModel" required maxlength="100"
+                                  />
+                                  <span class="help-block" *ngIf="name.errors && (name.dirty|| name.touched ||submited )">
+                                      <p *ngIf="name.errors.required"> Name is required</p>
+                                      <p *ngIf="name.errors.maxlength"> Name only contain up to 150 characters</p>
+                                   </span>
+                                </div>
+                                </ng-container>
+                                  
+                              </td>
+                              <td>
+                                <span *ngIf="!rowEdits.Item(language.id)">{{language.culture}}</span>
+                                <ng-container *ngIf="rowEdits.Item(language.id)">
+                                    <div [ngClass]="{
+                                      'has-error': culture.errors && (culture.dirty|| culture.touched ||submited ),
+                                      'has-success': !culture.errors 
+                                  }">
+                                <input type="text" class="form-control input-sm"  name="culture_{{language.id}}" [(ngModel)]="language.culture" #culture="ngModel" required maxlength="20"
+                                />
+                                <span class="help-block" *ngIf="culture.errors && (culture.dirty|| culture.touched ||submited )">
+                                    <p *ngIf="culture.errors.required"> Culture is required</p>
+                                      <p *ngIf="culture.errors.maxlength"> Culture only contain up to 20 characters</p>
+                                  </span>
+                                </div>
+                              </ng-container>
+                              </td>
+                              <td>
+                                <span *ngIf="!rowEdits.Item(language.id)">{{language.uniqueSeoCode}}</span>
+                                <ng-container *ngIf="rowEdits.Item(language.id)">
+                                    <div [ngClass]="{
+                                      'has-error': uniqueSeoCode.errors && (uniqueSeoCode.dirty|| uniqueSeoCode.touched ||submited ),
+                                      'has-success': !uniqueSeoCode.errors 
+                                  }">
+                                <input type="text" class="form-control input-sm" name="uniqueSeoCode_{{language.id}}" [(ngModel)]="language.uniqueSeoCode" #uniqueSeoCode="ngModel" required maxlength="2"
+                                />
+                                <span class="help-block" *ngIf="uniqueSeoCode.errors && (uniqueSeoCode.dirty|| uniqueSeoCode.touched ||submited )">
+                                    <p *ngIf="uniqueSeoCode.errors.required"> UniqueSeo Code  is required</p>
+                                    <p *ngIf="uniqueSeoCode.errors.maxlength"> UniqueSeo Code only contain up to 2 characters</p>
+                                </span>
+                                </div>
+                              </ng-container>
+                              </td>
+                              <td style="width:20%; height:20%">
+                                <span *ngIf="!rowEdits.Item(language.id)"><img class="flagImg" src="http://192.168.1.251:5000{{language.flagImageFileName}}"></span>
+                                <ng-container *ngIf="rowEdits.Item(language.id)">
+                                    
+                                  <div class="col-md-12">
+                                      <app-file-upload maxFiles="1" maxSize="3" fileExt="JPG, GIF, PNG" imageUrl="http://192.168.1.251:5000{{language.flagImageFileName}}">
+                                      </app-file-upload>
+                                      <!-- <span class="help-block" *ngIf="flagImageFileName.errors && (flagImageFileName.dirty || flagImageFileName.touched ||submited)">
+                                        <p>flagImageFileName is required</p>
+                                      </span> -->
+                                    </div>
+                                
+                              </ng-container>
+                              </td>
+                              <td>
+                                <span *ngIf="!rowEdits.Item(language.id)&& language.published==true">Yes</span>
+                                <span *ngIf="!rowEdits.Item(language.id)&& language.published==false">No</span>
+                                <div class="form-group" *ngIf="rowEdits.Item(language.id)">
+                                  <label class="mt-checkbox" style="margin-left: 7px;">
+                                    <input type="checkbox" name="published_{{language.id}}" [(ngModel)]="language.published" />
+                                    <span></span>
+                                  </label>
+                                </div>
+                              </td>
+                              <td>
+                                <span *ngIf="!rowEdits.Item(language.id)">{{language.displayOrder}}</span>
+                                <ng-container *ngIf="rowEdits.Item(language.id)">
+                                    <div [ngClass]="{
+                                      'has-error': displayOrder.errors && (displayOrder.dirty|| displayOrder.touched ||submited ),
+                                      'has-success': !displayOrder.errors 
+                                  }">
+                                <input type="number" class="form-control input-sm" name="displayOrder_{{language.id}}" [(ngModel)]="language.displayOrder" #displayOrder="ngModel" required min="1"
+                                />
+                                <span class="help-block" *ngIf="displayOrder.errors && (displayOrder.dirty|| displayOrder.touched ||submited )">
+                                    <p *ngIf="displayOrder.errors.required"> Display order is required</p>
+                                    <p *ngIf="displayOrder.errors.min"> Display order must be greater than 0</p>
+                                   </span>
+                                </div>
+                              </ng-container>
+                              </td>
+                             
+                              <td>
+                                  <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onChange(language.id)" *ngIf="!rowEdits.Item(language.id)">
+                                      <i class="fa fa-pencil"></i> Edit </a>
+                                  <button type="button" class="btn green" (click)="onSave(language.id)" *ngIf="rowEdits.Item(language.id)">Save</button>
+                                  <button type="button" class="btn default" (click)="onChangeCancel(language.id)" *ngIf="rowEdits.Item(language.id)">Cancel</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <!-- End: Demo Datatable 1 -->
+  </div>
+</div>

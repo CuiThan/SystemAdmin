@@ -1,0 +1,102 @@
+<div id="sharding-config-add-or-change" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 [hidden]="model.id > 0" class="modal-title" id="exampleModalLabel">Add sharding config</h5>
+        <h5 [hidden]="model.id == 0" class="modal-title" id="exampleModalLabel">Change sharding config</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onAddOrChange(shardingConfigAddOrChange)" autocomplete="off" #shardingConfigAddOrChange="ngForm">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-2">HostName:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="HostName" name="hostname" [(ngModel)]="model.hostName" required maxlength="50"
+                #hostname="ngModel" />
+              <div [hidden]="!(hostname.touched && hostname.errors?.required)" class="alert alert-danger">
+                HostName is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label  col-sm-2">DatabaseName:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="DatabaseName" name="databaseName" [(ngModel)]="model.databaseName" required
+                maxlength="150" #databaseName="ngModel" />
+              <div [hidden]="!(databaseName.touched && databaseName.errors?.required)" class="alert alert-danger">
+                DatabaseName is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label  col-sm-2">Uid:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Uid" name="uid" [(ngModel)]="model.uid" required maxlength="50" #uid="ngModel"
+              />
+              <div [hidden]="!(uid.touched && uid.errors?.required)" class="alert alert-danger">
+                Uid is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label  col-sm-2">Pwd:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Pwd" name="pwd" [(ngModel)]="model.pwd" required maxlength="50" #pwd="ngModel"
+              />
+              <div [hidden]="!(pwd.touched && pwd.errors?.required)" class="alert alert-danger">
+                Pwd is required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label  col-sm-2">Type:</label>
+            <div class="col-sm-10">
+              <div>
+                <select class="form-control" [(ngModel)]="model.type" name="type" required>
+                  <option *ngFor="let item of model.types" [ngValue]="item.value">{{item.text}}</option>
+                </select>
+              </div>
+              <div *ngIf="model.type==5" class="YearTypeConfig" style="margin-top: 10px;">
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">YearTypeConfig:</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="Year" name="yearTypeConfig" [(ngModel)]="model.yearTypeConfig" required
+                      minlength="4" maxlength="4" #yearTypeConfig="ngModel" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label  col-sm-2">ShardGroup:</label>
+            <div class="col-sm-10">
+              <select class="form-control" [(ngModel)]="model.shardGroup" name="shardGroup" required>
+                <option *ngFor="let item of model.shardGroups" [ngValue]="item.value">{{item.text}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label  col-sm-2">Status:</label>
+            <div class="col-sm-10">
+              <div class="form-check" *ngFor="let item of model.statuses">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="{{item.value}}" [checked]="item.checked" name="status_{{item.value}}" (change)="onChangeStatus($event)" />{{item.text}}
+                </label>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

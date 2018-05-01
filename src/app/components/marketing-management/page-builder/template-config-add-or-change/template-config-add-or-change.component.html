@@ -1,0 +1,185 @@
+<div class="row" id="template-config-add-or-change">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit portlet-datatable">
+            <div class="portlet-title portlet-title-action ">
+                <div class="caption">
+                    <i class="icon-settings font-green"></i>
+                    <span [hidden]="templateConfig.id == ''" class="caption-subject font-red sbold uppercase">Add new config</span>
+                    <span [hidden]="templateConfig.id != ''" class="caption-subject font-red sbold uppercase">Change config</span>
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" [routerLink]="['/g/template-add']">
+                        <i class="fa fa-plus"></i> Add new </a>
+
+                    <div class="btn-group">
+                        <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-share"></i>
+                            <span class="hidden-xs"> Tools </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;"> Export to Excel </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> Export to CSV </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> Export to XML </a>
+                            </li>
+                            <li class="divider"> </li>
+                            <li>
+                                <a href="javascript:;"> Print Invoices </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-container">
+                    <form class="form-horizontal" (ngSubmit)="onAddOrChange(templateConfigAddOrChange)" autocomplete="off" #templateConfigAddOrChange="ngForm">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Id
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="id" name="id" [(ngModel)]="templateConfig.id" readonly #id="ngModel"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">TemplateId
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="templateId" name="templateId" [(ngModel)]="template.id" readonly #templateId="ngModel"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Template Name
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" placeholder="templateName" name="templateName" [(ngModel)]="template.templateName"
+                                        readonly #templateName="ngModel" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Position Code
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7" [ngClass]="{ 
+                                    'has-error': (templatePositionCode.errors && (templatePositionCode.dirty || templatePositionCode.touched)) 
+                                    || (!formValid && templatePositionCode.errors)
+                                    || templatePositionCodeIsExist,
+                                    'has-success': !templatePositionCode.errors 
+                                 }">
+                                    <input type="text" class="form-control" placeholder="PositionCode" name="templatePositionCode" [(ngModel)]="templateConfig.templatePositionCode"
+                                        required minlength="0" maxlength="150" #templatePositionCode="ngModel" (change)="onChangeTemplatePositionCode()"
+                                    />
+                                    <span class="help-block" *ngIf="(templatePositionCode.errors && (templatePositionCode.dirty || templatePositionCode.touched)) 
+                                    || (!formValid && templatePositionCode.errors)
+                                    || templatePositionCodeIsExist">
+                                        <p class="required" *ngIf="templatePositionCode.errors?.required">Position code is required</p>
+                                        <p class="required" *ngIf="templatePositionCode.errors.maxlength || templatePositionCode.errors.minlength">
+                                            Position code must be between 1 and 150 characters</p>
+                                        <p class="required" *ngIf="templatePositionCodeIsExist">Position code is exist</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Path To View
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7" [ngClass]="{ 
+                                    'has-error': (pathToView.errors && (pathToView.dirty || pathToView.touched))
+                                     || (!formValid && pathToView.errors),
+                                    'has-success': !pathToView.errors 
+                                }">
+                                    <input type="text" class="form-control" placeholder="Path to view" name="pathToView" [(ngModel)]="templateConfig.pathToView"
+                                        required minlength="1" maxlength="2048" #pathToView="ngModel" />
+                                    <span class="help-block" *ngIf="(pathToView.invalid && (pathToView.dirty  || pathToView.touched))
+                                    || (!formValid && pathToView.errors)
+                                    ">
+                                        <p class="required" *ngIf="pathToView.errors?.required">Path To View is required</p>
+                                        <p class="required" *ngIf="pathToView.errors.maxlength || pathToView.errors.minlength">
+                                            Path To View must be between 1 and 2048 characters</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Component Type
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7" [ngClass]="{ 
+                                    'has-error': componentType.errors && (componentType.dirty  || componentType.touched)
+                                    || (!formValid && componentType.errors),
+                                    'has-success': !componentType.errors 
+                     }">
+                                    <select class="form-control form-filter input-sm" [(ngModel)]="templateConfig.componentType" name="componentType" #componentType="ngModel"
+                                        required>
+                                        <option *ngFor="let item of componentTypes" [ngValue]="item.value">{{item.text}}</option>
+                                    </select>
+                                    <span class="help-block" *ngIf="(componentType.errors && (componentType.dirty || componentType.touched))
+                                    || (!formValid && componentType.errors)
+                                    ">
+                                        <p class="required" *ngIf="componentType.errors?.required">Page Type is required</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">ComponentId
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7" [hidden]="templateConfig.componentType == null || templateConfig.componentType == ''" [ngClass]="{ 
+                                    'has-error': componentId.errors && (componentId.dirty  || templateConfig.touched)
+                                    || (!formValid && componentId.errors),
+                                    'has-success': !componentId.errors 
+                                }">
+                                    <input type="text" class="form-control" style="display:none;" placeholder="componentId" name="componentId" [(ngModel)]="templateConfig.componentId"
+                                        required maxlength="50" #componentId="ngModel" />
+                                    <select class="form-control form-filter input-sm" id="componentId" style="width: 300px;">
+                                        <option value="{{templateConfig.component?.id}}" selected="selected">{{templateConfig.component?.text}}</option>
+                                    </select>
+                                    <span class="help-block" *ngIf="(componentId.errors && (componentId.dirty  || componentId.touched))
+                                    || (!formValid && componentId.errors)
+                                    ">
+                                        <p class="required" *ngIf="componentId.errors?.required">ComponentId is required</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Status
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7" [ngClass]="{ 
+                        'has-error': status.errors && (status.dirty  || status.touched)
+                        || (!formValid && status.errors),
+                        'has-success': !status.errors 
+                     }">
+                                    <select class="form-control form-filter input-sm" [(ngModel)]="templateConfig.status" name="status" #status="ngModel" required>
+                                        <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                                    </select>
+                                    <span class="help-block" *ngIf="(status.errors && (status.dirty || status.touched))
+                                    || (!formValid && status.errors)
+                                    ">
+                                        <p class="required" *ngIf="status.errors?.required">Status is required</p>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Save</button>
+                                    <a href="javascript:;" [routerLink]="['/g/template/template-config',tmpId]" class="btn grey-salsa btn-outline">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12" id="productForm">
+    <div class="row vin-grid">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Thêm thông tin chi tiết cho sản phẩm</h3>
+          </div>
+          <div class="col-md-6 ">
+            <p class="text-right" style="margin-top:25px;">
+              <a class="btn btn-sm btn-success" href="javascript:void(0)" [routerLink]="['/g/products']">
+                <i class="fa fa-th-list fa-fw"></i> Quay lại tạo sản phẩm</a>
+              <button type="button" id="btnSearch" class="btn btn-sm btn-danger" onclick="window.location.reload()">
+                <i class="fa  fa-refresh fa-fw"></i> Tải lại</button>
+            </p>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="filter-by">
+            <div class="row">
+              <div class="col-md-12">
+                <h4>
+                  <input type="hidden" ng-model="CategoryId" id="CategoryId" value="@ViewBag.CategoryId" />
+                </h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <form name="productForm" novalidate>
+                  <app-product-add-or-change-general #productAddOrChangeGeneralComponent></app-product-add-or-change-general>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

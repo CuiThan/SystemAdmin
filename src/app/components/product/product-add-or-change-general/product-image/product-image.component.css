@@ -1,0 +1,11 @@
+.item.work-archive-thumb-link img {
+    display: inline-block!important;
+}
+
+#uploadAllImages .dz-message {
+    background-position: 0px -384px;
+}
+
+.text-red {
+    color: red;
+}

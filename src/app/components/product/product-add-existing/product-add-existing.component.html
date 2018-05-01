@@ -1,0 +1,337 @@
+<form id="frmForm" name="frmForm" class="clearfix mtop-10" novalidate>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Tên sản phẩm: XYZ</h3>
+    </div>
+  </div>
+  <input type="hidden" name="strWareHouse" value="{{strWarehouses}}" />
+  <br />
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+
+          <div class="row vin-grid">
+            <div class="col-md-6">
+              Thông tin nhà cung cấp và kho hàng
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+              <button type="submit" name="save" class="btn btn-sm btn-success">
+                <i class="fa fa-save fa-fw"></i>Cập nhật</button>
+              &nbsp;
+              <i class="fa fa-chevron-left"></i>&nbsp;
+              <a href="javascript:void(0)" onclick="history.go(-1);">Quay lại</a>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12" style="text-align:center;">
+                  <div style="padding:10px;border:solid 1px red;">
+                    <span style="color:red;">Bạn không có quyền truy cập tới ngành hàng của sản phẩm.</span>
+                  </div>
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Nhà cung cấp
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input class="form-control" id="merchantCode" type="text" name="merchantCode" placeholder="Lựa chọn merchant" />
+                    <p style="color:red;"> Nhà cung cấp đang chọn hiện đã bán sản phẩm này.</p>
+                    <div class="error-messages">
+                      <div class="error">Vui lòng chọn nhà cung cấp.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Nhà ký gửi </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input class="form-control" id="Vendor" type="text" name="Vendor" placeholder="Lựa chọn nhà ký gửi" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Sku
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="sku" id="sku" required placeholder="Mã sản phẩm của merchant" anti-html />
+                    <div class="error-messages">
+                      <div class="error">SKU không được để trống.</div>
+                      <div class="error">SKU không được chứa các ký tự đặc biệt.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">VAT đầu vào
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <select class="form-control" name="fieldVat" required>
+                      <option value="">Chọn % VAT đầu vào</option>
+                    </select>
+                    <input type="hidden" name="VatId" required />
+                    <div class="error">
+                      <div>Bạn phải lựa chọn VAT đầu vào.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">VAT đầu ra
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <select class="form-control" name="fieldVatExt" required>
+                      <option value="">Chọn % VAT đầu ra</option>
+                    </select>
+                    <input type="hidden" name="VatExtId" required />
+                    <div class="error">Bạn phải lựa chọn VAT đầu ra.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+              <label class="bold italic" style="color:red"> {{cateNote}}</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Đơn vị
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <input class="form-control" type="text" maxlength="250" name="UnitName" anti-html placeholder="Đơn vị của sản phẩm" required
+                    />
+                    <div class="error-messages">
+                      <div class="error">Đơn vị không được để trống.</div>
+                      <div class="error"> Đơn vị không được chứa các ký tự đặc biệt.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Số lượng </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table table-condensed table-bordered">
+                    <tr>
+                      <th>
+                        Kho hàng
+                      </th>
+                      <th>Số lượng</th>
+                      <th>Giá bán (VNĐ)</th>
+                      <th>Giá gốc (VNĐ)</th>
+                    </tr>
+                    <tr>
+                      <td>Tên kho hàng</td>
+                      <td>
+                        <input type="text" class="form-control" required min="0" name="Quantity" />
+                        <div class="error-messages">
+                          <div class="error">Số lượng không được để trống và đúng định dạng, phải là một số nguyên và ít hơn 12 chữ số.</div>
+                          <div class="error">Số lượng không được để trống.</div>
+                        </div>
+                      </td>
+                      <td>
+                        <input type="text" class="form-control" format-number ecom-round-number required min="0" name="SellPrice" />
+                        <div class="error-messages">
+                          <div class="error">Giá bán không được để trống và đúng định dạng, phải là một số và ít hơn 12 chữ số, sử dụng dấu.
+                            Cho số thập phân.</div>
+                          <div class="error">Giá bán không được để trống.</div>
+                          <div class="error">Giá bán không lẻ dưới trăm đồng.</div>
+                        </div>
+                      </td>
+                      <td>
+                        <input type="text" class="form-control" format-number ecom-round-number required min="0" name="OriginalPrice" />
+                        <div class="error-messages">
+                          <div class="error">Giá gốc không được để trống và đúng định dạng, phải là một số và ít hơn 12 chữ số, sử dụng dấu.
+                            Cho số thập phân.</div>
+                          <div class="error">Giá gốc không được để trống.</div>
+                          <div class="error">Giá gốc không lẻ dưới trăm đồng.</div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Danh mục hiển thị</div>
+        <div class="panel-body">
+          <div class="row  form-horizontal clearfix">
+            <div class="col-xs-12">
+              <span> Danh mục</span>
+              <strong>Root</strong>
+              <button type="button" id="btnSearch" class="btn btn-sm btn-success">Đổi ngành hàng</button>
+            </div>
+            <div class="col-xs-12">
+              <label>Root > Áo thun</label>
+            </div>
+            <div class="col-xs-12">
+              <div class="col-md-2"> </div>
+              <div class="col-sm-9 col-md-5">
+                <div id="jsCategoryTree_CategoryTreeTypeId">jsCategoryTree</div>
+              </div>
+            </div>
+            <div style="clear:both; margin-top:20px; margin-bottom:20px; border-bottom: 1px solid #ccc;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Dữ liệu Recommend</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Thuộc tính phân loại (segment)</h4>
+              <table class="table table-condensed table-bordered">
+                <tr>
+                  <th style="width:10%">STT</th>
+                  <th style="width:30%">Thuộc tính </th>
+                  <th>Giá trị</th>
+                </tr>
+                <tr>
+                  <td class="text-center">1</td>
+                  <td>Giới tính</td>
+                  <td>
+                    <div class="row">
+                      <div class="col-md-8 form-group">
+                        <select class="form-control" name="GenderId" disabled>
+                          <option value="">Lựa chọn giá trị </option>
+                        </select>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">2</td>
+                  <td>Độ tuổi mua hàng</td>
+                  <td>
+                    <div class="row">
+                      <div class="col-md-8 form-group">
+                        <select class="form-control" name="AgeId" disabled>
+                          <option value="">Lựa chọn giá trị </option>
+                        </select>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3</td>
+                  <td>Mức thu nhập</td>
+                  <td>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-8 form-group">
+                          <select class="form-control" name="Gender" disabled>
+                            <option value="">Lựa chọn giá trị </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="col-md-12">
+              <h4>Sản phẩm mua cùng</h4>
+            </div>
+            <div class="col-md-12">
+              <table class="table table-condensed table-bordered">
+                <tr>
+                  <th style="width:10%">STT</th>
+                  <th style="width:10%">ADR ID </th>
+                  <th style="width:30%">Ảnh </th>
+                  <th style="width:40%">Tên sản phẩm</th>
+                </tr>
+                <tr>
+                  <td class="text-center">1</td>
+                  <td>1234</td>
+                  <td><img src="#" /></td>
+                  <td>Tên sản phẩm 1</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Tên sản phẩm: ABC</div>
+        <div class="panel-body">          
+          <app-product-detail-content #productDetailContent></app-product-detail-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <!-- Begin: Demo Datatable 1 -->
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-body">
+        <div class="table-container">
+          <div>
+            <a class="row-remove d-none btn btn-danger" href="javascript:;" onclick="PageBuilderApp.deleteRow()">
+              <i class="fa fa-trash-o fa-lg"></i> Delete selected row</a>
+          </div>
+          <div id="wrapper" class="clickable row-wrap">
+
+          </div>
+          
+          <section class="sidebar">
+            <ul class="row-tool">
+              <li>
+                <div class="block">0-12 CL</div>
+              </li>
+              <li>
+                <div class="block">1-11 CL</div>
+              </li>
+              <li>
+                <div class="block">2-10 CL</div>
+              </li>
+              <li>
+                <div class="block">3-9 CL</div>
+              </li>
+              <li>
+                <div class="block">4-8 CL</div>
+              </li>
+              <li>
+                <div class="block">5-7 CL</div>
+              </li>
+              <li>
+                <div class="block">6-6 CL</div>
+              </li>
+              <li>
+                <div class="block">7-5 CL</div>
+              </li>
+              <li>
+                <div class="block">8-4 CL</div>
+              </li>
+              <li>
+                <div class="block">9-3 CL</div>
+              </li>
+              <li>
+                <div class="block">10-2 CL</div>
+              </li>
+              <li>
+                <div class="block">11-1 CL</div>
+              </li>
+
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- End: Demo Datatable 1 -->
+  </div>
+</div>
+<app-template-row [rowTemplate] = "addedRowTemplate"></app-template-row>

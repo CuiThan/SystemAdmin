@@ -1,0 +1,48 @@
+<ngb-tabset #tabs (tabChange)="beforeChange($event)">
+  <ngb-tab id="tab-1" title="Thông tin">
+    <ng-template ngbTabContent>
+      <app-product-content #productContent (setTab)="setTab($event)"></app-product-content>
+    </ng-template>
+  </ngb-tab>
+  <!-- [disabled]="true" -->
+  <ngb-tab id="tab-2" title="Thuộc tính miêu tả">
+    <ng-template ngbTabContent>
+      <app-product-attribute-info #productAttributeInfo (setTab)="setTab($event)"></app-product-attribute-info>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-3" title="Thông tin tính phí vận chuyển">
+    <ng-template ngbTabContent>
+      <app-product-attribute-logistic #productAttributeLogistic (setTab)="setTab($event)"></app-product-attribute-logistic>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-4" title="Biến thể sản phẩm">
+    <ng-template ngbTabContent>
+      <app-product-variant #productVariant (setTab)="setTab($event)"></app-product-variant>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-5" title="Ảnh sản phẩm">
+    <ng-template ngbTabContent>
+      <app-product-image #productImage (setTab)="setTab($event)"></app-product-image>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-6" title="Seo sản phẩm">
+    <ng-template ngbTabContent>
+      <app-product-seo #productSeo (setTab)="setTab($event)"></app-product-seo>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-7" title="Dữ liệu Recommend">
+    <ng-template ngbTabContent>
+      <app-product-recommend #productRecommend (setTab)="setTab($event)"></app-product-recommend>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-8" title="Danh mục hiển thị">
+    <ng-template ngbTabContent>
+      <app-product-category-tree #productCategoryTree (setTab)="setTab($event)"></app-product-category-tree>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-9" title="Xem trước sản phẩm">
+    <ng-template ngbTabContent>
+      <app-product-preview #productPreview (setTab)="setTab($event)"></app-product-preview>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

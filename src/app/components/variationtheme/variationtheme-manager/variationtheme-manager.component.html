@@ -1,0 +1,79 @@
+<div class="row">
+  <div class=" col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-body">
+        <div class="table-container">
+          <form (ngSubmit)="getVariationTheme()" #f="ngForm" autocomplete="off">
+            <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax">
+              <thead>
+                <tr role="row" class="heading">
+                  <th>
+                    STT
+                  </th>
+                  <th>
+                    Tên nhóm
+                  </th>
+                  <th>
+                    Thuộc tính trong nhóm
+                  </th>
+                  <th>
+                    Chức năng
+                  </th>
+                </tr>
+                <tr role="row" class="filter">
+                  <td>
+                  </td>
+                  <td>
+                    <div>
+                      <input type="text" class="form-control form-filter input-sm" name="attributeName" [(ngModel)]="searchParams.attributeName"
+                        #attributeName="ngModel" minlength="3" maxlength="150" />
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <input type="text" class="form-control form-filter input-sm" name="variationThemeName" [(ngModel)]="searchParams.variationThemeName"
+                        #variationThemeName="ngModel" minlength="3" maxlength="150" />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="margin-bottom-5">
+                      <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit">
+                        <i class="fa fa-search"></i> Search</button>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let variationtheme of variationThemes | paginate: {itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow } ; let i = index">
+                  <td>
+                    {{i+1}}                   
+                  </td>
+                  <td>
+                    {{variationtheme.attributeName}}
+                  </td>
+                  <td>
+                    {{variationtheme.variationThemeName}}
+                  </td>                  
+                  <td>
+                      <a href="javascript:;" class="btn btn-circle btn-outline blue"  *ngIf="!variationtheme.isUsed" (click)="onShowEditForm(variationtheme.variationThemeId,variationtheme.attributeId)">
+                        <i class="fa fa-pencil">Edit</i>
+                      </a>
+                      <a href="javascript:;" class="btn btn-circle btn-outline red" *ngIf="!variationtheme.isUsed" (click)="onRemoveAtt(variationtheme.variationThemeId)">
+                        <i class="fa fa-cross">Delete</i>
+                      </a>                    
+                      <a href="javascript:;" class="btn btn-circle btn-outline green" *ngIf="variationtheme.isUsed" (click)="onGetDetail(variationtheme.variationThemeId,variationtheme.attributeId)">
+                        <i class="fa fa-plus">View</i>
+                      </a>                    
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="popup">
+  <app-variationtheme-edit #variationThemeEdit></app-variationtheme-edit>
+</div>

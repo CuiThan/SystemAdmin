@@ -1,0 +1,227 @@
+<div id="customer-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span [hidden]="customer.id == ''" class="caption-subject font-red sbold uppercase">Change customer</span>
+                  <span [hidden]="customer.id != ''" class="caption-subject font-red sbold uppercase">Add new customer</span>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <form class="form-horizontal" (ngSubmit)="onAddOrChange(customerAddOrChange)" autocomplete="off" #customerAddOrChange="ngForm">
+                  <div class="form-body">
+                    <div class="alert alert-danger display-hide" *ngIf="customerAddOrChange.form.valid">
+                      <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                    <div class="alert alert-success display-hide">
+                      <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Code
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="Code" name="code" [(ngModel)]="customer.code" readonly #code="ngModel"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Language
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': language.errors && (language.dirty ||submited&&!language.dirty),
+                        'has-success': !language.errors 
+                     }">
+                        <select class="form-control" [(ngModel)]="customer.languageId" name="languageId" required #language="ngModel">
+                          <option *ngFor="let item of languages" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="language.errors && (language.dirty ||submited&&!language.dirty)">
+                          <p class="required">language is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Email
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <div class="input-group" [ngClass]="{ 
+                          'has-error': email.errors && (email.dirty ||submited&&!email.dirty),
+                          'has-success': !email.errors 
+                       }">
+                          <span class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                          </span>
+                          <input type="text" class="form-control" placeholder="Email" [(ngModel)]="customer.email" name="mail" required maxlength="150"
+                            pattern="[^ @]*@[^ @]*" #email="ngModel" [readonly]="customer.id != '' && customer.email != '' "
+                          />
+                        </div>
+                        <span class="help-block" *ngIf="email.errors && (email.dirty ||submited&&!email.dirty)">
+                          <p class="required" *ngIf="email.errors.required">Email is required</p>
+                          <p class="required" *ngIf="email.errors.maxlength">Email only contain up to 150 characters</p>
+                          <p class="required" *ngIf="email.errors.pattern">Email invalid</p>
+                        </span>
+                        <span class="help-block"> e.g: support@gico.vn </span>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3">IsTaxExempt
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7">
+                        <div class="mt-checkbox-inline">
+                          <label class="mt-checkbox">
+                            <input type="checkbox" class="form-check-input" name="isTaxExempt" [(ngModel)]="customer.isTaxExempt" #isTaxExempt="ngModel"
+                            /> IsTaxExempt
+                            <span></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group" [hidden]="customer.id != ''">
+                      <label class="control-label col-md-3">Password
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': password.errors && (password.dirty ||submited&&!password.dirty),
+                        'has-success': !password.errors 
+                     }">
+                        <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="customer.password" maxlength="150"
+                          minlength="6" required passwordvalidator #password="ngModel" />
+                        <span class="help-block" *ngIf="password.errors && (password.dirty ||submited&&!password.dirty)">
+                          <p class="required" *ngIf="password.errors.required">password is required</p>
+                          <p class="required" *ngIf="password.errors.minlength">password must contain at least 6 characters</p>
+                          <p class="required" *ngIf="password.errors.maxlength">password only contain up to 150 characters</p>
+                          <p class="required" *ngIf="!password.errors.required&&!password.errors.minlength&&password.errors.passwordvalidator">password must contain both characters and numbers</p>
+                        </span>
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">PhoneNumber
+                      </label>
+                      <div class="col-md-7">
+                        <input type="text" class="form-control" placeholder="phoneNumber" name="phoneNumber" [(ngModel)]="customer.phoneNumber" maxlength="50"
+                          #phoneNumber="ngModel" [readonly]="customer.id != '' && customer.phoneNumber != '' " />
+                        <span class="help-block">Số điện thoại di dộng viết liền</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">TwoFactorEnabled</label>
+                      <div class="col-md-7">
+                        <select class="form-control" [(ngModel)]="customer.twoFactorEnabled" name="twoFactorEnabled">
+                          <option *ngFor="let item of twoFactorEnableds" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">FullName
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                        'has-error': fullName.errors && (fullName.dirty  || (submited&&!fullName.dirty)),
+                        'has-success': !fullName.errors 
+                     }">
+                        <input type="text" class="form-control" placeholder="FullName" name="fullName" [(ngModel)]="customer.fullName" required maxlength="50"
+                          #fullName="ngModel" />
+                        <span class="help-block" *ngIf="fullName.errors && (fullName.dirty  || (submited&&!fullName.dirty))">
+                          <p class="required">Full Name is required</p>
+                        </span>
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Gender
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-4" [ngClass]="{ 
+                        'has-error': gender.errors && (gender.dirty ||submited&&!gender.dirty),
+                        'has-success': !gender.errors 
+                     }">
+                        <select class="form-control" [(ngModel)]="customer.gender" name="gender" required #gender="ngModel">
+                          <option *ngFor="let item of genders" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="gender.errors && (gender.dirty ||submited&&!gender.dirty)">
+                          <p class="required">Gender is required</p>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Birthday
+                      </label>
+                      <div class="col-md-4">
+                        <div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="mm/dd/yyyy">
+                          <input type="text" class="form-control" name="birthday" placeholder="Birthday" [(ngModel)]="customer.birthday" maxlength="50"
+                            #birthday="ngModel" />
+                          <span class="input-group-btn">
+                            <button class="btn btn-sm default" type="button">
+                              <i class="fa fa-calendar"></i>
+                            </button>
+                          </span>
+                        </div>
+                        <span class="help-block">MM/dd/yyy (tháng/ngày/năm)</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Type
+                        <span class="required"> * </span>
+                      </label>
+                      <div class="col-md-4" [ngClass]="{ 
+                        'has-error': (_typeDirty||submited)&&_type==0,
+                        'has-success': !((_typeDirty||submited)&&_type==0)
+                     }">
+                        <div class="mt-checkbox-list">
+                          <label class="mt-checkbox" *ngFor="let item of types;let index = index;trackBy:trackByIndex;">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="types[index].checked" value="{{item.value}}" [checked]="item.checked"
+                              (click)="checkedType(this.item)" name="types_{{item.value}}" /> {{item.text}}
+                            <span></span>
+                          </label>
+                          <div class="help-block" *ngIf="(_typeDirty||submited)&&_type==0">
+                            <p class="required">The type is required</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3">AdminComment
+                      </label>
+                      <div class="col-md-7" [ngClass]="{ 
+                          'has-error': adminComment.errors && (adminComment.dirty ||submited&&!adminComment.dirty),
+                          'has-success': !adminComment.errors  && (adminComment.dirty ||submited&&!adminComment.dirty)
+                       }">
+                        <textarea class="form-control" rows="3" placeholder="Comment" name="adminComment" [(ngModel)]="customer.adminComment" maxlength="2000"
+                          #adminComment="ngModel"></textarea>
+                        <span class="help-block" *ngIf="adminComment.errors && (adminComment.dirty ||adminComment.touched)">
+                          <p class="required">Admin Comment is only contain up to 2000 characters</p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn green">Save</button>
+                        <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<h4 class="block font-blue sbold">
+  Warehouse Detail</h4>
+
+<div class="note note-info col-md-10">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- BEGIN VALIDATION STATES-->
+
+
+      <div class="portlet-title">
+        <h1 class="font-green sbold uppercase">{{warehouse.name}}</h1>
+      </div>
+      <div class="portlet-body">
+        <div class="mt-element-list">
+          <div class="mt-list-container list-simple">
+            <ul class="list-unstyled">
+
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.code=='') ? '':'done' }}">
+                  <i class="{{(warehouse.code=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Code
+                  </h3>
+                  <span class="caption-subject">{{warehouse.code}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.description=='') ? '':'done' }}">
+                  <i class="{{(warehouse.description=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Description
+                  </h3>
+                  <span class="caption-subject">{{warehouse.description}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.email=='') ? '':'done' }}">
+                  <i class="{{(warehouse.email=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Email
+                  </h3>
+                  <span class="caption-subject">
+                    <i class="font-red-sunglo">{{warehouse.email}}</i>
+                  </span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.phoneNumber=='') ? '':'done' }}">
+                  <i class="{{(warehouse.phoneNumber=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Phone Number
+                  </h3>
+                  <span class="caption-subject">{{warehouse.phoneNumber}}</span>
+                </div>
+              </li>
+
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.typeName=='') ? '':'done' }}">
+                  <i class="{{(warehouse.typeName=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Type
+                  </h3>
+                  <span class="caption-subject">{{warehouse.typeName}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.statusName=='') ? '':'done' }}">
+                  <i class="{{(warehouse.statusName=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Status
+                  </h3>
+                  <span> {{warehouse.statusName}} </span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.provinceName=='') ? '':'done' }}">
+                  <i class="{{(warehouse.provinceName=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Province
+                  </h3>
+                  <span class="caption-subject">{{warehouse.provinceName}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.districtName=='') ? '':'done' }}">
+                  <i class="{{(warehouse.districtName=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">District</h3>
+                  <span class="caption-subject">{{warehouse.districtName}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.villageName=='') ? '':'done' }}">
+                  <i class="{{(warehouse.villageName=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Ward</h3>
+                  <span class="caption-subject">{{warehouse.villageName}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.roadName=='') ? '':'done' }}">
+                  <i class="{{(warehouse.roadName=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Street</h3>
+                  <span class="caption-subject">{{warehouse.roadName}}</span>
+                </div>
+              </li>
+              <li class="mt-list-item">
+                <div class="list-icon-container {{(warehouse.addressDetail=='') ? '':'done' }}">
+                  <i class="{{(warehouse.addressDetail=='') ? 'icon-close':'icon-check' }}"></i>
+                </div>
+                <div class="list-item-content">
+                  <h3 class="uppercase bold font-blue-hoki">Addresss Detail
+                  </h3>
+                  <span class="caption-subject">{{warehouse.addressDetail}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <!-- END VALIDATION STATES-->
+  </div>
+</div>

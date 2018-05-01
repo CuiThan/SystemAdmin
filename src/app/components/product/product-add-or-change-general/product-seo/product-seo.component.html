@@ -1,0 +1,245 @@
+<form autocomplete="off" #frmTabSeo="ngForm">
+  <div class="col-md-12">
+    <div class="row form-horizontal clearfix">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label class="col-md-2 control-label">
+            <span> Meta title</span>
+          </label>
+          <div class="col-sm-9 col-md-5">
+            <input class="form-control" name="MetaTitle" anti-html="anti-html" />
+            <div class="error-messages">
+              <div>
+                Meta title không được để trống, độ dài từ 1 ký tự.
+              </div>
+              <div>
+                Meta title không được để trống, độ dài từ 1 ký tự.
+              </div>
+              <div>
+                Meta title không vượt quá 250 ký tự
+              </div>
+              <div>
+                Meta title không được chứa các ký tự đặc biệt.
+              </div>
+            </div>
+
+            <div>
+              <a href="javascript:void(0)" class="sensorEdit">[+] Tên sản phẩm:
+                <b>Tên sản phẩm</b>
+              </a>
+              <br />
+              <div class="sensorEdit">
+                [+] Danh sách thuộc tính:
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" id="btn_showProductAttribute_01" class="sensorEdit">Value</a>
+                  </li>
+                </ul>
+              </div>
+              <br /> [+] Giá sản phẩm:&nbsp;
+              <a href="javascript:void(0)" class="sensorEdit">
+                <b>price</b>
+              </a>
+              &nbsp;
+              <a href="javascript:void(0)" class="sensorEdit">
+                <b>price_sale</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Tên danh mục:
+                <b>category.name</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Thương hiệu:
+                <b>product.brand</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Kho:
+                <b>property.kho</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Nhà cung cấp:
+                <b>property.ncc</b>
+              </a>
+              <br />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="MetaDescription">
+            <span> Meta description</span>
+            <span class="field-validation-error"> (*)</span>
+          </label>
+          <div class="col-sm-9 col-md-8">
+            <textarea class="form-control" name="MetaDescription" anti-html="anti-html" required></textarea>
+
+            <div class="error-messages">
+              <div>
+                Meta description không được để trống, độ dài tối đa 155 ký tự.
+              </div>
+              <div>
+                Meta description không được để trống, độ dài tối đa 155 ký tự.
+              </div>
+              <div>
+                Meta description không được để trống, độ dài tối đa 155 ký tự.
+              </div>
+              <div>
+                Meta Description không được chứa các ký tự đặc biệt.
+              </div>
+            </div>
+
+            <div>
+              <a href="javascript:void(0)" class="sensorEdit">[+] Tên sản phẩm:
+                <b>product.name</b>
+              </a>
+              <br />
+              <div class="sensorEdit">
+                [+] Danh sách thuộc tính:
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" id="btn_showProductAttribute_01" class="sensorEdit">{{prop}}</a>
+                  </li>
+                </ul>
+              </div>
+              <br /> [+] Giá sản phẩm:&nbsp;
+              <a href="javascript:void(0)" class="sensorEdit">
+                <b>product.price</b>
+              </a>
+              &nbsp;
+              <a href="javascript:void(0)" class="sensorEdit">
+                <b>product.price_sale</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Tên danh mục:
+                <b>category.name</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Thương hiệu:
+                <b>product.brand</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Kho:
+                <b>property.kho</b>
+              </a>
+              <br />
+              <a href="javascript:void(0)" class="sensorEdit">[+] Nhà cung cấp:
+                <b>property.ncc</b>
+              </a>
+              <br />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="MetaKeyword">
+            <span> Meta keyword</span>
+          </label>
+          <div class="col-sm-9 col-md-8">
+            <input class="form-control" name="MetaKeyword" anti-html="anti-html" />
+            <div class="error-messages">
+              <div>
+                Meta keyword không được để trống, các keyword ngăn cách bới dấu , độ dài tối đa 155 ký tự.
+              </div>
+              <div>
+                Meta keyword không được để trống, các keyword ngăn cách bới dấu , độ dài tối đa 155 ký tự.
+              </div>
+              <div>
+                Meta keyword không được để trống, các keyword ngăn cách bới dấu , độ dài tối đa 155 ký tự.
+              </div>
+              <div>
+                Meta keyword không được chứa các ký tự đặc biệt.
+              </div>
+            </div>
+            <div class="text-danger">
+              Các keyword cách nhau bởi dấu phảy (,)
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="MetaRobotIndex">
+            <span> Meta Robots Index</span>
+          </label>
+          <div class="col-sm-9 col-md-8">
+            <div>
+              <label class="radio-inline">
+                <input type="radio" name="MetaRobotIndex" /> Index
+              </label>
+            </div>
+            <div>
+              <label class="radio-inline">
+                <input type="radio" name="MetaRobotIndex" /> No Index
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="MetaRobotFollow">
+            <span> Meta Robots Follow</span>
+          </label>
+          <div class="col-sm-9 col-md-8">
+            <div>
+              <label class="radio-inline">
+                <input type="radio" name="MetaRobotFollow" /> Follow
+              </label>
+            </div>
+            <div>
+              <label class="radio-inline">
+                <input type="radio" name="MetaRobotFollow" /> No Follow
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="CanonicalURL">
+            <span> Canonical URL</span>
+          </label>
+          <div class="col-sm-9 col-md-8">
+            <input type="url" class="form-control" name="CanonicalUrl" anti-html="anti-html" />
+            <div class="error-messages">
+              <div>
+                Canonical không được để trống
+              </div>
+              <div>
+                Độ dài từ 1 ký tự.
+              </div>
+              <div>
+                Không vượt quá 2056 số
+              </div>
+              <div>
+                Canonical không được chứa các ký tự đặc biệt.
+              </div>
+              <div>
+                Canonical URL không hợp lệ.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="FacebookSharingImage" class="col-md-2 control-label">
+            <span> Ảnh chia sẻ Facebook</span>
+          </label>
+          <div class="col-sm-9 col-md-8">
+            <img src="#" name="FacebookSharingImage" style="width: 180px" class="img-responsive img-thumbnail img-choose" title="Click để chọn ảnh"
+            />
+            <button class="btn btn-sm btn-danger" type="button" title="Xóa ảnh chia sẻ"> Xóa </button>
+            <br />
+            <span class="warning italic text-danger">Ảnh nên nhỏ hơn 1mb, kích thước 560x292</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <input type="file" class="upload hide" accept="image/gif, image/jpeg, image/png" name="FacebookSharingImage" />
+
+  <div class="row" style="margin-top:15px">
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-warning" (click)="setTab.emit('tab-5');">Quay lại</button>
+      <button type="button" class="btn btn-success" (click)="setTab.emit('tab-7');">
+        <i class='fa fa-spinner fa-spin'></i>Tiếp tục</button>
+    </div>
+  </div>
+</form>

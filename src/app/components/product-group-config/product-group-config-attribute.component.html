@@ -1,0 +1,199 @@
+<div id="productgroup-attribute" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light portlet-fit portlet-form bordered">
+                            <div class="portlet-title ">
+                                <div class="caption">
+                                    <i class="icon-settings font-red"></i>
+                                    <span class="caption-subject font-red sbold uppercase">Product Group config Attributes</span>
+                                </div>
+                            </div>
+                            <div class="portlet-title portlet-title-action ">
+                                <div class="actions">
+                                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onAddNew()">
+                                        <i class="fa fa-plus"></i> Add new </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <form class="form-horizontal" autocomplete="off" #productGroupConfigAttributes="ngForm">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Attribute
+                                                                        </th>
+                                                                        <th>
+                                                                            AttributeValue
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="keyword" [(ngModel)]="keyword" />
+                                                                        </td>
+                                                                        <td>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetAttributesConfig()>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngIf="showAddNew">
+                                                                        <td style="width: 300px;text-align: center;">
+                                                                            <div [ngClass]="{ 
+                                                                                'has-error': (attributeIdCurrentSelected == null) 
+                                                                                || ( attributeIdCurrentSelected == undefined ) 
+                                                                                || ( attributeIdCurrentSelected.length <= 0 ),
+                                                                                'has-success': (attributeIdCurrentSelected != null) 
+                                                                                && ( attributeIdCurrentSelected != undefined ) 
+                                                                                && ( attributeIdCurrentSelected.length > 0 )
+                                                                                }">
+                                                                                <input type="text" class="form-control" name="attributeAddnewId" [(ngModel)]="attributeAddnew.id" required minlength="1"
+                                                                                    maxlength="50" #attributeAddnewId="ngModel"
+                                                                                    style="display: none" />
+                                                                                <select class="form-control form-filter input-sm" id="attributeAddnewAutocomplete" style="width: 300px;">
+                                                                                    <option value="{{attributeAddnew?.id}}" selected="selected">{{attributeAddnew?.text}}</option>
+                                                                                </select>
+                                                                                <span class="help-block" *ngIf="(attributeIdCurrentSelected == null) 
+                                                                                    || ( attributeIdCurrentSelected == undefined ) 
+                                                                                    || ( attributeIdCurrentSelected.length <= 0 )">
+                                                                                    <p class="required">Attribute is required</p>
+                                                                                </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div [ngClass]="{ 
+                                                                                    'has-error': (attributeValueIdsCurrentSelected == null) 
+                                                                                    || ( attributeValueIdsCurrentSelected == undefined ) 
+                                                                                    || ( attributeValueIdsCurrentSelected.length <= 0 ),
+                                                                                    'has-success': (attributeValueIdsCurrentSelected != null) 
+                                                                                    && ( attributeValueIdsCurrentSelected != undefined ) 
+                                                                                    && ( attributeValueIdsCurrentSelected.length > 0 )
+                                                                                    }">
+                                                                                <select class="form-control form-filter input-sm" id="attributeValueAddnewAutocomplete" multiple="multiple" style="width: 300px;">
+                                                                                    <!-- <option value="{{attributeAddnew?.id}}" selected="selected">{{attributeAddnew?.text}}</option> -->
+                                                                                </select>
+                                                                                <span class="help-block" *ngIf="(attributeValueIdsCurrentSelected == null) 
+                                                                                || ( attributeValueIdsCurrentSelected == undefined ) 
+                                                                                || ( attributeValueIdsCurrentSelected.length <= 0 )">
+                                                                                    <p class="required">AttributeValue is required</p>
+                                                                                </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" title="Save" class="btn btn-circle btn-outline green" (click)="onAddSave(attributeAddnew)">
+                                                                                <i class="fa fa-save"></i>
+                                                                            </a>
+                                                                            <a href="javascript:;" title="Cancel" class="btn btn-circle btn-outline red" (click)="onAddNewCancel()">
+                                                                                <i class="fa fa-retweet"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr *ngFor="let attribute of attributesConfig | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                                                                        <td style="width: 300px;text-align: center;">
+                                                                            <strong *ngIf="!rowEdits.Item(attribute.id)">{{attribute.attributeName}}</strong>
+                                                                            <ng-container *ngIf="rowEdits.Item(attribute.id)">
+                                                                                <div [ngClass]="{ 
+                                                                                    'has-error': (attributeIdCurrentSelected == null) 
+                                                                                    || ( attributeIdCurrentSelected == undefined ) 
+                                                                                    || ( attributeIdCurrentSelected.length <= 0 ),
+                                                                                    'has-success': (attributeIdCurrentSelected != null) 
+                                                                                    && ( attributeIdCurrentSelected != undefined ) 
+                                                                                    && ( attributeIdCurrentSelected.length > 0 )
+                                                                                    }">
+                                                                                    <select class="form-control form-filter input-sm" id="attributeAddnewAutocomplete" style="width: 300px;">
+                                                                                        <option value="{{attribute?.id}}" selected="selected">{{attribute?.name}}</option>
+                                                                                    </select>
+                                                                                    <span class="help-block" *ngIf="(attributeIdCurrentSelected == null) 
+                                                                                    || ( attributeIdCurrentSelected == undefined ) 
+                                                                                    || ( attributeIdCurrentSelected.length <= 0 )">
+                                                                                        <p class="required">Attribute is required</p>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </td>
+                                                                        <td>
+                                                                            <ng-container *ngIf="!rowEdits.Item(attribute.id)">
+                                                                                <div *ngFor="let attributeValue of attribute.attributeValues">
+                                                                                    {{attributeValue.value}}
+                                                                                </div>
+                                                                            </ng-container>
+                                                                            <ng-container *ngIf="rowEdits.Item(attribute.id)">
+                                                                                <div [ngClass]="{ 
+                                                                                        'has-error': (attributeValueIdsCurrentSelected == null) 
+                                                                                        || ( attributeValueIdsCurrentSelected == undefined ) 
+                                                                                        || ( attributeValueIdsCurrentSelected.length <= 0 ),
+                                                                                        'has-success': (attributeValueIdsCurrentSelected != null) 
+                                                                                        && ( attributeValueIdsCurrentSelected != undefined ) 
+                                                                                        && ( attributeValueIdsCurrentSelected.length > 0 )
+                                                                                        }">
+                                                                                    <select class="form-control form-filter input-sm" id="attributeValueAddnewAutocomplete" multiple="multiple" style="width: 300px;">
+                                                                                        <option *ngFor="let attributeValue of attribute.attributeValues" value="{{attributeValue?.attributeValueId}}" selected="selected">{{attributeValue?.value}}</option>
+                                                                                    </select>
+                                                                                    <span class="help-block" *ngIf="(attributeValueIdsCurrentSelected == null) 
+                                                                                    || ( attributeValueIdsCurrentSelected == undefined ) 
+                                                                                    || ( attributeValueIdsCurrentSelected.length <= 0 )">
+                                                                                        <p class="required">AttributeValue is required</p>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <ng-container *ngIf="!rowEdits.Item(attribute.id)">
+                                                                                <a href="javascript:;" title="Change" class="btn btn-circle btn-outline green" (click)="onChange(attribute.id)">
+                                                                                    <i class="fa fa-pencil"></i>
+                                                                                </a>
+                                                                                <a href="javascript:;" title="Remove" class="btn btn-circle btn-outline red" (click)="onRemove(attribute.id)">
+                                                                                        <i class="fa fa-remove"></i>
+                                                                                    </a>
+                                                                            </ng-container>
+                                                                            <ng-container *ngIf="rowEdits.Item(attribute.id)">
+                                                                                <a href="javascript:;" title="Save" class="btn btn-circle btn-outline green" (click)="onChangeSave(attribute)">
+                                                                                    <i class="fa fa-save"></i>
+                                                                                </a>
+                                                                                <a href="javascript:;" title="Cancel" class="btn btn-circle btn-outline red" (click)="onChangeCancel(attribute.id)">
+                                                                                    <i class="fa fa-retweet"></i>
+                                                                                </a>
+                                                                            </ng-container>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light portlet-fit portlet-datatable">
+      <div class="portlet-title portlet-title-action ">
+        <div class="actions">
+          <a href="javascript:;" class="btn btn-circle blue-steel btn-outline" (click)="onAddNew()">
+            <i class="fa fa-plus"></i> Add new </a>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="table-container">
+          <form #f="ngForm" autocomplete="off">
+            <table class="table table-striped table-bordered table-hover table-checkable" id="template-define">
+              <thead>
+                <tr role="row" class="heading">
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Actions
+                  </th>
+                </tr>
+                <tr role="row" class="filter">
+                  <td>
+                    <input type="text" class="form-control form-filter input-sm" name="nameParam" [(ngModel)]="nameParam" />
+                  </td>
+                  <td>
+                    <select class="form-control form-filter input-sm" [(ngModel)]="statusParam" name="statusParam" #status="ngModel" required>
+                      <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                    </select>
+                  </td>
+                  <td>
+                    <div class="margin-bottom-5">
+                      <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)="onGets()">
+                        <i class="fa fa-search"></i> Search</button>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="showAddNew">
+                  <td>
+                    <div [ngClass]="{
+                            'has-error': (templateDefineAddNewName.errors && (templateDefineAddNewName.dirty|| templateDefineAddNewName.touched))
+                                       || (!formValid && templateDefineAddNewName.errors),
+                            'has-success': !templateDefineAddNewName.errors
+                          }">
+                      <input type="text" class="form-control input-sm" name="templateDefineAddNewName" [(ngModel)]="templateDefineAddNew.name"
+                        #templateDefineAddNewName="ngModel" required minlength="1" maxlength="250" />
+                      <span class="help-block" *ngIf="(templateDefineAddNewName.errors && (templateDefineAddNewName.dirty|| templateDefineAddNewName.touched))
+                            || (!formValid && templateDefineAddNewName.errors)">
+                        <p class="required" *ngIf="templateDefineAddNewName.errors.required"> Name is required</p>
+                        <p class="required" *ngIf="templateDefineAddNewName.errors.maxlength || templateDefineAddNewName.errors.minlength">
+                          Path To View must be between 1 and 500 characters</p>
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div [ngClass]="{
+                            'has-error': (templateDefineAddNewStatus.errors && (templateDefineAddNewStatus.dirty|| templateDefineAddNewStatus.touched))
+                                       || (!formValid && templateDefineAddNewStatus.errors),
+                            'has-success': !templateDefineAddNewStatus.errors
+                          }">
+                      <select class="form-control form-filter input-sm" [(ngModel)]="templateDefineAddNew.status" name="templateDefineAddNewStatus"
+                        #templateDefineAddNewStatus="ngModel" required>
+                        <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                      </select>
+                      <span class="help-block" *ngIf="(templateDefineAddNewStatus.errors && (templateDefineAddNewStatus.dirty || templateDefineAddNewStatus.touched))
+                                  || (!formValid && templateDefineAddNewStatus.errors)
+                                  ">
+                        <p class="required" *ngIf="templateDefineAddNewStatus.errors?.required">Status Type is required</p>
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" class="btn green" (click)="onSave(f,templateDefineAddNew,true)">Save</button>
+                    <button type="button" class="btn default" (click)="onAddNewCancel()">Cancel</button>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr *ngFor="let templateDefine of templateDefines">
+                  <td>
+                    <span *ngIf="!rowEdits.Item(templateDefine.id)">{{templateDefine.name}}</span>
+                    <ng-container *ngIf="rowEdits.Item(templateDefine.id)">
+                      <div [ngClass]="{
+                                  'has-error': (templateDefineName.errors && (templateDefineName.dirty|| templateDefineName.touched))
+                                             || (!formValid && templateDefineName.errors),
+                                  'has-success': !templateDefineName.errors
+                                }">
+                        <input type="text" class="form-control input-sm" name="templateDefineName" [(ngModel)]="templateDefine.name" #templateDefineName="ngModel"
+                          required minlength="1" maxlength="256" />
+                        <span class="help-block" *ngIf="(templateDefineName.errors && (templateDefineName.dirty|| templateDefineName.touched))
+                                  || (!formValid && templateDefineName.errors)">
+                          <p class="required" *ngIf="templateDefineName.errors.required"> Name is required</p>
+                          <p class="required" *ngIf="templateDefineName.errors.maxlength || templateDefineName.errors.minlength">
+                            Path To View must be between 1 and 500 characters</p>
+                        </span>
+                      </div>
+                    </ng-container>
+                  </td>
+                  <td>
+                    <span *ngIf="!rowEdits.Item(templateDefine.id)">{{templateDefine.statusName}}</span>
+                    <ng-container *ngIf="rowEdits.Item(templateDefine.id)">
+                      <div [ngClass]="{
+                                'has-error': (templateDefine.errors && (templateDefine.dirty|| templateDefine.touched))
+                                           || (!formValid && templateDefine.errors),
+                                'has-success': !templateDefine.errors
+                              }">
+                        <select class="form-control form-filter input-sm" [(ngModel)]="templateDefine.status" name="templateDefineStatus" #templateDefineStatus="ngModel"
+                          required>
+                          <option *ngFor="let item of statuses" [ngValue]="item.value">{{item.text}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="(templateDefineStatus.errors && (templateDefineStatus.dirty || templateDefineStatus.touched))
+                                      || (!formValid && templateDefineStatus.errors)
+                                      ">
+                          <p class="required" *ngIf="templateDefineStatus.errors?.required">Status Type is required</p>
+                        </span>
+                      </div>
+                    </ng-container>
+                  </td>
+                  <td>
+                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onChange(templateDefine.id)" *ngIf="!rowEdits.Item(templateDefine.id)">
+                      <i class="fa fa-pencil"></i> Edit </a>
+                    <button type="button" class="btn green" (click)="onSave(f,templateDefine,false)" *ngIf="rowEdits.Item(templateDefine.id)">Save</button>
+                    <button type="button" class="btn default" (click)="onChangeCancel(templateDefine.id)" *ngIf="rowEdits.Item(templateDefine.id)">Cancel</button>
+                    
+                    <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onShowTemplateDefineHtml(templateDefine.id)">
+                      <i class="fa fa-gear"></i> Html
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-template-define-html #htmlChange></app-template-define-html>

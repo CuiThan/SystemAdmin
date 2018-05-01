@@ -1,0 +1,83 @@
+<div id="warehouse-address-add-or-change" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+              <div class="portlet-title ">
+                <div class="caption">
+                  <i class="icon-settings font-red"></i>
+                  <span class="caption-subject font-red sbold uppercase">Cập nhật address</span>
+
+                </div>
+              </div>
+              <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <div class="col-md-5">
+                  <div id="menus"></div>
+                </div>
+                <div class="col-md-7 fixed-top !important">
+                  <p>
+                    <ngb-progressbar [showValue]="true" type="success" [value]="progressbarValue"></ngb-progressbar>
+                  </p>
+
+                  <div class="table-responsive">
+                    <table class="table a">
+                      <tbody>
+                        <tr>
+                          <td class="col-md-2">
+                            <label class="pull-right">Provicen Name</label>
+                          </td>
+                          <td class="col-md-5"> {{locationUpdateRequest.provinceName}} </td>
+
+                        </tr>
+                        <tr>
+                          <td class="col-md-2">
+                            <label class="pull-right">District Name</label>
+                          </td>
+                          <td class="col-md-5"> {{locationUpdateRequest.districtName}} </td>
+
+                        </tr>
+                        <tr>
+                          <td class="col-md-2">
+                            <label class="pull-right">Ward Name </label>
+                          </td>
+                          <td class="col-md-5"> {{locationUpdateRequest.wardName}} </td>
+
+                        </tr>
+
+                        <tr>
+                          <td class="col-md-2">
+                            <label class="pull-right">Street Name </label>
+                          </td>
+                          <td class="col-md-5"> {{locationUpdateRequest.streetName}} </td>
+
+                        </tr>
+                        <tr>
+                          <td class="col-md-2"></td>
+                          <td class="col-md-5">
+                            <button class="btn btn-sm blue pull-right" [disabled]="!isValidForm()" (click)="onSaveAddress()" >
+                              <i class="fa fa-edit"></i> Save</button>
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+
+
+                </div>
+
+                <!-- END FORM-->
+              </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

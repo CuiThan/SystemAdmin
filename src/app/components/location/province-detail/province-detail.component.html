@@ -1,0 +1,200 @@
+<div class="col-md-12">
+  <ngb-tabset>
+    <ngb-tab id="tab-1" title="Infomation">
+      <ng-template ngbTabContent>
+        <div>
+          <div class="note note-info ">
+            <em class="block sbold font-red">{{locationUpdateRequest.provinceName}}</em>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="portlet-body">
+                  <div class="table-scrollable">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          <td> Id </td>
+                          <td>{{locationUpdateRequest.id}}</td>
+                        </tr>
+                        <tr>
+                          <td> Province Name English </td>
+                          <td>{{locationUpdateRequest.provinceNameEN}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-2" title="Edit">
+      <ng-template ngbTabContent>
+        <form class="form-horizontal" (ngSubmit)="onUpdate(provinceUpdate)" autocomplete="off" #provinceUpdate="ngForm">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">Province Name
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group" [ngClass]="{ 'has-error': provinceName.errors && (provinceName.dirty || submited && !provinceName.dirty), 'has-success': !provinceName.errors }">
+                      <input class="form-control" id="ProvinceName" type="text" name="ProvinceName" placeholder="Enter province name" [(ngModel)]="locationUpdateRequest.provinceName"
+                        required #provinceName="ngModel" />
+                      <span class="help-block" *ngIf="provinceName.errors && (provinceName.dirty || submited && !provinceName.dirty)">
+                        <p class="required">Province name is required</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">Province Name English
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group" [ngClass]="{ 'has-error': provinceNameEN.errors && (provinceNameEN.dirty || submited && !provinceNameEN.dirty), 'has-success': !provinceNameEN.errors }">
+                      <input class="form-control" id="ProvinceNameEN" type="text" name="ProvinceNameEN" placeholder="Enter province name english"
+                        [(ngModel)]="locationUpdateRequest.provinceNameEN" required #provinceNameEN="ngModel" />
+                      <span class="help-block" *ngIf="provinceNameEN.errors && (provinceNameEN.dirty || submited && !provinceNameEN.dirty)">
+                        <p class="required">Province name english is required</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:15px">
+            <div class="col-md-12 text-right">
+              <button type="button" class="btn btn-danger" (click)="onDelete(locationUpdateRequest.id, 'province');">Delete</button>
+              <button type="submit" class="btn btn-success">
+                <i class='fa fa-spinner fa-spin'></i> Save</button>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-3" title="Add district">
+      <ng-template ngbTabContent>
+        <form class="form-horizontal" (ngSubmit)="onAddDistrict(districtAdd)" autocomplete="off" #districtAdd="ngForm">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">Province name
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input class="form-control" id="ProvinceName" type="text" name="ProvinceName" disabled placeholder="Enter province name"
+                        [(ngModel)]="locationUpdateRequest.provinceName" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">District name
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group" [ngClass]="{ 'has-error': name.errors && (name.dirty || submited && !name.dirty), 'has-success': !name.errors }">
+                      <input class="form-control" id="DistrictName" type="text" name="DistrictName" placeholder="Enter district name" [(ngModel)]="locationAddRequest.districtName"
+                        required #name="ngModel" />
+                      <span class="help-block" *ngIf="name.errors && (name.dirty || submited && !name.dirty)">
+                        <p class="required">District name is required</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">District name english
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group" [ngClass]="{ 'has-error': nameEN.errors && (nameEN.dirty || submited && !nameEN.dirty), 'has-success': !nameEN.errors }">
+                      <input class="form-control" id="DistrictNameEN" type="text" name="DistrictNameEN" placeholder="Enter district name english"
+                        [(ngModel)]="locationAddRequest.districtNameEN" required #nameEN="ngModel" />
+                      <span class="help-block" *ngIf="nameEN.errors && (nameEN.dirty || submited && !nameEN.dirty)">
+                        <p class="required">District name english is required</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">Prefix
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group" [ngClass]="{ 'has-error': prefix.errors && (prefix.dirty || submited && !prefix.dirty), 'has-success': !prefix.errors }">
+                      <input class="form-control" id="Prefix" type="text" name="Prefix" placeholder="Enter prefix" [(ngModel)]="locationAddRequest.prefix"
+                        required #prefix="ngModel" />
+                      <span class="help-block" *ngIf="prefix.errors && (prefix.dirty || submited && !prefix.dirty)">
+                        <p class="required">Prefix is required</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label class="control-label">Short Name
+                  <span class="field-validation-error"> (*)</span>
+                </label>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group" [ngClass]="{ 'has-error': shortName.errors && (shortName.dirty || submited && !shortName.dirty), 'has-success': !shortName.errors }">
+                      <input class="form-control" id="ShortName" type="text" name="ShortName" placeholder="Enter ward short name" [(ngModel)]="locationAddRequest.shortName"
+                        required #shortName="ngModel" />
+                      <span class="help-block" *ngIf="shortName.errors && (shortName.dirty || submited && !shortName.dirty)">
+                        <p class="required">Short name is required</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:15px">
+            <div class="col-md-12 text-right">
+              <button type="button" class="btn btn-warning" (click)="onReset(districtAdd)">Reset</button>
+              <button type="submit" class="btn btn-success">
+                <i class='fa fa-spinner fa-spin'></i> Save</button>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

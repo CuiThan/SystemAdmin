@@ -1,0 +1,23 @@
+export class WarehouseAddOrChangeModel{
+    id:string;
+    name:string;
+    addressDetail:string;
+    districtName:string;
+    districtId:number;
+    email:string;
+    provinceId:number;
+    provinceName:string;
+    roadId:number;
+    roadName:string;
+    status:number;
+    phoneNumber:string;
+    vendorId:string;
+    code:string;
+    type:number;
+    description:string;
+    statusName:string;
+    typeName:string;
+    vendorName:string;
+    villageId:number;
+    villageName:string;
+}

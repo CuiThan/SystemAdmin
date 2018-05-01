@@ -1,0 +1,54 @@
+<h1 class="page-title">
+    <h2>Tạo sản phẩm</h2>
+    <div class="note note-success">
+        <p style="font-size: 15px;">
+            Sản phẩm mà bạn tạo mới có thể đã có trên hệ thống. Tìm kiếm ngay danh mục ngành hàng mà bạn muốn bán cho sản phẩm của mình
+            và tiết kiệm thời gian cho chính bản thân mình.
+            <br />
+            <a href="#">Xem tài liệu hướng dẫn</a> |
+            <a href="#">Xem video hướng dẫn</a>
+        </p>
+    </div>
+    <div class="box-header">
+        <h4 class="box-title">
+            Tìm kiếm danh mục sản phẩm trên hệ thống.
+        </h4>
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Điền mã danh mục">
+        <span class="input-group-btn">
+            <button class="btn blue" type="button">TÌM KIẾM</button>
+        </span>
+    </div>
+    <div class="pull-right" style="font-size:15px; padding: 10px 0;">Sản phẩm này chưa có trên hệ thống?
+        <a href="javascript:;" class="btn blue" [routerLink]="['/g/product/search-category']">TẠO MỚI SẢN PHẨM</a>
+    </div>
+</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tab-content no-margin no-padding" id="tab-content">
+            <div class="vin-grid" style="overflow: hidden">
+                <h4>CategorySearch.CategoryName</h4>
+                <h4 style="display:none">
+                    <label class="text-danger">cateNote</label>
+                </h4>
+                <div>
+                    <div ng-show="CategoryBreadCrumb.length">
+                        CategoryBreadCrumb
+                        <a class="btn btn-sm btn-warning" href="#">Chọn danh mục này</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Chọn danh mục từ cây</h4>
+                    </div>
+                </div>
+                <div class="row" style="overflow-x:hidden">
+                    <div class="col-md-12">
+                        <div id="tree_2" class="tree-demo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

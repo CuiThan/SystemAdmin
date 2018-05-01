@@ -1,0 +1,247 @@
+<ngb-tabset>
+  <ngb-tab id="tab-1" title="Infomation">
+    <ng-template ngbTabContent>
+      <div>
+        <div class="note note-info ">
+          <em class="block sbold font-red">{{locationUpdateRequest.wardName}}</em>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="portlet-body">
+                <div class="table-scrollable">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td> Id </td>
+                        <td>{{locationUpdateRequest.id}}</td>
+                      </tr>
+                      <tr>
+                        <td> Ward Name English </td>
+                        <td>{{locationUpdateRequest.wardNameEN}}</td>
+                      </tr>
+                      <tr>
+                        <td> Prefix </td>
+                        <td>{{locationUpdateRequest.prefix}}</td>
+                      </tr>
+                      <tr>
+                        <td> Short Name </td>
+                        <td>{{locationUpdateRequest.shortName}}</td>
+                      </tr>
+                      <tr>
+                        <td> Province Name </td>
+                        <td>{{locationUpdateRequest.provinceName}}</td>
+                      </tr>
+                      <tr>
+                        <td> District Name </td>
+                        <td>{{locationUpdateRequest.districtName}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-2" title="Edit">
+    <ng-template ngbTabContent>
+      <form class="form-horizontal" (ngSubmit)="onWardUpdate(districtUpdate)" autocomplete="off" #districtUpdate="ngForm">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Province Name
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <select class="form-control" [(ngModel)]="locationUpdateRequest.provinceId" name="provinceId" required #provinceId="ngModel"
+                      (ngModelChange)="onChange($event)">
+                      <option *ngFor="let item of locationResponse.ltsProvince" [ngValue]="item.id">{{item.provinceName}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">District Name
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <select class="form-control" [(ngModel)]="locationUpdateRequest.districtId" name="district" required #districtId="ngModel">
+                      <option *ngFor="let item of locationResponse.ltsDistricts" [ngValue]="item.id">{{item.districName}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Ward Name
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group" [ngClass]="{ 'has-error': wardName.errors && (wardName.dirty || submited && !wardName.dirty), 'has-success': !wardName.errors }">
+                    <input class="form-control" id="WardName" type="text" name="WardName" placeholder="Enter ward name" [(ngModel)]="locationUpdateRequest.wardName"
+                      required #wardName="ngModel" />
+                    <span class="help-block" *ngIf="wardName.errors && (wardName.dirty || submited && !wardName.dirty)">
+                      <p class="required">Ward name is required</p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Ward Name English
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group" [ngClass]="{ 'has-error': wardNameEN.errors && (wardNameEN.dirty || submited && !wardNameEN.dirty), 'has-success': !wardNameEN.errors }">
+                    <input class="form-control" id="WardNameEN" type="text" name="WardNameEN" placeholder="Enter ward name english" [(ngModel)]="locationUpdateRequest.wardNameEN"
+                      required #wardNameEN="ngModel" />
+                    <span class="help-block" *ngIf="wardNameEN.errors && (wardNameEN.dirty || submited && !wardNameEN.dirty)">
+                      <p class="required">Ward name english is required</p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Prefix
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group" [ngClass]="{ 'has-error': prefix.errors && (prefix.dirty || submited && !prefix.dirty), 'has-success': !prefix.errors }">
+                    <input class="form-control" id="Prefix" type="text" name="Prefix" placeholder="Enter prefix" [(ngModel)]="locationUpdateRequest.prefix"
+                      required #prefix="ngModel" />
+                    <span class="help-block" *ngIf="prefix.errors && (prefix.dirty || submited && !prefix.dirty)">
+                      <p class="required">Prefix is required</p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="control-label">Short Name
+                <span class="field-validation-error"> (*)</span>
+              </label>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group" [ngClass]="{ 'has-error': shortName.errors && (shortName.dirty || submited && !shortName.dirty), 'has-success': !shortName.errors }">
+                    <input class="form-control" id="ShortName" type="text" name="ShortName" placeholder="Enter shortname" [(ngModel)]="locationUpdateRequest.shortName"
+                      required #shortName="ngModel" />
+                    <span class="help-block" *ngIf="shortName.errors && (shortName.dirty || submited && !shortName.dirty)">
+                      <p class="required">Short name is required</p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-danger" (click)="onDelete(locationUpdateRequest.id, 'ward');">Delete</button>
+            <button type="submit" class="btn btn-success">
+              <i class='fa fa-spinner fa-spin'></i> Save</button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab id="tab-3" title="Add street">
+    <ng-template ngbTabContent>
+      <form class="form-horizontal" (ngSubmit)="onAddStreet(streetAdd)" autocomplete="off" #streetAdd="ngForm">
+        <div class="row">
+          <div class="col-md-2">
+            <label class="control-label">Street name</label>
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <span class="ui-fluid">
+                    <p-autoComplete [(ngModel)]="streets" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterStreetMultiple($event)"
+                      styleClass="wid100" [minLength]="2" placeholder="Enter street name" name="listStreet" field="streetName"
+                      [multiple]="true">
+                    </p-autoComplete>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <ul>
+              <li *ngFor="let item of streets">{{item.streetName}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row" style="margin-top:15px">
+          <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">
+              <i class='fa fa-spinner fa-spin'></i> Save</button>
+          </div>
+        </div>
+      </form>
+      <em class="block sbold font-red">List street</em>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet light portlet-fit portlet-datatable">
+            <div class="portlet-body">
+              <div class="table-container">
+                <table class="table table-striped table-bordered table-hover table-checkable">
+                  <thead>
+                    <tr role="row" class="heading">
+                      <th>STT</th>
+                      <th>Street name</th>
+                      <th>Street name english</th>
+                      <th style="width:8%"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let street of locationResponse.ltsStreet; let i = index">
+                      <td>{{i + 1}}</td>
+                      <td>{{street.streetName}}</td>
+                      <td>{{street.streetNameEN}}</td>
+                      <td><a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onDeleteStreet(street.id)">
+                          <i class="fa fa-trash"></i> Delete </a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

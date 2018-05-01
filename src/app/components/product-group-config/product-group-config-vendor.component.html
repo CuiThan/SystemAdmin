@@ -1,0 +1,177 @@
+<div id="productgroup-vender" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light portlet-fit portlet-form bordered">
+                            <div class="portlet-title ">
+                                <div class="caption">
+                                    <i class="icon-settings font-red"></i>
+                                    <span class="caption-subject font-red sbold uppercase">Product Group config Venders</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <form class="form-horizontal" (ngSubmit)="onSave(productGroupConfigVenders)" autocomplete="off" #productGroupConfigVenders="ngForm">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Info
+                                                                        </th>
+                                                                        <th style="width: 100px;">
+                                                                            Type
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Status
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="vendorParam" [(ngModel)]="vendorParam" />
+                                                                        </td>
+                                                                        <td>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <select class="form-control form-filter input-sm" [(ngModel)]="vendorStatus" name="vendorStatus">
+                                                                                <option *ngFor="let item of vendorStatuses" [ngValue]="item.value">{{item.text}}</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetVendors()>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let vendor of vendors | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalRow }">
+                                                                        <td style="padding-left: 10px">
+                                                                            <div class="text-left">Code:
+                                                                                <strong>{{vendor.code}}</strong>
+                                                                            </div>
+                                                                            <div class="text-left">Name: {{vendor.name}}</div>
+                                                                            <div class="text-left">Email:
+                                                                                <i>{{vendor.email}}</i>
+                                                                            </div>
+                                                                            <div class="text-left">Phone: {{vendor.phone}}</div>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{vendor.typeName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            {{vendor.statusName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" class="btn btn-circle btn-outline green" (click)="onAddVender(vendor.id)">
+                                                                                <i class="fa fa-arrow-right"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="portlet light portlet-fit portlet-datatable">
+                                                    <div class="portlet-body">
+                                                        <div class="table-container">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable">
+                                                                <thead>
+                                                                    <tr role="row" class="heading">
+                                                                        <th>
+                                                                            Info
+                                                                        </th>
+                                                                        <th style="width: 100px;">
+                                                                            Type
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Status
+                                                                        </th>
+                                                                        <th style="width: 100px;" class="text-center">
+                                                                            Actions
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr role="row" class="filter">
+                                                                        <td style="padding-left:20px;padding-right: 20px;">
+                                                                            <input type="text" class="form-control form-filter input-sm" name="vendorConfigParam" [(ngModel)]="vendorConfigParam" />
+                                                                        </td>
+                                                                        <td>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <select class="form-control form-filter input-sm" [(ngModel)]="vendorConfigStatus" name="vendorConfigStatus">
+                                                                                <option *ngFor="let item of vendorStatuses" [ngValue]="item.value">{{item.text}}</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <div class="margin-bottom-5">
+                                                                                <button class="btn btn-sm yellow filter-submit margin-bottom" type="button" (click)=onGetVendorsConfig(productGroupId)>
+                                                                                    <i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let vendor of vendorsConfig | paginate: { itemsPerPage: vendorConfigPageSize, currentPage: vendorConfigPageIndex, totalItems: vendorConfigTotalRow }">
+                                                                        <td style="padding-left: 10px">
+                                                                            <div class="text-left">Code:
+                                                                                <strong>{{vendor.code}}</strong>
+                                                                            </div>
+                                                                            <div class="text-left">Name: {{vendor.name}}</div>
+                                                                            <div class="text-left">Email:
+                                                                                <i>{{vendor.email}}</i>
+                                                                            </div>
+                                                                            <div class="text-left">Phone: {{vendor.phone}}</div>
+                                                                        </td>
+                                                                        <td>
+                                                                            {{vendor.typeName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            {{vendor.statusName}}
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="javascript:;" class="btn btn-circle btn-outline red" (click)="onRemove(vendor.id)">
+                                                                                <i class="fa fa-remove"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">                                               
+                                                <button type="button" class="btn grey-salsa btn-outline" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
